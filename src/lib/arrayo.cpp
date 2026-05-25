@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "menu.h"
+#include "presskey.h"
 
 namespace arrayo
 {
@@ -14,6 +15,7 @@ namespace arrayo
 
     void ArrayO::startMenu()
     {
+        // Clear home page for new page this
         base::clearScreen();
         cout << "========================================" << endl;
         cout << "|           Array Operations           |" << endl;
@@ -117,7 +119,7 @@ namespace arrayo
 
     void ArrayO::traverseArray()
     {
-        base::clearScreen();
+        base::hideTextOfScreen();
         visit(
             [](auto& vec)
             {
@@ -127,6 +129,8 @@ namespace arrayo
                 }
             },
             this->my_array);
+            
+        presskey::pressAnyKey("Press any key to return to Array operation menu");
     }
 
 }  // namespace arrayo

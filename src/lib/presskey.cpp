@@ -72,7 +72,11 @@ namespace presskey
 
     void pressAnyKey(string alert_text)
     {
-        cout << "Press any key to continue";
+        if (alert_text != "")
+            cout << alert_text;
+        else
+            cout << "Press any key to continue";
+            
         while (true)
         {
             cout << ".";
