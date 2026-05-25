@@ -24,18 +24,17 @@ namespace base
     using OptionSelectionDataType = char;
     const string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
 
-    using VariantVectorDataType =
-        variant<vector<int>, vector<double>, vector<string>, vector<char>>;
-    using VariantSingleDataType = variant<int, double, string, char>;
+
+    using VariantSupportedDataType = variant<int, double, string, char>;
 
     // Methods
     void showAppTitle(string sub_title);
     void hideTextOfScreen();
     void clearScreen();
     void pauseProgram(int second);
+    void getIntInput(int & i_variable);
     void exitApp();
-    void validVariantInputItr(VariantVectorDataType& variable, int i);
-    VariantSingleDataType validVariantInput(VariantVectorDataType& variable);
+
 }  // namespace base
 
 #endif

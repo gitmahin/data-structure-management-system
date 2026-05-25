@@ -62,7 +62,7 @@ namespace base
      */
     void pauseProgram(int second)
     {
-        cout.flush();   
+        cout.flush();
         // clang-format off
         #ifdef _WIN32
             Sleep(second * 1000);
@@ -73,91 +73,28 @@ namespace base
     };
 
     /**
-     * Handles type-safe input for elements within a VariantItrDataType data.
-     *
-     * Uses std::visit and compile-time type checking (if constexpr) to
-     * prompt the user for input based on the underlying data type.
+     * Handles type-safe integer input from the user.
+     * Repeatedly prompts the user until a valid integer is entered.
      * Includes validation to handle input failures and buffer clearing.
-     * @param data The variant containing a data of supported types.
-     * @param i    The index of the element to be populated.
+     * @param i_variable Reference to store the valid integer input.
      */
-    void validVariantInputItr(VariantVectorDataType& data, int i)
+    void getIntInput(int& i_variable)
     {
-        visit(
-            [i](auto& element)
+        while(true)
+        {
+            cin >> i_variable;
+
+            if (cin.fail())
             {
-                while (true)  // ← keep asking until valid input
-                {
-                    cout << "Enter element [" << i << "]: ";
+                cin.clear();
+                while (cin.get() != '\n');  // flush bad inputs
+                cout << "Invalid input! Try again: ";
+                continue;
+            }
 
-                    // if value type is string then use getline to take
-                    // input
-                    if constexpr (is_same_v<decay_t<decltype(element[0])>,
-                                            string>)
-                    {
-                        getline(cin, element[i]);
-                        break;
-                    }
-                    else
-                    {
-                        cin >> element[i];
-
-                        if (cin.fail())
-                        {
-                            cin.clear();
-                            while (cin.get() != '\n');  // flush bad inputs
-                            cout << "Invalid input! Try again." << endl;
-                            continue;
-                        }
-
-                        while (cin.get() != '\n');
-                        break;
-                    }
-                }
-            },
-            data);
-    }
-
-    VariantSingleDataType validVariantInput(VariantVectorDataType& data)
-    {
-        VariantSingleDataType result;
-        visit(
-            [&result](auto& vec)
-            {
-                typename decay_t<decltype(vec)>::value_type element;
-                while (true)  // ← keep asking until valid input
-                {
-                    cout << "Enter element: ";
-
-                    // if value type is string then use getline to take
-                    // input
-                    if constexpr (is_same_v<decay_t<decltype(vec[0])>, string>)
-                    {
-                        getline(cin, element);
-                        break;
-                    }
-                    else
-                    {
-                        cin >> element;
-
-                        if (cin.fail())
-                        {
-                            cin.clear();
-                            while (cin.get() != '\n');  // flush bad inputs
-                            cout << "Invalid input! Try again." << endl;
-                            continue;
-                        }
-
-                        while (cin.get() != '\n');
-                        break;
-                    }
-                }
-
-                result = element;
-            },
-            data);
-
-            return result;
+            while (cin.get() != '\n');
+            break;
+        }
     }
 
     /**

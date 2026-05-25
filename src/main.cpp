@@ -13,8 +13,8 @@ using namespace arrayo;
  */
 int main()
 {
+    bool saveAllOperations = false;
     Home* appHome = new Home();
-
     ArrayO* arrayOpr;
 
     // Dont exit while user input is not [i]

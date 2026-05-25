@@ -13,6 +13,95 @@ namespace arrayo
     set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i'};
     set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'i'};
 
+    /**
+     * Handles type-safe input for elements within a vector data.
+     *
+     * Uses std::visit and compile-time type checking (if constexpr) to
+     * prompt the user for input based on the underlying vector data type.
+     * Includes validation to handle input failures and buffer clearing.
+     * @param data The variant containing a data of supported types.
+     * @param i    The index of the element to be populated.
+     */
+    void validVectorCreateInput(VariantVectorDataType& data, int i)
+    {
+        visit(
+            [i](auto& element)
+            {
+                while (true)  // ← keep asking until valid input
+                {
+                    cout << "Enter element [" << i << "]: ";
+
+                    // if value type is string then use getline to take
+                    // input
+                    if constexpr (is_same_v<decay_t<decltype(element[0])>,
+                                            string>)
+                    {
+                        getline(cin, element[i]);
+                        break;
+                    }
+                    else
+                    {
+                        cin >> element[i];
+
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            while (cin.get() != '\n');  // flush bad inputs
+                            cout << "Invalid input! Try again." << endl;
+                            continue;
+                        }
+
+                        while (cin.get() != '\n');
+                        break;
+                    }
+                }
+            },
+            data);
+    }
+
+    base::VariantSupportedDataType validVectorInsertInput(
+        VariantVectorDataType& data)
+    {
+        base::VariantSupportedDataType result;
+        visit(
+            [&result](auto& vec)
+            {
+                typename decay_t<decltype(vec)>::value_type element;
+                while (true)  // ← keep asking until valid input
+                {
+                    cout << "Enter element: ";
+
+                    // if value type is string then use getline to take
+                    // input
+                    if constexpr (is_same_v<decay_t<decltype(vec[0])>, string>)
+                    {
+                        getline(cin, element);
+                        break;
+                    }
+                    else
+                    {
+                        cin >> element;
+
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            while (cin.get() != '\n');  // flush bad inputs
+                            cout << "Invalid input! Try again." << endl;
+                            continue;
+                        }
+
+                        while (cin.get() != '\n');
+                        break;
+                    }
+                }
+
+                result = element;
+            },
+            data);
+
+        return result;
+    }
+
     void ArrayO::startMenu()
     {
         // Clear home page for new page this
@@ -92,8 +181,7 @@ namespace arrayo
 
         int initial_array_size = 0;
         cout << "Enter initial size of array: ";
-        cin >> initial_array_size;
-        cin.ignore();
+        base::getIntInput(initial_array_size);
 
         /**
          * std::visit references
@@ -108,7 +196,7 @@ namespace arrayo
 
         for (int i = 0; i < initial_array_size; i++)
         {
-            base::validVariantInputItr(this->my_array, i);
+            validVectorCreateInput(this->my_array, i);
         }
 
         visit(
@@ -126,6 +214,11 @@ namespace arrayo
         return;
     }
 
+    /**
+     * Iterates through the array and prints each element to the console.
+     * Uses std::visit to handle the underlying vector type within the
+     * VariantVectorDataType variant.
+     */
     void ArrayO::traverseArray()
     {
         visit(
@@ -139,21 +232,31 @@ namespace arrayo
             this->my_array);
     }
 
+    /**
+     * Inserts an element into the array at a specified position.
+     *
+     * @param label   The text prompt to display to the user.
+     * @param atBegin If true, inserts the element at the start of the array.
+     * @param atEnd   If true, inserts the element at the end of the array.
+     * @param atIndex If true, inserts the element at the specified index.
+     * @param index   The target index for insertion (used only if atIndex is
+     * true).
+     */
     void ArrayO::insertAt(string label, bool atBegin, bool atEnd, bool atIndex,
                           int index)
     {
-        base::VariantSingleDataType i_element;
+        base::VariantSupportedDataType i_element;
         cout << "Your created array is: " << endl;
         this->traverseArray();
 
         cout << endl << label << endl;
-        i_element = base::validVariantInput(this->my_array);
+        i_element = validVectorInsertInput(this->my_array);
 
-        string exit_word = get<string>(i_element);
-        if (exit_word == "exit")
-        {
-            return;
-        }
+        // string exit_word = get<string>(i_element);
+        // if (exit_word == "exit")
+        // {
+        //     return;
+        // }
 
         visit(
             // catch everything by reference
