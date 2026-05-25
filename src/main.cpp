@@ -17,8 +17,8 @@ int main()
     Home* appHome = new Home();
     ArrayO* arrayOpr;
 
-    // Dont exit while user input is not [i]
-    while (appHome->selection_point != 'i')
+    // Dont exit while user input is not [z]
+    while (appHome->selection_point != 'z')
     {
         appHome->startMenu();
 
@@ -28,8 +28,8 @@ int main()
 
                 arrayOpr = new ArrayO();
 
-                // Dont exit while user input is not [i]
-                while (arrayOpr->selection_point != 'i')
+                // Dont exit while user input is not [z]
+                while (arrayOpr->selection_point != 'z')
                 {
                     arrayOpr->startMenu();
 
@@ -44,8 +44,7 @@ int main()
                             cout << "Displaying stored array elements:" << endl;
                             arrayOpr->traverseArray();
                             presskey::pressAnyKey(
-                                "Press any key to return to Array operation "
-                                "menu");
+                                "Press any key to return to Array Operations menu");
                             break;
                         case 'c':
                             base::hideTextOfScreen();

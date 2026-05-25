@@ -18,10 +18,10 @@ namespace menu
      * @param selection_point     Reference to store the valid user input
      * @param menu_options        Set of valid characters the user can choose
      * @param menu_label          Name of the menu shown in error messages
-     * @param shouldExitOnInputI  If true, exits the program when 'i' is entered
+     * @param shouldExitOnInputI  If true, exits the program when 'z' is entered
      *                            If false, returns back to caller (main menu)
      * @code
-     *   set<char> options = {'a', 'b', 'c', 'i'};
+     *   set<char> options = {'a', 'b', 'c', 'z'};
      *   char selection;
      *   getMenuSelection(selection, options, "Main Menu", true);
      *   cout << selection;   // access the stored selection
@@ -61,7 +61,7 @@ namespace menu
             if (menu_options.count(selection_point))
             {
                 isInvalidInput = false;
-                if (selection_point == 'i')
+                if (selection_point == 'z')
                 {
                     /**
                      * If developer willing to exit program on input i it will

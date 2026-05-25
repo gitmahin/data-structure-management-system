@@ -7,7 +7,7 @@
 namespace home
 {
 
-    set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
+    set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
 
     void Home::startMenu()
     {
@@ -24,7 +24,7 @@ namespace home
         cout << "| g -> Graph Operations                |" << endl;
         cout << "| h -> Tree Operations                 |" << endl;
         cout << "========================================" << endl;
-        cout << "| i -> Exit                            |" << endl;
+        cout << "| z -> Exit                            |" << endl;
         cout << "========================================" << endl;
         cout << "Choose an option: ";
 

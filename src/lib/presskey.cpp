@@ -88,7 +88,7 @@ namespace presskey
 
         while (true)
         {
-            cout << ".";
+            cout << "...";
             cout.flush();
 
             // clang-format off

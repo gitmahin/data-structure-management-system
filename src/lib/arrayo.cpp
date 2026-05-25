@@ -11,8 +11,8 @@ namespace arrayo
 {
 
     // Constant values
-    set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i'};
-    set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'i'};
+    set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'z'};
+    set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'z'};
 
     /**
      * Handles type-safe input for elements within a vector data.
@@ -143,7 +143,7 @@ namespace arrayo
         cout << "| g -> Delete from End                 |" << endl;
         cout << "| h -> Delete from Any Position        |" << endl;
         cout << "========================================" << endl;
-        cout << "| i -> Main Menu                       |" << endl;
+        cout << "| z -> Main Menu                       |" << endl;
         cout << "========================================" << endl;
         cout << "Choose an array operation: ";
 
@@ -162,7 +162,7 @@ namespace arrayo
         cout << "| c -> string                          |" << endl;
         cout << "| d -> char                            |" << endl;
         cout << "========================================" << endl;
-        cout << "| i -> Array Operation Menu            |" << endl;
+        cout << "| z -> Array Operation Menu            |" << endl;
         cout << "========================================" << endl;
         cout << "Select the array data type you want: ";
 
@@ -193,7 +193,7 @@ namespace arrayo
                 cout << "Creating Dynamic Array: Selected data type [char]"
                      << endl;
                 this->my_array = vector<char>();
-            case 'i':
+            case 'z':
                 // back to array start page
                 base::clearScreen();
                 return;
