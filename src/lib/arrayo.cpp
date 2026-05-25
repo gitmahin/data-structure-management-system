@@ -17,8 +17,9 @@ namespace arrayo
     {
         // Clear home page for new page this
         base::clearScreen();
+        base::showAppTitle("Array Operations");
         cout << "========================================" << endl;
-        cout << "|           Array Operations           |" << endl;
+        cout << "|            Operations Menu           |" << endl;
         cout << "========================================" << endl;
         cout << "| a -> Create Array                    |" << endl;
         cout << "| b -> Traverse Array                  |" << endl;
@@ -38,6 +39,7 @@ namespace arrayo
 
     void ArrayO::createArray()
     {
+        base::hideTextOfScreen();
         cout << "========================================" << endl;
         cout << "|        Choose Array Data Type        |" << endl;
         cout << "========================================" << endl;
@@ -46,7 +48,7 @@ namespace arrayo
         cout << "| c -> string                          |" << endl;
         cout << "| d -> char                            |" << endl;
         cout << "========================================" << endl;
-        cout << "| i -> Main Menu                       |" << endl;
+        cout << "| i -> Array Operation Menu            |" << endl;
         cout << "========================================" << endl;
         cout << "Select the array data type you want: ";
 
@@ -54,21 +56,35 @@ namespace arrayo
                                array_data_type_options, "Array Data Types",
                                false);
 
+        base::hideTextOfScreen();
+
         switch (this->selected_data_type)
         {
             case 'a':
+                cout << "Creating Dynamic Array: Selected data type [int]"
+                     << endl;
                 this->my_array = vector<int>();
                 break;
             case 'b':
+                cout << "Creating Dynamic Array: Selected data type [double]"
+                     << endl;
                 this->my_array = vector<double>();
                 break;
             case 'c':
+                cout << "Creating Dynamic Array: Selected data type [string]"
+                     << endl;
                 this->my_array = vector<string>();
                 break;
             case 'd':
+                cout << "Creating Dynamic Array: Selected data type [char]"
+                     << endl;
                 this->my_array = vector<char>();
+            case 'i':
+                // back to array start page
+                base::clearScreen();
+                return;
             default:
-                break;
+                return;
         }
 
         // Take initial size of the array from user;
@@ -91,16 +107,7 @@ namespace arrayo
 
         for (int i = 0; i < initial_array_size; i++)
         {
-            visit(
-                [i](auto& vec)
-                {
-                    // get type from vec[0];
-                    auto value = vec[0];
-                    cout << "Enter element [" << i << "]: ";
-                    cin >> value;
-                    vec[i] = value;
-                },
-                this->my_array);
+            base::validVariantInputItr(this->my_array, i);
         }
 
         visit(
@@ -114,12 +121,14 @@ namespace arrayo
             this->my_array);
         cout << "Elements are inserted. Now you can play with this elements."
              << endl;
+
         return;
     }
 
     void ArrayO::traverseArray()
     {
         base::hideTextOfScreen();
+        cout << "Displaying stored array elements:" << endl;
         visit(
             [](auto& vec)
             {
@@ -129,8 +138,9 @@ namespace arrayo
                 }
             },
             this->my_array);
-            
-        presskey::pressAnyKey("Press any key to return to Array operation menu");
+
+        presskey::pressAnyKey(
+            "Press any key to return to Array operation menu");
     }
 
 }  // namespace arrayo

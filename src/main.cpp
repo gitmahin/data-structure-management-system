@@ -5,34 +5,29 @@
 using namespace home;
 using namespace arrayo;
 
+/**
+ * In main function handle all menu switching logic
+ * as menu option input is just returning after storing user choice in a
+ * variable unless invalid input.
+ */
 int main()
 {
     Home* appHome = new Home();
 
     ArrayO* arrayOpr;
 
-    // if(appHome->selection_point == 'a') {
-    //     delete appHome;
-    //     arrayOpr = new ArrayO;
-    //     arrayOpr->startMenu();
-    //     if(arrayOpr->selection_point == 'i') {
-    //         delete arrayOpr;
-    //         appHome = new Home();
-
-    //     }
-
-    // }
-
+    // Dont exit while user input is not [i]
     while (appHome->selection_point != 'i')
     {
         appHome->startMenu();
-        cout << "here" << appHome->selection_point << endl;
+
         switch (appHome->selection_point)
         {
             case 'a':
 
                 arrayOpr = new ArrayO();
 
+                // Dont exit while user input is not [i]
                 while (arrayOpr->selection_point != 'i')
                 {
                     arrayOpr->startMenu();
@@ -40,6 +35,7 @@ int main()
                     switch (arrayOpr->selection_point)
                     {
                         case 'a':
+
                             arrayOpr->createArray();
                             break;
                         case 'b':
@@ -48,14 +44,16 @@ int main()
                             break;
 
                         default:
+                            // clear screen for new page after exiting this page
+                            base::clearScreen();
                             break;
                     }
                 }
                 delete arrayOpr;
                 break;
 
+            // if selection_point is [i] just exit program
             default:
-                cout << "NOTHING" << endl;
                 break;
         }
     }

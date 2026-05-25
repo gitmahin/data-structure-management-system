@@ -83,6 +83,7 @@ namespace menu
             if (isInvalidInput)
             {
                 cout << "You have to choose [" << available_options << "]: ";
+
                 continue;
             }
 

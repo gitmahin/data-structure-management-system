@@ -2,6 +2,7 @@
 
 #ifdef _WIN32
     #include <conio.h>
+    #include <windows.h>
 #else
     #include <termios.h>
     #include <unistd.h>
@@ -76,7 +77,7 @@ namespace presskey
             cout << alert_text;
         else
             cout << "Press any key to continue";
-            
+
         while (true)
         {
             cout << ".";
@@ -86,10 +87,10 @@ namespace presskey
             
             // Cross-platform program pausing
             #ifdef _WIN32
-                #include <windows.h>
+          
                 Sleep(500);  // notice the capital -> S
             #else                   
-                #include <unistd.h>
+       
                 usleep(500000);
             #endif
             // clang-format on

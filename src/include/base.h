@@ -13,6 +13,9 @@
 #define BASE_H
 
 #include <iostream>
+#include <variant>
+#include <vector>
+
 using namespace std;
 
 namespace base
@@ -21,11 +24,16 @@ namespace base
     using OptionSelectionDataType = char;
     const string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
 
+    using VariantDataType =
+        variant<vector<int>, vector<double>, vector<string>, vector<char>>;
+
     // Methods
     void showAppTitle(string sub_title);
     void hideTextOfScreen();
     void clearScreen();
+    void pauseProgram(int second);
     void exitApp();
+    void validVariantInputItr(VariantDataType& variable, int i);
 }  // namespace base
 
 #endif

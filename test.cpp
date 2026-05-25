@@ -1,77 +1,54 @@
-#ifdef _WIN32
-#include <conio.h>
-#else
-#include <unistd.h>
-#include <termios.h>
-#endif
-
-// #include <bitset> // for testing newt.c_lflag bits are on or off
-#include <stdio.h>
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-char getch()
-{
-#ifdef _WIN32
-    return _getch(); // platform specific
-#else
-    /**
-     * MAN: https://pubs.opengroup.org/onlinepubs/7908799/xsh/termios.h.html
-     * Reference: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
-     * Learn: Biwise operator: https://en.cppreference.com/cpp/language/operator_arithmetic
-     */
+int add(int a, int b) { return a + b; }
 
-    termios oldt, newt;             // create two terminal settings variables
-    tcgetattr(STDIN_FILENO, &oldt); // store current terminal settings for future restore (if settings modified)
-    newt = oldt;                    // create new terminal with current terminal settings for start safe modification
+int subtract(int a, int b) { return a - b; }
 
-    /**
-     * Logging bits are on or off
-     */
+int division(int a, int b) { return a / b; }
 
-    //  // Print full c_lflag
-    // cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;
-
-    // // Check ICANON specifically
-    // cout << "ICANON value: " << bitset<32>(ICANON) << endl;
-    // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;
-
-    /**
-     *  The c_lflag field of the argument structure is used to control various terminal functions
-     */
-
-    newt.c_lflag &= ~(ICANON | ECHO);        // flip (toggle on/off by default those are on) every bits of ICANON(line buffering. wait for enter key) and ECHO(show typed chars on screen)
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // apply new settings to terminal
-
-    char ch = getchar();
-
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore old terminal settings after completing press any key operation.
-    return ch;
-#endif
-}
+int multiply(int a, int b) { return a * b; }
 
 int main()
 {
-    cout << "Press any key to continue";
-    while (true)
+    char option;
+    int a, b, result;
+
+    cout << "Options:" << endl;
+    cout << "a -> add" << endl;
+    cout << "b -> subtract" << endl;
+    cout << "c -> division" << endl;
+    cout << "d -> multiply" << endl;
+
+    cout << "Choose an option: ";
+    cin >> option;
+
+    cin.ignore();
+
+    cout << "Enter number a: ";
+    cin >> a;
+    cout << "Enter number b: ";
+    cin >> b;
+
+    switch (option)
     {
-        cout << ".";
-        fflush(stdout); // From stdio.h
-
-        // Cross-platform program pausing
-
-#ifdef _WIN32
-#include <windows.h>
-        Sleep(500); // notice the capital -> S
-#else
-#include <unistd.h>
-        usleep(500000);
-#endif
-
-        if (getch())
+        case 'a':
+            result = add(a, b);
+            break;
+        case 'b':
+            result = subtract(a, b);
+            break;
+        case 'c':
+            result = division(a, b);
+            break;
+        case 'd':
+            result = multiply(a, b);
+            break;
+        default:
             break;
     }
 
-    cout << endl;
-    return 0;
+    cout<<"Your result is: "<<result<<endl;
 }
