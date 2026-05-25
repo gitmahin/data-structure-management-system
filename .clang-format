@@ -1,0 +1,31 @@
+BasedOnStyle: Google
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Braces
+BreakBeforeBraces: Allman
+IndentCaseLabels: true
+
+# Namespace
+NamespaceIndentation: All  
+
+# Preprocessor
+IndentPPDirectives: BeforeHash 
+PPIndentWidth: 4   
+
+# Spaces
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInAngles: false
+SpaceAfterCStyleCast: false
+
+# Lines
+ColumnLimit: 80
+MaxEmptyLinesToKeep: 1
+
+# Includes
+SortIncludes: true
+
+# Pointers
+PointerAlignment: Left # int* p  not  int *p

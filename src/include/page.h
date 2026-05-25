@@ -3,7 +3,7 @@
 
 class IPage
 {
-public:
+   public:
     base::OptionSelectionDataType selection_point;
     virtual void startMenu() = 0;
 };

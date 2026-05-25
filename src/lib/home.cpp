@@ -1,5 +1,7 @@
-#include <set>
 #include "home.h"
+
+#include <set>
+
 #include "menu.h"
 
 namespace home
@@ -9,8 +11,7 @@ namespace home
 
     void Home::startMenu()
     {
-
-        base::showAppTitle();
+        base::showAppTitle("");
         cout << "========================================" << endl;
         cout << "|          Data Structure Menu         |" << endl;
         cout << "========================================" << endl;
@@ -27,7 +28,8 @@ namespace home
         cout << "========================================" << endl;
         cout << "Choose an option: ";
 
-        menu::getMenuSelection(this->selection_point, main_menu_options, "Home Menu", true);
+        menu::getMenuSelection(this->selection_point, main_menu_options,
+                               "Home Menu", true);
     };
 
-} // namespace home
+}  // namespace home

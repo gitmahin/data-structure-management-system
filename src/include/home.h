@@ -8,10 +8,10 @@ namespace home
 
     class Home : public IPage
     {
-    public:
-        void startMenu() override ;
+       public:
+        void startMenu() override;
     };
 
-}
+}  // namespace home
 
 #endif

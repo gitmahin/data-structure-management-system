@@ -54,3 +54,21 @@ target_link_libraries(App
     PRIVATE
         AppLib
 )
+
+# Format codebase
+find_program(CLANG_FORMAT clang-format)
+
+# If clang is installed run formatter
+if(CLANG_FORMAT)
+    file(GLOB_RECURSE ALL_SOURCE_FILES
+        src/*.cpp
+        src/*.h
+    )
+
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT} -i ${ALL_SOURCE_FILES}
+        COMMENT "Formatting source files..."
+    )
+else()
+    message(WARNING "clang-format not found!")
+endif()

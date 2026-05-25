@@ -1,14 +1,20 @@
+#include "arrayo.h"
+
 #include <set>
 #include <vector>
-#include "arrayo.h"
+
 #include "menu.h"
 
 namespace arrayo
 {
+
+    // Constant values
     set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i'};
     set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'i'};
+
     void ArrayO::startMenu()
     {
+        base::clearScreen();
         cout << "========================================" << endl;
         cout << "|           Array Operations           |" << endl;
         cout << "========================================" << endl;
@@ -24,7 +30,8 @@ namespace arrayo
         cout << "========================================" << endl;
         cout << "Choose an array operation: ";
 
-        menu::getMenuSelection(this->selection_point, sub_menu_options, "Array Operations", false);
+        menu::getMenuSelection(this->selection_point, sub_menu_options,
+                               "Array Operations", false);
     };
 
     void ArrayO::createArray()
@@ -41,23 +48,25 @@ namespace arrayo
         cout << "========================================" << endl;
         cout << "Select the array data type you want: ";
 
-        menu::getMenuSelection(this->selected_data_type, array_data_type_options, "Array Data Types", false);
+        menu::getMenuSelection(this->selected_data_type,
+                               array_data_type_options, "Array Data Types",
+                               false);
 
         switch (this->selected_data_type)
         {
-        case 'a':
-            my_array = vector<int>();
-            break;
-        case 'b':
-            my_array = vector<double>();
-            break;
-        case 'c':
-            my_array = vector<string>();
-            break;
-        case 'd':
-            my_array = vector<char>();
-        default:
-            break;
+            case 'a':
+                this->my_array = vector<int>();
+                break;
+            case 'b':
+                this->my_array = vector<double>();
+                break;
+            case 'c':
+                this->my_array = vector<string>();
+                break;
+            case 'd':
+                this->my_array = vector<char>();
+            default:
+                break;
         }
 
         // Take initial size of the array from user;
@@ -70,19 +79,18 @@ namespace arrayo
         /**
          * std::visit references
          *
-         * redit reference: https://www.reddit.com/r/cpp_questions/comments/12ur4wv/comment/jh9850n/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+         * redit reference:
+         * https://www.reddit.com/r/cpp_questions/comments/12ur4wv/comment/jh9850n/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
          * cpp reference: https://en.cppreference.com/cpp/utility/variant/visit2
          */
 
-        visit([&initial_array_size](auto &vec){
-            vec.resize(initial_array_size);
-        }, my_array);
+        visit([&initial_array_size](auto& vec)
+              { vec.resize(initial_array_size); }, this->my_array);
 
         for (int i = 0; i < initial_array_size; i++)
         {
-
             visit(
-                [i](auto &vec)
+                [i](auto& vec)
                 {
                     // get type from vec[0];
                     auto value = vec[0];
@@ -90,16 +98,35 @@ namespace arrayo
                     cin >> value;
                     vec[i] = value;
                 },
-                my_array);
+                this->my_array);
         }
 
-        visit([](auto &vec)
-              {
-            for(auto &element: vec) {
-                cout<<"Element is: "<<element<<endl;
-            } }, my_array);
-        cout << "Elements are inserted. Now you can play with this elements."<<endl;
+        visit(
+            [](auto& vec)
+            {
+                for (auto& element : vec)
+                {
+                    cout << "Element is: " << element << endl;
+                }
+            },
+            this->my_array);
+        cout << "Elements are inserted. Now you can play with this elements."
+             << endl;
         return;
     }
 
-}
+    void ArrayO::traverseArray()
+    {
+        base::clearScreen();
+        visit(
+            [](auto& vec)
+            {
+                for (auto& element : vec)
+                {
+                    cout << element << endl;
+                }
+            },
+            this->my_array);
+    }
+
+}  // namespace arrayo

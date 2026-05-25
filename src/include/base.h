@@ -22,8 +22,10 @@ namespace base
     const string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
 
     // Methods
-    void showAppTitle();
+    void showAppTitle(string sub_title);
+    void hideTextOfScreen();
+    void clearScreen();
     void exitApp();
-}
+}  // namespace base
 
 #endif

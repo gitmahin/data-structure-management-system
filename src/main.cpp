@@ -1,15 +1,15 @@
+#include "arrayo.h"
 #include "base.h"
 #include "home.h"
-#include "arrayo.h"
 
 using namespace home;
 using namespace arrayo;
 
 int main()
 {
-    Home *appHome = new Home();
+    Home* appHome = new Home();
 
-    ArrayO *arrayOpr;
+    ArrayO* arrayOpr;
 
     // if(appHome->selection_point == 'a') {
     //     delete appHome;
@@ -27,26 +27,36 @@ int main()
     {
         appHome->startMenu();
         cout << "here" << appHome->selection_point << endl;
-
         switch (appHome->selection_point)
         {
-        case 'a':
-            arrayOpr = new ArrayO();
-            
-            while(arrayOpr->selection_point != 'i') {
-                arrayOpr->startMenu();
-                
-                if(arrayOpr->selection_point == 'a') {
-                    arrayOpr->createArray();
-                }
-                
-            }
-            delete arrayOpr;
-            break;
+            case 'a':
 
-        default:
-            cout << "NOTHING" << endl;
-            break;
+                arrayOpr = new ArrayO();
+
+                while (arrayOpr->selection_point != 'i')
+                {
+                    arrayOpr->startMenu();
+
+                    switch (arrayOpr->selection_point)
+                    {
+                        case 'a':
+                            arrayOpr->createArray();
+                            break;
+                        case 'b':
+
+                            arrayOpr->traverseArray();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                delete arrayOpr;
+                break;
+
+            default:
+                cout << "NOTHING" << endl;
+                break;
         }
     }
     return 0;

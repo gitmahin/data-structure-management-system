@@ -27,9 +27,9 @@ namespace menu
      *   cout << selection;   // access the stored selection
      * @endcode
      */
-    void getMenuSelection(char &selection_point, set<char> &menu_options, string menu_label, bool shouldExitOnInputI)
+    void getMenuSelection(char& selection_point, set<char>& menu_options,
+                          string menu_label, bool shouldExitOnInputI)
     {
-
         // Track validity for each input
         bool isInvalidInput = false;
         string available_options = "";
@@ -50,14 +50,14 @@ namespace menu
         // ask user input until it gets invalid input
         while (true)
         {
-
             // Take user input
             cin >> selection_point;
             // Remove leftover new line char
             cin.ignore();
 
             // std::set reference: https://en.cppreference.com/cpp/container/set
-            // if user choosen point is available in options; then its valid and break with success
+            // if user choosen point is available in options; then its valid and
+            // break with success
             if (menu_options.count(selection_point))
             {
                 isInvalidInput = false;
@@ -76,7 +76,8 @@ namespace menu
             else
             {
                 isInvalidInput = true;
-                cout << selection_point << " " << "Doesn't exists in " << menu_label << "! Try again!" << endl;
+                cout << selection_point << " " << "Doesn't exists in "
+                     << menu_label << "! Try again!" << endl;
             }
 
             if (isInvalidInput)
@@ -90,4 +91,4 @@ namespace menu
 
         return;
     }
-}
+}  // namespace menu

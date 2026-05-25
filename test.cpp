@@ -1,0 +1,77 @@
+#ifdef _WIN32
+#include <conio.h>
+#else
+#include <unistd.h>
+#include <termios.h>
+#endif
+
+// #include <bitset> // for testing newt.c_lflag bits are on or off
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+char getch()
+{
+#ifdef _WIN32
+    return _getch(); // platform specific
+#else
+    /**
+     * MAN: https://pubs.opengroup.org/onlinepubs/7908799/xsh/termios.h.html
+     * Reference: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
+     * Learn: Biwise operator: https://en.cppreference.com/cpp/language/operator_arithmetic
+     */
+
+    termios oldt, newt;             // create two terminal settings variables
+    tcgetattr(STDIN_FILENO, &oldt); // store current terminal settings for future restore (if settings modified)
+    newt = oldt;                    // create new terminal with current terminal settings for start safe modification
+
+    /**
+     * Logging bits are on or off
+     */
+
+    //  // Print full c_lflag
+    // cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;
+
+    // // Check ICANON specifically
+    // cout << "ICANON value: " << bitset<32>(ICANON) << endl;
+    // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;
+
+    /**
+     *  The c_lflag field of the argument structure is used to control various terminal functions
+     */
+
+    newt.c_lflag &= ~(ICANON | ECHO);        // flip (toggle on/off by default those are on) every bits of ICANON(line buffering. wait for enter key) and ECHO(show typed chars on screen)
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // apply new settings to terminal
+
+    char ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore old terminal settings after completing press any key operation.
+    return ch;
+#endif
+}
+
+int main()
+{
+    cout << "Press any key to continue";
+    while (true)
+    {
+        cout << ".";
+        fflush(stdout); // From stdio.h
+
+        // Cross-platform program pausing
+
+#ifdef _WIN32
+#include <windows.h>
+        Sleep(500); // notice the capital -> S
+#else
+#include <unistd.h>
+        usleep(500000);
+#endif
+
+        if (getch())
+            break;
+    }
+
+    cout << endl;
+    return 0;
+}
