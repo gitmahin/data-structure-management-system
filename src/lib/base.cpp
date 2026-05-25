@@ -54,6 +54,11 @@ namespace base
         // clang-format on
     };
 
+    /**
+     * Pauses the program execution for a specified number of seconds.
+     * Uses platform-specific sleep functions (Sleep for Windows, usleep for POSIX).
+     * @param second The duration to pause in seconds.
+     */
     void pauseProgram(int second)
     {
         // clang-format off
@@ -65,6 +70,15 @@ namespace base
         // clang-format on
     };
 
+    /**
+     * Handles type-safe input for elements within a VariantDataType data.
+     * 
+     * Uses std::visit and compile-time type checking (if constexpr) to 
+     * prompt the user for input based on the underlying data type.
+     * Includes validation to handle input failures and buffer clearing.
+     * @param data The variant containing a data of supported types.
+     * @param i    The index of the element to be populated.
+     */
     void validVariantInputItr(VariantDataType& data, int i)
     {
         visit(
