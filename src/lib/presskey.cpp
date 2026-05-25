@@ -71,7 +71,7 @@ char getch()
 namespace presskey
 {
 
-    void pressAnyKey(string alert_text)
+    int pressAnyKey(string alert_text)
     {
         if (alert_text != "")
             cout << alert_text;
@@ -81,7 +81,7 @@ namespace presskey
         while (true)
         {
             cout << ".";
-            fflush(stdout);  // From stdio.h
+            cout.flush();
 
             // clang-format off
             
@@ -99,6 +99,6 @@ namespace presskey
         }
 
         cout << endl;
-        return;
+        return 1;
     }
 }  // namespace presskey

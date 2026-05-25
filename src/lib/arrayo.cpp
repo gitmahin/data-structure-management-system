@@ -23,11 +23,12 @@ namespace arrayo
         cout << "========================================" << endl;
         cout << "| a -> Create Array                    |" << endl;
         cout << "| b -> Traverse Array                  |" << endl;
-        cout << "| c -> Stack Operations                |" << endl;
+        cout << "| c -> Insert at Beginning             |" << endl;
         cout << "| d -> Insert at End                   |" << endl;
         cout << "| e -> Insert at Any Position          |" << endl;
         cout << "| f -> Delete from Beginning           |" << endl;
-        cout << "| g -> Delete from Any Position        |" << endl;
+        cout << "| g -> Delete from End                 |" << endl;
+        cout << "| h -> Delete from Any Position        |" << endl;
         cout << "========================================" << endl;
         cout << "| i -> Main Menu                       |" << endl;
         cout << "========================================" << endl;
@@ -127,8 +128,6 @@ namespace arrayo
 
     void ArrayO::traverseArray()
     {
-        base::hideTextOfScreen();
-        cout << "Displaying stored array elements:" << endl;
         visit(
             [](auto& vec)
             {
@@ -138,9 +137,60 @@ namespace arrayo
                 }
             },
             this->my_array);
+    }
 
-        presskey::pressAnyKey(
-            "Press any key to return to Array operation menu");
+    void ArrayO::insertAt(string label, bool atBegin, bool atEnd, bool atIndex,
+                          int index)
+    {
+        base::VariantSingleDataType i_element;
+        cout << "Your created array is: " << endl;
+        this->traverseArray();
+
+        cout << endl << label << endl;
+        i_element = base::validVariantInput(this->my_array);
+
+        string exit_word = get<string>(i_element);
+        if (exit_word == "exit")
+        {
+            return;
+        }
+
+        visit(
+            // catch everything by reference
+            [&](auto& vec)
+            {
+                using ArrayType = decay_t<decltype(vec)>::value_type;
+
+                visit(
+                    [&](auto& element)
+                    {
+                        // if input value matches with supported types then
+                        // insert value
+                        if constexpr (is_same_v<decay_t<decltype(element)>,
+                                                ArrayType>)
+                        {
+                            if (atBegin)
+                            {
+                                vec.insert(vec.begin(), element);
+                            }
+
+                            if (atEnd)
+                            {
+                                vec.insert(vec.end(), element);
+                            }
+
+                            if (atIndex)
+                            {
+                                vec.insert(vec.begin() + index, element);
+                            }
+                        }
+                    },
+                    i_element);
+            },
+            this->my_array);
+
+        cout << "Element inserted success";
+        base::pauseProgram(2);
     }
 
 }  // namespace arrayo

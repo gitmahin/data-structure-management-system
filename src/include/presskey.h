@@ -7,7 +7,7 @@
 
 namespace presskey
 {
-    void pressAnyKey(string alert_text);
+    int pressAnyKey(string alert_text);
 }
 
 #endif

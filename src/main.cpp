@@ -1,6 +1,7 @@
 #include "arrayo.h"
 #include "base.h"
 #include "home.h"
+#include "presskey.h"
 
 using namespace home;
 using namespace arrayo;
@@ -39,8 +40,21 @@ int main()
                             arrayOpr->createArray();
                             break;
                         case 'b':
-
+                            base::hideTextOfScreen();
+                            cout << "Displaying stored array elements:" << endl;
                             arrayOpr->traverseArray();
+                            presskey::pressAnyKey(
+                                "Press any key to return to Array operation "
+                                "menu");
+                            break;
+                        case 'c':
+                            base::hideTextOfScreen();
+                            arrayOpr->insertAt(
+                                "Inserting array at the beginning. (to abort "
+                                "operation type "
+                                "exit)",
+                                true);
+                           
                             break;
 
                         default:

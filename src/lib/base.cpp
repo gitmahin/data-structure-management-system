@@ -56,11 +56,13 @@ namespace base
 
     /**
      * Pauses the program execution for a specified number of seconds.
-     * Uses platform-specific sleep functions (Sleep for Windows, usleep for POSIX).
+     * Uses platform-specific sleep functions (Sleep for Windows, usleep for
+     * POSIX).
      * @param second The duration to pause in seconds.
      */
     void pauseProgram(int second)
     {
+        cout.flush();   
         // clang-format off
         #ifdef _WIN32
             Sleep(second * 1000);
@@ -71,15 +73,15 @@ namespace base
     };
 
     /**
-     * Handles type-safe input for elements within a VariantDataType data.
-     * 
-     * Uses std::visit and compile-time type checking (if constexpr) to 
+     * Handles type-safe input for elements within a VariantItrDataType data.
+     *
+     * Uses std::visit and compile-time type checking (if constexpr) to
      * prompt the user for input based on the underlying data type.
      * Includes validation to handle input failures and buffer clearing.
      * @param data The variant containing a data of supported types.
      * @param i    The index of the element to be populated.
      */
-    void validVariantInputItr(VariantDataType& data, int i)
+    void validVariantInputItr(VariantVectorDataType& data, int i)
     {
         visit(
             [i](auto& element)
@@ -114,6 +116,48 @@ namespace base
                 }
             },
             data);
+    }
+
+    VariantSingleDataType validVariantInput(VariantVectorDataType& data)
+    {
+        VariantSingleDataType result;
+        visit(
+            [&result](auto& vec)
+            {
+                typename decay_t<decltype(vec)>::value_type element;
+                while (true)  // ← keep asking until valid input
+                {
+                    cout << "Enter element: ";
+
+                    // if value type is string then use getline to take
+                    // input
+                    if constexpr (is_same_v<decay_t<decltype(vec[0])>, string>)
+                    {
+                        getline(cin, element);
+                        break;
+                    }
+                    else
+                    {
+                        cin >> element;
+
+                        if (cin.fail())
+                        {
+                            cin.clear();
+                            while (cin.get() != '\n');  // flush bad inputs
+                            cout << "Invalid input! Try again." << endl;
+                            continue;
+                        }
+
+                        while (cin.get() != '\n');
+                        break;
+                    }
+                }
+
+                result = element;
+            },
+            data);
+
+            return result;
     }
 
     /**
