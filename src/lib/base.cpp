@@ -80,7 +80,7 @@ namespace base
      */
     void getIntInput(int& i_variable)
     {
-        while(true)
+        while (true)
         {
             cin >> i_variable;
 

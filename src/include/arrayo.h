@@ -20,11 +20,13 @@ namespace arrayo
         void startMenu() override;
         void createArray();
         void traverseArray();
-        void insertAt(string label, bool atBegin = true, bool atEnd = false, bool atIndex = false, int index = 0);
+        void insertAt(string label, bool atBegin = true, bool atEnd = false,
+                      bool atIndex = false, int index = 0);
     };
 
     void validVectorCreateInput(VariantVectorDataType& variable, int i);
-    base::VariantSupportedDataType validVectorInsertInput(VariantVectorDataType& variable);
+    base::VariantSupportedDataType validVectorInsertInput(
+        VariantVectorDataType& variable);
 }  // namespace arrayo
 
 #endif

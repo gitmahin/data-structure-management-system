@@ -1,6 +1,7 @@
 #include "arrayo.h"
 
 #include <set>
+#include <type_traits>
 #include <vector>
 
 #include "menu.h"
@@ -21,6 +22,13 @@ namespace arrayo
      * Includes validation to handle input failures and buffer clearing.
      * @param data The variant containing a data of supported types.
      * @param i    The index of the element to be populated.
+     *
+     * @code
+     *  for (int i = 0; i < initial_array_size; i++)
+     *  {
+     *    validVectorCreateInput(my_array, i);
+     *  }
+     * @endcode
      */
     void validVectorCreateInput(VariantVectorDataType& data, int i)
     {
@@ -59,6 +67,21 @@ namespace arrayo
             data);
     }
 
+    /**
+     * Handles type-safe input for a single element to be inserted into the
+     * array.
+     *
+     * Determines the required data type based on the current state of the
+     * VariantVectorDataType and prompts the user for a matching value.
+     * @param data The variant containing the vector to determine the expected
+     * type.
+     * @return A variant containing the validated user input.
+     *
+     * @code
+     *  base::VariantSupportedDataType usr_input;
+     *  usr_input = validVectorInsertInput(my_array);
+     * @endcode
+     */
     base::VariantSupportedDataType validVectorInsertInput(
         VariantVectorDataType& data)
     {
@@ -71,8 +94,9 @@ namespace arrayo
                 {
                     cout << "Enter element: ";
 
-                    // if value type is string then use getline to take
-                    // input
+                    // compare two types: if value type is string then use
+                    // getline to take input
+
                     if constexpr (is_same_v<decay_t<decltype(vec[0])>, string>)
                     {
                         getline(cin, element);
@@ -241,12 +265,20 @@ namespace arrayo
      * @param atIndex If true, inserts the element at the specified index.
      * @param index   The target index for insertion (used only if atIndex is
      * true).
+     *
+     * @code
+     *  arrayOpr->insertAt(
+     *   "Inserting array at the beginning. (to abort "
+     *   "operation type "
+     *   "exit)",
+     *   true);
+     * @endcode
      */
     void ArrayO::insertAt(string label, bool atBegin, bool atEnd, bool atIndex,
                           int index)
     {
         base::VariantSupportedDataType i_element;
-        cout << "Your created array is: " << endl;
+        cout << "Your created array is:" << endl;
         this->traverseArray();
 
         cout << endl << label << endl;
@@ -262,13 +294,18 @@ namespace arrayo
             // catch everything by reference
             [&](auto& vec)
             {
+                /**
+                 * Defined in header <type_traits>
+                 * decay_t Reference:
+                 * https://en.cppreference.com/cpp/types/decay
+                 */
                 using ArrayType = decay_t<decltype(vec)>::value_type;
 
                 visit(
                     [&](auto& element)
                     {
-                        // if input value matches with supported types then
-                        // insert value
+                        // if input value matches with already stored vector
+                        // data type then insert value
                         if constexpr (is_same_v<decay_t<decltype(element)>,
                                                 ArrayType>)
                         {
@@ -292,8 +329,8 @@ namespace arrayo
             },
             this->my_array);
 
-        cout << "Element inserted success";
-        base::pauseProgram(2);
+        cout << "Element inserted success.";
+        base::pauseProgram(1);
     }
 
 }  // namespace arrayo

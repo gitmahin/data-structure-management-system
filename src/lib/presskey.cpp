@@ -22,11 +22,10 @@ char getch()
         return _getch();  // platform specific
     #else
    
-
         /**
-         * MAN: https://pubs.opengroup.org/onlinepubs/7908799/xsh/termios.h.html
-         * Reference: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
-         * Learn: Biwise operator:
+         * termios MAN: https://pubs.opengroup.org/onlinepubs/7908799/xsh/termios.h.html
+         * Reference of this code: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
+         * Learn Biwise operator:
          * https://en.cppreference.com/cpp/language/operator_arithmetic
          */
 
@@ -36,22 +35,21 @@ char getch()
         newt = oldt; // create new terminal with current terminal settings for
                      // start safe modification
 
-        /**
-         * Logging bits are on or off
-         */
-
-        //  // Print full c_lflag
-        // cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;
-
-        // // Check ICANON specifically
-        // cout << "ICANON value: " << bitset<32>(ICANON) << endl;
-        // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;
+        ///////////////////////////////////////////////////////////////////////
+        // Logging bits are on or off                                        //
+        //                                                                   //
+        // Print full c_lflag                                                //
+        // cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;     //
+        //                                                                   //
+        // Check ICANON specifically                                         //
+        // cout << "ICANON value: " << bitset<32>(ICANON) << endl;           //
+        // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;           //
+        ///////////////////////////////////////////////////////////////////////
 
         /**
          *  The c_lflag field of the argument structure is used to control various
          * terminal functions
          */
-
         newt.c_lflag &=
             ~(ICANON | ECHO);  // flip (toggle on/off by default those are on) every
                                // bits of ICANON(line buffering. wait for enter key)
@@ -70,7 +68,17 @@ char getch()
 
 namespace presskey
 {
-
+    /**
+     * Pauses the program and waits for the user to press any key.
+     * Displays a custom or default message with an animated ellipsis.
+     *
+     * @param alert_text The message to display to the user.
+     * @return Returns 1 upon key press.
+     *
+     * @code
+     * presskey::pressAnyKey("Press any key to return to menu");
+     * @endcode
+     */
     int pressAnyKey(string alert_text)
     {
         if (alert_text != "")

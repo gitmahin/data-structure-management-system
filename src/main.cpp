@@ -50,12 +50,23 @@ int main()
                         case 'c':
                             base::hideTextOfScreen();
                             arrayOpr->insertAt(
-                                "Inserting array at the beginning. (to abort "
-                                "operation type "
-                                "exit)",
-                                true);
-                           
+                                "Inserting array at the beginning.", true);
+
                             break;
+                        case 'd':
+                            base::hideTextOfScreen();
+                            arrayOpr->insertAt("Inserting array at end.", false,
+                                               true);
+
+                            break;
+                            // TODO: Add stored array element count then show
+                            // input to user. case 'e':
+                            //     base::hideTextOfScreen();
+                            //     arrayOpr->insertAt(
+                            //         "Inserting array at any position.",
+                            //         false, false, true);
+
+                            //     break;
 
                         default:
                             // clear screen for new page after exiting this page

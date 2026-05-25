@@ -24,7 +24,7 @@ namespace base
     using OptionSelectionDataType = char;
     const string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
 
-
+    // std::variant reference: https://en.cppreference.com/cpp/utility/variant
     using VariantSupportedDataType = variant<int, double, string, char>;
 
     // Methods
@@ -32,7 +32,7 @@ namespace base
     void hideTextOfScreen();
     void clearScreen();
     void pauseProgram(int second);
-    void getIntInput(int & i_variable);
+    void getIntInput(int& i_variable);
     void exitApp();
 
 }  // namespace base
