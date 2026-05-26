@@ -11,7 +11,7 @@ namespace arrayo
 {
 
     // Constant values
-    set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'z'};
+    set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
     set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'z'};
 
     /**
@@ -205,7 +205,7 @@ namespace arrayo
 
         int initial_array_size = 0;
         cout << "Enter initial size of array: ";
-        // User can create initial array with max size 100 
+        // User can create initial array with max size 100
         base::getIntInput(initial_array_size, 100);
 
         /**
@@ -343,13 +343,47 @@ namespace arrayo
      *  cout << "Array has " << count << " elements." << endl;
      * @endcode
      */
-    int ArrayO::getArraySize() {
+    int ArrayO::getArraySize()
+    {
         int size;
-        visit([&size](auto & vec) {
-            size = vec.size();
-        }, this->my_array);
+        visit([&size](auto& vec) { size = vec.size(); }, this->my_array);
 
         return size;
+    }
+
+    void ArrayO::deleteElement(bool atBegin, bool atEnd, bool atIndex,
+                               int index)
+    {
+        visit(
+            // catch everything by reference
+            [&](auto& vec)
+            {
+
+                if(vec.empty()) {
+                    cout<<"Cannot delete from an empty array!"<<endl;
+                    return;
+                }
+
+                if (atBegin)
+                {
+                    vec.erase(vec.begin());
+                
+                }
+
+                if (atEnd)
+                {
+                    vec.pop_back();
+                }
+
+                if (atIndex)
+                {
+                    vec.erase(vec.begin() + index);
+                }
+            },
+            this->my_array);
+
+        cout << "Element deleted success.";
+        base::pauseProgram(2);
     }
 
 }  // namespace arrayo

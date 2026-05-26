@@ -75,8 +75,8 @@ int main()
                             arrayOpr->traverseArray();
 
                             //  Perform insertion
-                            arrayOpr->insertAt("Inserting element at end.", false,
-                                               true);
+                            arrayOpr->insertAt("Inserting element at end.",
+                                               false, true);
 
                             break;
                         }
@@ -92,7 +92,7 @@ int main()
                             // Make string with element_count placeholder
                             auto input_ask_text =
                                 (ostringstream() << "Enter index between 0 to "
-                                                 << element_count << ": ")
+                                                 << element_count - 1 << ": ")
                                     .str();
 
                             // Display array elements
@@ -112,9 +112,55 @@ int main()
                             break;
                         }
 
+                        case 'f':
+                        {
+                            base::hideTextOfScreen();
+                            // Delete from begin
+                            arrayOpr->deleteElement(true, false);
+                            break;
+                        }
+                        case 'g':
+                        {
+                            base::hideTextOfScreen();
+                            // Delete from end
+                            arrayOpr->deleteElement(false);
+                            break;
+                        }
+                        case 'h':
+                        {
+                            base::hideTextOfScreen();
+                            int arr_index;
+
+                            // Get number of elements are in array
+                            int element_count = arrayOpr->getArraySize();
+
+                            // Make string with element_count placeholder
+                            auto input_ask_text =
+                                (ostringstream() << "Enter index between 0 to "
+                                                 << element_count - 1<< ": ")
+                                    .str();
+
+                            // Display array elements
+                            cout << "Current Array State: [" << element_count
+                                 << "] elements." << endl;
+                            arrayOpr->traverseArray();
+
+                            // Get index input from user
+                            cout << input_ask_text;
+                            base::getIntInput(arr_index, element_count);
+
+                            // Delete from end
+                            cout << "Deleting element at your specified index."
+                                 << endl;
+                            arrayOpr->deleteElement(false);
+                            
+                            break;
+                        }
+
                         default:
                         {  // clear screen for new page after exiting this page
                             base::clearScreen();
+
                             break;
                         }
                     }
