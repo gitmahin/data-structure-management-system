@@ -27,6 +27,7 @@ namespace arrayo
         void deleteElement(bool atBegin = false, bool atEnd = true,
                            bool atIndex = false, int index = 0);
         int getArraySize();
+        
     };
 
     void validVectorCreateInput(VariantVectorDataType& variable, int i);

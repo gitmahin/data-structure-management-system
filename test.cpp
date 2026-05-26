@@ -1,54 +1,18 @@
 #include <iostream>
-#include <string>
+   #include <unistd.h>
 
-using namespace std;
-
-int add(int a, int b) { return a + b; }
-
-int subtract(int a, int b) { return a - b; }
-
-int division(int a, int b) { return a / b; }
-
-int multiply(int a, int b) { return a * b; }
-
+   using namespace std;
 int main()
 {
-    char option;
-    int a, b, result;
+	char ch; //or 'int ch;' (it doesn't really matter)
 
-    cout << "Options:" << endl;
-    cout << "a -> add" << endl;
-    cout << "b -> subtract" << endl;
-    cout << "c -> division" << endl;
-    cout << "d -> multiply" << endl;
+	//the program pauses here until a key is pressed
+	ch = getchar();
 
-    cout << "Choose an option: ";
-    cin >> option;
-
-    cin.ignore();
-
-    cout << "Enter number a: ";
-    cin >> a;
-    cout << "Enter number b: ";
-    cin >> b;
-
-    switch (option)
-    {
-        case 'a':
-            result = add(a, b);
-            break;
-        case 'b':
-            result = subtract(a, b);
-            break;
-        case 'c':
-            result = division(a, b);
-            break;
-        case 'd':
-            result = multiply(a, b);
-            break;
-        default:
-            break;
-    }
-
-    cout<<"Your result is: "<<result<<endl;
+	if(ch == 'a')
+		std::cout << "You pressed a!" << std::endl;
+	else
+		std::cout << "You did not press a!" << std::endl;
+    cout<<"t"<<ch<<endl;
+	return 0;
 }

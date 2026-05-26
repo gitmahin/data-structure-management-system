@@ -1,6 +1,8 @@
 #include "arrayo.h"
 
+#include <bitset>
 #include <set>
+#include <sstream>
 #include <type_traits>
 #include <vector>
 
@@ -90,6 +92,7 @@ namespace arrayo
             [&result](auto& vec)
             {
                 typename decay_t<decltype(vec)>::value_type element;
+                // cout << typeid(element).name() << endl;
                 while (true)  // ← keep asking until valid input
                 {
                     cout << "Enter element: ";
@@ -354,6 +357,11 @@ namespace arrayo
     void ArrayO::deleteElement(bool atBegin, bool atEnd, bool atIndex,
                                int index)
     {
+        base::VariantSupportedDataType deleted_element;
+        int before_delete_element_count = this->getArraySize();
+        int deleted_element_index = 0;
+        bool isInvalidRequest = false;
+
         visit(
             // catch everything by reference
             [&](auto& vec)
@@ -361,28 +369,54 @@ namespace arrayo
                 if (vec.empty())
                 {
                     cout << "Cannot delete from an empty array!" << endl;
-                    return;
+                    base::pauseProgram(1);
+                    isInvalidRequest = true;
                 }
-
-                if (atBegin)
+                else
                 {
-                    vec.erase(vec.begin());
-                }
+                    if (atBegin)
+                    {
+                        deleted_element = vec[0];
+                        deleted_element_index = 0;
+                        vec.erase(vec.begin());
+                    }
 
-                if (atEnd)
-                {
-                    vec.pop_back();
-                }
+                    if (atEnd)
+                    {
+                        int last_index = vec.size() - 1;
+                        deleted_element = vec.at(last_index);
+                        deleted_element_index = last_index;
+                        vec.pop_back();
+                    }
 
-                if (atIndex)
-                {
-                    vec.erase(vec.begin() + index);
+                    if (atIndex)
+                    {
+                        deleted_element = vec[index];
+                        deleted_element_index = index;
+                        vec.erase(vec.begin() + index);
+                    }
                 }
             },
             this->my_array);
+        // if there is empty array return
+        if (isInvalidRequest) return;
 
-        cout << "Element deleted success.";
-        base::pauseProgram(2);
-    }
+        cout << "Element deleted success." << endl;
+        cout << endl << "Deletion Result" << endl;
+        cout << "Previous Number of Elements: " << before_delete_element_count
+             << endl;
+        cout << "Current Number of Elements: " << this->getArraySize() << endl;
+
+        visit(
+            [&](auto& e)
+            {
+                cout << "Deleted Element: " << e
+                     << " [Index: " << deleted_element_index << "]" << endl;
+            },
+            deleted_element);
+
+        presskey::pressAnyKey(
+            "Press any key to return to the Array Operations menu.");
+    };
 
 }  // namespace arrayo

@@ -38,11 +38,17 @@ int main()
 
                     switch (arrayOpr->selection_point)
                     {
+                  
+                        // Show Array Operations Menu 
+                    
                         case 'a':
                         {
                             arrayOpr->createArray();
                             break;
                         }
+                    
+                        // Traverse stored array elements 
+          
                         case 'b':
                         {
                             base::hideTextOfScreen();
@@ -54,6 +60,8 @@ int main()
                                 "menu");
                             break;
                         }
+                 
+                        // Insert element at begin 
                         case 'c':
                         {
                             base::hideTextOfScreen();
@@ -67,6 +75,8 @@ int main()
 
                             break;
                         }
+                  
+                        // Insert element at end 
                         case 'd':
                         {
                             base::hideTextOfScreen();
@@ -80,7 +90,7 @@ int main()
 
                             break;
                         }
-
+                        // Insert element at specific index 
                         case 'e':
                         {
                             base::hideTextOfScreen();
@@ -102,7 +112,7 @@ int main()
 
                             // Get index input from user
                             cout << input_ask_text;
-                            base::getIntInput(arr_index, element_count);
+                            base::getIntInput(arr_index, element_count - 1);
 
                             // Perform insertion
                             arrayOpr->insertAt(
@@ -112,6 +122,7 @@ int main()
                             break;
                         }
 
+                        // Delete element from array beginning
                         case 'f':
                         {
                             base::hideTextOfScreen();
@@ -119,6 +130,8 @@ int main()
                             arrayOpr->deleteElement(true, false);
                             break;
                         }
+
+                        // Delete element from array end
                         case 'g':
                         {
                             base::hideTextOfScreen();
@@ -126,13 +139,25 @@ int main()
                             arrayOpr->deleteElement(false);
                             break;
                         }
+
+                        // Delete element at specific index
                         case 'h':
                         {
                             base::hideTextOfScreen();
+
                             int arr_index;
 
                             // Get number of elements are in array
                             int element_count = arrayOpr->getArraySize();
+
+                            if (!element_count)
+                            {
+                                cout
+                                    << "Cannot perform deletion on empty array!"
+                                    << endl;
+                                base::pauseProgram(2);
+                                break;
+                            }
 
                             // Make string with element_count placeholder
                             auto input_ask_text =
@@ -140,6 +165,8 @@ int main()
                                                  << element_count - 1 << ": ")
                                     .str();
 
+                            // Showing operation title
+                            cout << "!!!!!! Performing Deletion !!!!!!" << endl;
                             // Display array elements
                             cout << "Current Array State: [" << element_count
                                  << "] elements." << endl;
@@ -147,12 +174,9 @@ int main()
 
                             // Get index input from user
                             cout << input_ask_text;
-                            base::getIntInput(arr_index, element_count);
-
-                            // Delete from end
-                            cout << "Deleting element at your specified index."
-                                 << endl;
-                            arrayOpr->deleteElement(false);
+                            base::getIntInput(arr_index, element_count - 1);
+                            arrayOpr->deleteElement(false, false, true,
+                                                    arr_index);
 
                             break;
                         }
