@@ -32,7 +32,7 @@ namespace base
     void hideTextOfScreen();
     void clearScreen();
     void pauseProgram(int second);
-    void getIntInput(int& i_variable);
+    void getIntInput(int& i_variable, int max = 1, int min = 0);
     void exitApp();
 
 }  // namespace base

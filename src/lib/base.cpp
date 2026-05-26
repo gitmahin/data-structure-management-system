@@ -12,6 +12,11 @@ namespace base
     /**
      * Displays the application title formatted within a decorative border.
      * Uses the APP_TITLE constant defined in the base namespace.
+     *
+     * @code
+     *  base::showAppTitle("");
+     *  base::showAppTitle("Array Operations");
+     * @endcode
      */
     void showAppTitle(string sub_title)
     {
@@ -30,6 +35,10 @@ namespace base
      * \033[1;1H to reset the cursor position.
      *
      * Reference: https://stackoverflow.com/a/75486350/23577239
+     *
+     * @code
+     *  base::hideTextOfScreen();
+     * @endcode
      */
     void hideTextOfScreen()
     {
@@ -42,6 +51,10 @@ namespace base
      * Clears the terminal screen.
      * Uses the system-specific command ("cls" for Windows, "clear" for POSIX)
      * to provide a clean interface.
+     *
+     * @code
+     *  base::clearScreen();
+     * @endcode
      */
     void clearScreen()
     {
@@ -59,6 +72,10 @@ namespace base
      * Uses platform-specific sleep functions (Sleep for Windows, usleep for
      * POSIX).
      * @param second The duration to pause in seconds.
+     *
+     * @code
+     *  base::pauseProgram(2); // Pauses for 2 seconds
+     * @endcode
      */
     void pauseProgram(int second)
     {
@@ -77,8 +94,19 @@ namespace base
      * Repeatedly prompts the user until a valid integer is entered.
      * Includes validation to handle input failures and buffer clearing.
      * @param i_variable Reference to store the valid integer input.
+     * @param max The maximum allowed value (inclusive).
+     * @param min The minimum allowed value (inclusive).
+     *
+     * @code
+     *  int size;
+     *  cout << "Enter size: ";
+     *  // Max 50 and min 0 by defualt
+     *  base::getIntInput(size, 50);
+     *  // Max 50 and min 2
+     *  base::getIntInput(size, 50, 2);
+     * @endcode
      */
-    void getIntInput(int& i_variable)
+    void getIntInput(int& i_variable, int max, int min)
     {
         while (true)
         {
@@ -89,6 +117,15 @@ namespace base
                 cin.clear();
                 while (cin.get() != '\n');  // flush bad inputs
                 cout << "Invalid input! Try again: ";
+                continue;
+            }
+
+            if (i_variable < min || i_variable > max)
+            {
+                cin.clear();
+                while (cin.get() != '\n');  // flush bad inputs
+                cout << "Out of range! Must be between " << min << " and "
+                     << max << ". Try again: ";
                 continue;
             }
 

@@ -205,7 +205,8 @@ namespace arrayo
 
         int initial_array_size = 0;
         cout << "Enter initial size of array: ";
-        base::getIntInput(initial_array_size);
+        // User can create initial array with max size 100 
+        base::getIntInput(initial_array_size, 100);
 
         /**
          * std::visit references
@@ -278,8 +279,6 @@ namespace arrayo
                           int index)
     {
         base::VariantSupportedDataType i_element;
-        cout << "Your created array is:" << endl;
-        this->traverseArray();
 
         cout << endl << label << endl;
         i_element = validVectorInsertInput(this->my_array);
@@ -331,6 +330,26 @@ namespace arrayo
 
         cout << "Element inserted success.";
         base::pauseProgram(1);
+    }
+
+    /**
+     * Retrieves the current number of elements in the array.
+     * Uses std::visit to access the size of the underlying vector.
+     *
+     * @return The total number of elements in the array.
+     *
+     * @code
+     *  int count = arrayOpr->getArraySize();
+     *  cout << "Array has " << count << " elements." << endl;
+     * @endcode
+     */
+    int ArrayO::getArraySize() {
+        int size;
+        visit([&size](auto & vec) {
+            size = vec.size();
+        }, this->my_array);
+
+        return size;
     }
 
 }  // namespace arrayo

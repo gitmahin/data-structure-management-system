@@ -22,6 +22,7 @@ namespace arrayo
         void traverseArray();
         void insertAt(string label, bool atBegin = true, bool atEnd = false,
                       bool atIndex = false, int index = 0);
+        int getArraySize();
     };
 
     void validVectorCreateInput(VariantVectorDataType& variable, int i);
