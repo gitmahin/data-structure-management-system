@@ -22,8 +22,10 @@ namespace arrayo
         void traverseArray();
         void insertAt(string label, bool atBegin = true, bool atEnd = false,
                       bool atIndex = false, int index = 0);
-        // atEnd is by default true as we have easy method pop_back() for vector to delete last element.
-        void deleteElement(bool atBegin = false, bool atEnd = true, bool atIndex = false, int index = 0);
+        // atEnd is by default true as we have easy method pop_back() for vector
+        // to delete last element.
+        void deleteElement(bool atBegin = false, bool atEnd = true,
+                           bool atIndex = false, int index = 0);
         int getArraySize();
     };
 

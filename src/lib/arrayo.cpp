@@ -358,16 +358,15 @@ namespace arrayo
             // catch everything by reference
             [&](auto& vec)
             {
-
-                if(vec.empty()) {
-                    cout<<"Cannot delete from an empty array!"<<endl;
+                if (vec.empty())
+                {
+                    cout << "Cannot delete from an empty array!" << endl;
                     return;
                 }
 
                 if (atBegin)
                 {
                     vec.erase(vec.begin());
-                
                 }
 
                 if (atEnd)

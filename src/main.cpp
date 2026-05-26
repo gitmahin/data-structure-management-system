@@ -137,7 +137,7 @@ int main()
                             // Make string with element_count placeholder
                             auto input_ask_text =
                                 (ostringstream() << "Enter index between 0 to "
-                                                 << element_count - 1<< ": ")
+                                                 << element_count - 1 << ": ")
                                     .str();
 
                             // Display array elements
@@ -153,7 +153,7 @@ int main()
                             cout << "Deleting element at your specified index."
                                  << endl;
                             arrayOpr->deleteElement(false);
-                            
+
                             break;
                         }
 
