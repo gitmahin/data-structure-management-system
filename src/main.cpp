@@ -53,7 +53,7 @@ int main()
                         {
                             base::hideTextOfScreen();
                             // Display array elements
-                            cout << "Displaying stored array elements:" << endl;
+                            std::cout << "Displaying stored array elements:" << std::endl;
                             arrayOpr->traverseArray();
                             presskey::pressAnyKey(
                                 "Press any key to return to Array Operations "
@@ -66,7 +66,7 @@ int main()
                         {
                             base::hideTextOfScreen();
                             // Display array elements
-                            cout << "Current Array State:" << endl;
+                            std::cout << "Current Array State:" << std::endl;
                             arrayOpr->traverseArray();
 
                             //  Perform insertion
@@ -81,7 +81,7 @@ int main()
                         {
                             base::hideTextOfScreen();
                             // Display array elements
-                            cout << "Current Array State:" << endl;
+                            std::cout << "Current Array State:" << std::endl;
                             arrayOpr->traverseArray();
 
                             //  Perform insertion
@@ -101,17 +101,17 @@ int main()
 
                             // Make string with element_count placeholder
                             auto input_ask_text =
-                                (ostringstream() << "Enter index between 0 to "
+                                (std::ostringstream() << "Enter index between 0 to "
                                                  << element_count - 1 << ": ")
                                     .str();
 
                             // Display array elements
-                            cout << "Current Array State: [" << element_count
-                                 << "] elements." << endl;
+                            std::cout << "Current Array State: [" << element_count
+                                 << "] elements." << std::endl;
                             arrayOpr->traverseArray();
 
                             // Get index input from user
-                            cout << input_ask_text;
+                            std::cout << input_ask_text;
                             base::getIntInput(arr_index, element_count - 1);
 
                             // Perform insertion
@@ -152,28 +152,28 @@ int main()
 
                             if (!element_count)
                             {
-                                cout
+                                std::cout
                                     << "Cannot perform deletion on empty array!"
-                                    << endl;
+                                    << std::endl;
                                 base::pauseProgram(2);
                                 break;
                             }
 
                             // Make string with element_count placeholder
                             auto input_ask_text =
-                                (ostringstream() << "Enter index between 0 to "
+                                (std::ostringstream() << "Enter index between 0 to "
                                                  << element_count - 1 << ": ")
                                     .str();
 
                             // Showing operation title
-                            cout << "!!!!!! Performing Deletion !!!!!!" << endl;
+                            std::cout << "!!!!!! Performing Deletion !!!!!!" << std::endl;
                             // Display array elements
-                            cout << "Current Array State: [" << element_count
-                                 << "] elements." << endl;
+                            std::cout << "Current Array State: [" << element_count
+                                 << "] elements." << std::endl;
                             arrayOpr->traverseArray();
 
                             // Get index input from user
-                            cout << input_ask_text;
+                            std::cout << input_ask_text;
                             base::getIntInput(arr_index, element_count - 1);
                             arrayOpr->deleteElement(false, false, true,
                                                     arr_index);

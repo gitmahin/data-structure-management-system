@@ -16,19 +16,17 @@
 #include <variant>
 #include <vector>
 
-using namespace std;
-
 namespace base
 {
     // Universal alias for menu options selection variables data type
     using OptionSelectionDataType = char;
-    const string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
+    const std::string APP_TITLE = "DATA STRUCTURE MANAGEMENT SYSTEM";
 
     // std::variant reference: https://en.cppreference.com/cpp/utility/variant
-    using VariantSupportedDataType = variant<int, double, string, char>;
+    using VariantSupportedDataType = std::variant<int, double, std::string, char>;
 
     // Methods
-    void showAppTitle(string sub_title);
+    void showAppTitle(std::string sub_title);
     void hideTextOfScreen();
     void clearScreen();
     void pauseProgram(int second);

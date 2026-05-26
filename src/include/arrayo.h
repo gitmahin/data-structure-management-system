@@ -10,7 +10,7 @@
 namespace arrayo
 {
     using VariantVectorDataType =
-        variant<vector<int>, vector<double>, vector<string>, vector<char>>;
+        std::variant<std::vector<int>, std::vector<double>, std::vector<std::string>, std::vector<char>>;
 
     class ArrayO : public IPage
     {
@@ -20,7 +20,7 @@ namespace arrayo
         void startMenu() override;
         void createArray();
         void traverseArray();
-        void insertAt(string label, bool atBegin = true, bool atEnd = false,
+        void insertAt(std::string label, bool atBegin = true, bool atEnd = false,
                       bool atIndex = false, int index = 0);
         // atEnd is by default true as we have easy method pop_back() for vector
         // to delete last element.

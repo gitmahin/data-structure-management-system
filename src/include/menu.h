@@ -9,8 +9,8 @@
 namespace menu
 {
     // Methods
-    void getMenuSelection(char& selection_point, set<char>& menu_options,
-                          string menu_label, bool shouldExitOnInputI);
+    void getMenuSelection(char& selection_point, std::set<char>& menu_options,
+                          std::string menu_label, bool shouldExitOnInputI);
 }  // namespace menu
 
 #endif

@@ -7,26 +7,26 @@
 namespace home
 {
 
-    set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
+    std::set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
 
     void Home::startMenu()
     {
         base::showAppTitle("");
-        cout << "========================================" << endl;
-        cout << "|          Data Structure Menu         |" << endl;
-        cout << "========================================" << endl;
-        cout << "| a -> Array Operations                |" << endl;
-        cout << "| b -> Linked List Operations          |" << endl;
-        cout << "| c -> Stack Operations                |" << endl;
-        cout << "| d -> Queue Operations                |" << endl;
-        cout << "| e -> Searching Operations            |" << endl;
-        cout << "| f -> Sorting Operations              |" << endl;
-        cout << "| g -> Graph Operations                |" << endl;
-        cout << "| h -> Tree Operations                 |" << endl;
-        cout << "========================================" << endl;
-        cout << "| z -> Exit                            |" << endl;
-        cout << "========================================" << endl;
-        cout << "Choose an option: ";
+        std::cout << "========================================\n";
+        std::cout << "|          Data Structure Menu         |\n";
+        std::cout << "========================================\n";
+        std::cout << "| a -> Array Operations                |\n";
+        std::cout << "| b -> Linked List Operations          |\n";
+        std::cout << "| c -> Stack Operations                |\n";
+        std::cout << "| d -> Queue Operations                |\n";
+        std::cout << "| e -> Searching Operations            |\n";
+        std::cout << "| f -> Sorting Operations              |\n";
+        std::cout << "| g -> Graph Operations                |\n";
+        std::cout << "| h -> Tree Operations                 |\n";
+        std::cout << "========================================\n";
+        std::cout << "| z -> Exit                            |\n";
+        std::cout << "========================================\n";
+        std::cout << "Choose an option: ";
 
         menu::getMenuSelection(this->selection_point, main_menu_options,
                                "Home Menu", true);

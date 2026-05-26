@@ -1,10 +1,12 @@
-#include "base.h"
+
 
 #ifdef _WIN32
     #include <windows.h>
 #else
     #include <unistd.h>
 #endif
+
+#include "base.h"
 
 namespace base
 {
@@ -18,15 +20,15 @@ namespace base
      *  base::showAppTitle("Array Operations");
      * @endcode
      */
-    void showAppTitle(string sub_title)
+    void showAppTitle(std::string sub_title)
     {
-        cout << "\n========================================" << endl;
-        cout << base::APP_TITLE << endl;
+        std::cout << "\n========================================\n";
+        std::cout << base::APP_TITLE << std::endl;
         if (sub_title != "")
         {
-            cout << "[" << sub_title << "]" << endl;
+            std::cout << "[" << sub_title << "]\n";
         }
-        cout << "========================================" << endl << endl;
+        std::cout << "========================================\n\n";
     }
 
     /**
@@ -79,7 +81,7 @@ namespace base
      */
     void pauseProgram(int second)
     {
-        cout.flush();
+        std::cout.flush();
         // clang-format off
         #ifdef _WIN32
             Sleep(second * 1000);
@@ -110,26 +112,26 @@ namespace base
     {
         while (true)
         {
-            cin >> i_variable;
+            std::cin >> i_variable;
 
-            if (cin.fail())
+            if (std::cin.fail())
             {
-                cin.clear();
-                while (cin.get() != '\n');  // flush bad inputs
-                cout << "Invalid input! Try again: ";
+                std::cin.clear();
+                while (std::cin.get() != '\n');  // flush bad inputs
+                std::cout << "Invalid input! Try again: ";
                 continue;
             }
 
             if (i_variable < min || i_variable > max)
             {
-                cin.clear();
-                while (cin.get() != '\n');  // flush bad inputs
-                cout << "Out of range! Must be between " << min << " and "
+                std::cin.clear();
+                while (std::cin.get() != '\n');  // flush bad inputs
+                std::cout << "Out of range! Must be between " << min << " and "
                      << max << ". Try again: ";
                 continue;
             }
 
-            while (cin.get() != '\n');
+            while (std::cin.get() != '\n');
             break;
         }
     }
@@ -138,5 +140,5 @@ namespace base
      * Handles the application shutdown process.
      * Prints an exit message to the console before termination.
      */
-    void exitApp() { cout << "Exiting..." << endl; };
+    void exitApp() { std::cout << "Exiting...\n"; };
 }  // namespace base

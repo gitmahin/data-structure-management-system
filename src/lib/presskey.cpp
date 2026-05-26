@@ -1,4 +1,3 @@
-#include "presskey.h"
 
 #ifdef _WIN32
     #include <conio.h>
@@ -13,9 +12,9 @@
 
 #include <iostream>
 
-using namespace std;
+#include "presskey.h"
 
-char getch()
+char getCharInput()
 {
     // clang-format off
     #ifdef _WIN32
@@ -79,17 +78,17 @@ namespace presskey
      * presskey::pressAnyKey("Press any key to return to menu");
      * @endcode
      */
-    int pressAnyKey(string alert_text)
+    int pressAnyKey(std::string alert_text)
     {
         if (alert_text != "")
-            cout << alert_text;
+            std::cout << alert_text;
         else
-            cout << "Press any key to continue";
+            std::cout << "Press any key to continue";
 
         while (true)
         {
-            cout << "...";
-            cout.flush();
+            std::cout << "...";
+            std::cout.flush();
 
             // clang-format off
             
@@ -103,10 +102,10 @@ namespace presskey
             #endif
             // clang-format on
 
-            if (getch()) break;
+            if (getCharInput()) break;
         }
 
-        cout << endl;
+        std::cout << std::endl;
         return 1;
     }
 }  // namespace presskey

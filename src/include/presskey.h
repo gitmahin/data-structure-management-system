@@ -7,7 +7,7 @@
 
 namespace presskey
 {
-    int pressAnyKey(string alert_text);
+    int pressAnyKey(std::string alert_text);
 }
 
 #endif

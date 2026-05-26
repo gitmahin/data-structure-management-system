@@ -13,8 +13,9 @@ namespace arrayo
 {
 
     // Constant values
-    set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
-    set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'z'};
+    std::set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e',
+                                       'f', 'g', 'h', 'z'};
+    std::set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'z'};
 
     /**
      * Handles type-safe input for elements within a vector data.
@@ -34,34 +35,36 @@ namespace arrayo
      */
     void validVectorCreateInput(VariantVectorDataType& data, int i)
     {
-        visit(
+        std::visit(
             [i](auto& element)
             {
                 while (true)  // ← keep asking until valid input
                 {
-                    cout << "Enter element [" << i << "]: ";
+                    std::cout << "Enter element [" << i << "]: ";
 
                     // if value type is string then use getline to take
                     // input
-                    if constexpr (is_same_v<decay_t<decltype(element[0])>,
-                                            string>)
+                    if constexpr (std::is_same_v<
+                                      std::decay_t<decltype(element[0])>,
+                                      std::string>)
                     {
-                        getline(cin, element[i]);
+                        getline(std::cin, element[i]);
                         break;
                     }
                     else
                     {
-                        cin >> element[i];
+                        std::cin >> element[i];
 
-                        if (cin.fail())
+                        if (std::cin.fail())
                         {
-                            cin.clear();
-                            while (cin.get() != '\n');  // flush bad inputs
-                            cout << "Invalid input! Try again." << endl;
+                            std::cin.clear();
+                            while (std::cin.get() != '\n');  // flush bad inputs
+                            std::cout << "Invalid input! Try again."
+                                      << std::endl;
                             continue;
                         }
 
-                        while (cin.get() != '\n');
+                        while (std::cin.get() != '\n');
                         break;
                     }
                 }
@@ -88,36 +91,38 @@ namespace arrayo
         VariantVectorDataType& data)
     {
         base::VariantSupportedDataType result;
-        visit(
+        std::visit(
             [&result](auto& vec)
             {
-                typename decay_t<decltype(vec)>::value_type element;
+                typename std::decay_t<decltype(vec)>::value_type element;
                 // cout << typeid(element).name() << endl;
                 while (true)  // ← keep asking until valid input
                 {
-                    cout << "Enter element: ";
+                    std::cout << "Enter element: ";
 
                     // compare two types: if value type is string then use
                     // getline to take input
 
-                    if constexpr (is_same_v<decay_t<decltype(vec[0])>, string>)
+                    if constexpr (std::is_same_v<std::decay_t<decltype(vec[0])>,
+                                                 std::string>)
                     {
-                        getline(cin, element);
+                        getline(std::cin, element);
                         break;
                     }
                     else
                     {
-                        cin >> element;
+                        std::cin >> element;
 
-                        if (cin.fail())
+                        if (std::cin.fail())
                         {
-                            cin.clear();
-                            while (cin.get() != '\n');  // flush bad inputs
-                            cout << "Invalid input! Try again." << endl;
+                            std::cin.clear();
+                            while (std::cin.get() != '\n');  // flush bad inputs
+                            std::cout << "Invalid input! Try again."
+                                      << std::endl;
                             continue;
                         }
 
-                        while (cin.get() != '\n');
+                        while (std::cin.get() != '\n');
                         break;
                     }
                 }
@@ -134,21 +139,21 @@ namespace arrayo
         // Clear home page for new page this
         base::clearScreen();
         base::showAppTitle("Array Operations");
-        cout << "========================================" << endl;
-        cout << "|            Operations Menu           |" << endl;
-        cout << "========================================" << endl;
-        cout << "| a -> Create Array                    |" << endl;
-        cout << "| b -> Traverse Array                  |" << endl;
-        cout << "| c -> Insert at Beginning             |" << endl;
-        cout << "| d -> Insert at End                   |" << endl;
-        cout << "| e -> Insert at Any Position          |" << endl;
-        cout << "| f -> Delete from Beginning           |" << endl;
-        cout << "| g -> Delete from End                 |" << endl;
-        cout << "| h -> Delete from Any Position        |" << endl;
-        cout << "========================================" << endl;
-        cout << "| z -> Main Menu                       |" << endl;
-        cout << "========================================" << endl;
-        cout << "Choose an array operation: ";
+        std::cout << "========================================\n";
+        std::cout << "|            Operations Menu           |\n";
+        std::cout << "========================================\n";
+        std::cout << "| a -> Create Array                    |\n";
+        std::cout << "| b -> Traverse Array                  |\n";
+        std::cout << "| c -> Insert at Beginning             |\n";
+        std::cout << "| d -> Insert at End                   |\n";
+        std::cout << "| e -> Insert at Any Position          |\n";
+        std::cout << "| f -> Delete from Beginning           |\n";
+        std::cout << "| g -> Delete from End                 |\n";
+        std::cout << "| h -> Delete from Any Position        |\n";
+        std::cout << "========================================\n";
+        std::cout << "| z -> Main Menu                       |\n";
+        std::cout << "========================================\n";
+        std::cout << "Choose an array operation: ";
 
         menu::getMenuSelection(this->selection_point, sub_menu_options,
                                "Array Operations", false);
@@ -157,17 +162,17 @@ namespace arrayo
     void ArrayO::createArray()
     {
         base::hideTextOfScreen();
-        cout << "========================================" << endl;
-        cout << "|        Choose Array Data Type        |" << endl;
-        cout << "========================================" << endl;
-        cout << "| a -> int                             |" << endl;
-        cout << "| b -> double                          |" << endl;
-        cout << "| c -> string                          |" << endl;
-        cout << "| d -> char                            |" << endl;
-        cout << "========================================" << endl;
-        cout << "| z -> Array Operation Menu            |" << endl;
-        cout << "========================================" << endl;
-        cout << "Select the array data type you want: ";
+        std::cout << "========================================\n";
+        std::cout << "|        Choose Array Data Type        |\n";
+        std::cout << "========================================\n";
+        std::cout << "| a -> int                             |\n";
+        std::cout << "| b -> double                          |\n";
+        std::cout << "| c -> string                          |\n";
+        std::cout << "| d -> char                            |\n";
+        std::cout << "========================================\n";
+        std::cout << "| z -> Array Operation Menu            |\n";
+        std::cout << "========================================\n";
+        std::cout << "Select the array data type you want: ";
 
         menu::getMenuSelection(this->selected_data_type,
                                array_data_type_options, "Array Data Types",
@@ -178,24 +183,24 @@ namespace arrayo
         switch (this->selected_data_type)
         {
             case 'a':
-                cout << "Creating Dynamic Array: Selected data type [int]"
-                     << endl;
-                this->my_array = vector<int>();
+                std::cout
+                    << "Creating Dynamic Array: Selected data type [int]\n";
+                this->my_array = std::vector<int>();
                 break;
             case 'b':
-                cout << "Creating Dynamic Array: Selected data type [double]"
-                     << endl;
-                this->my_array = vector<double>();
+                std::cout
+                    << "Creating Dynamic Array: Selected data type [double]\n";
+                this->my_array = std::vector<double>();
                 break;
             case 'c':
-                cout << "Creating Dynamic Array: Selected data type [string]"
-                     << endl;
-                this->my_array = vector<string>();
+                std::cout
+                    << "Creating Dynamic Array: Selected data type [string]\n";
+                this->my_array = std::vector<std::string>();
                 break;
             case 'd':
-                cout << "Creating Dynamic Array: Selected data type [char]"
-                     << endl;
-                this->my_array = vector<char>();
+                std::cout
+                    << "Creating Dynamic Array: Selected data type [char]\n";
+                this->my_array = std::vector<char>();
             case 'z':
                 // back to array start page
                 base::clearScreen();
@@ -207,7 +212,7 @@ namespace arrayo
         // Take initial size of the array from user;
 
         int initial_array_size = 0;
-        cout << "Enter initial size of array: ";
+        std::cout << "Enter initial size of array: ";
         // User can create initial array with max size 100
         base::getIntInput(initial_array_size, 100);
 
@@ -219,25 +224,26 @@ namespace arrayo
          * cpp reference: https://en.cppreference.com/cpp/utility/variant/visit2
          */
 
-        visit([&initial_array_size](auto& vec)
-              { vec.resize(initial_array_size); }, this->my_array);
+        std::visit([&initial_array_size](auto& vec)
+                   { vec.resize(initial_array_size); }, this->my_array);
 
         for (int i = 0; i < initial_array_size; i++)
         {
             validVectorCreateInput(this->my_array, i);
         }
 
-        visit(
+        std::visit(
             [](auto& vec)
             {
                 for (auto& element : vec)
                 {
-                    cout << "Element is: " << element << endl;
+                    std::cout << "Element is: " << element << std::endl;
                 }
             },
             this->my_array);
-        cout << "Elements are inserted. Now you can play with this elements."
-             << endl;
+        std::cout
+            << "Elements are inserted. Now you can play with this elements."
+            << std::endl;
 
         return;
     }
@@ -249,12 +255,12 @@ namespace arrayo
      */
     void ArrayO::traverseArray()
     {
-        visit(
+        std::visit(
             [](auto& vec)
             {
                 for (auto& element : vec)
                 {
-                    cout << element << endl;
+                    std::cout << element << std::endl;
                 }
             },
             this->my_array);
@@ -278,12 +284,12 @@ namespace arrayo
      *   true);
      * @endcode
      */
-    void ArrayO::insertAt(string label, bool atBegin, bool atEnd, bool atIndex,
-                          int index)
+    void ArrayO::insertAt(std::string label, bool atBegin, bool atEnd,
+                          bool atIndex, int index)
     {
         base::VariantSupportedDataType i_element;
 
-        cout << endl << label << endl;
+        std::cout << std::endl << label << std::endl;
         i_element = validVectorInsertInput(this->my_array);
 
         // string exit_word = get<string>(i_element);
@@ -292,7 +298,7 @@ namespace arrayo
         //     return;
         // }
 
-        visit(
+        std::visit(
             // catch everything by reference
             [&](auto& vec)
             {
@@ -301,15 +307,16 @@ namespace arrayo
                  * decay_t Reference:
                  * https://en.cppreference.com/cpp/types/decay
                  */
-                using ArrayType = decay_t<decltype(vec)>::value_type;
+                using ArrayType = std::decay_t<decltype(vec)>::value_type;
 
-                visit(
+                std::visit(
                     [&](auto& element)
                     {
                         // if input value matches with already stored vector
                         // data type then insert value
-                        if constexpr (is_same_v<decay_t<decltype(element)>,
-                                                ArrayType>)
+                        if constexpr (std::is_same_v<
+                                          std::decay_t<decltype(element)>,
+                                          ArrayType>)
                         {
                             if (atBegin)
                             {
@@ -331,7 +338,7 @@ namespace arrayo
             },
             this->my_array);
 
-        cout << "Element inserted success.";
+        std::cout << "Element inserted success.";
         base::pauseProgram(1);
     }
 
@@ -349,7 +356,7 @@ namespace arrayo
     int ArrayO::getArraySize()
     {
         int size;
-        visit([&size](auto& vec) { size = vec.size(); }, this->my_array);
+        std::visit([&size](auto& vec) { size = vec.size(); }, this->my_array);
 
         return size;
     }
@@ -362,13 +369,14 @@ namespace arrayo
         int deleted_element_index = 0;
         bool isInvalidRequest = false;
 
-        visit(
+        std::visit(
             // catch everything by reference
             [&](auto& vec)
             {
                 if (vec.empty())
                 {
-                    cout << "Cannot delete from an empty array!" << endl;
+                    std::cout << "Cannot delete from an empty array!"
+                              << std::endl;
                     base::pauseProgram(1);
                     isInvalidRequest = true;
                 }
@@ -401,17 +409,19 @@ namespace arrayo
         // if there is empty array return
         if (isInvalidRequest) return;
 
-        cout << "Element deleted success." << endl;
-        cout << endl << "Deletion Result" << endl;
-        cout << "Previous Number of Elements: " << before_delete_element_count
-             << endl;
-        cout << "Current Number of Elements: " << this->getArraySize() << endl;
+        std::cout << "Element deleted success." << std::endl;
+        std::cout << std::endl << "Deletion Result" << std::endl;
+        std::cout << "Previous Number of Elements: "
+                  << before_delete_element_count << std::endl;
+        std::cout << "Current Number of Elements: " << this->getArraySize()
+                  << std::endl;
 
-        visit(
+        std::visit(
             [&](auto& e)
             {
-                cout << "Deleted Element: " << e
-                     << " [Index: " << deleted_element_index << "]" << endl;
+                std::cout << "Deleted Element: " << e
+                          << " [Index: " << deleted_element_index << "]"
+                          << std::endl;
             },
             deleted_element);
 
