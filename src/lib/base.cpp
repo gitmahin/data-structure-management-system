@@ -127,7 +127,7 @@ namespace base
                 std::cin.clear();
                 while (std::cin.get() != '\n');  // flush bad inputs
                 std::cout << "Out of range! Must be between " << min << " and "
-                     << max << ". Try again: ";
+                          << max << ". Try again: ";
                 continue;
             }
 

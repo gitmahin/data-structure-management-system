@@ -7,7 +7,8 @@
 namespace home
 {
 
-    std::set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z'};
+    std::set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e',
+                                        'f', 'g', 'h', 'z'};
 
     void Home::startMenu()
     {

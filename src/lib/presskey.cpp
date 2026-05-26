@@ -33,7 +33,7 @@ char getCharInput()
                                         // future restore (if settings modified)
         newt = oldt; // create new terminal with current terminal settings for
                      // start safe modification
-
+       
         ///////////////////////////////////////////////////////////////////////
         // Logging bits are on or off                                        //
         //                                                                   //
@@ -44,7 +44,7 @@ char getCharInput()
         // cout << "ICANON value: " << bitset<32>(ICANON) << endl;           //
         // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;           //
         ///////////////////////////////////////////////////////////////////////
-
+             
         /**
          *  The c_lflag field of the argument structure is used to control various
          * terminal functions

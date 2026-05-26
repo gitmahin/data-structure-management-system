@@ -361,6 +361,23 @@ namespace arrayo
         return size;
     }
 
+    /**
+     * Deletes an element from the array at a specified position.
+     *
+     * Removes an element based on the provided flags (beginning, end, or
+     * index). Displays the deleted element and the updated array size.
+     *
+     * @param atBegin If true, deletes the first element.
+     * @param atEnd   If true, deletes the last element.
+     * @param atIndex If true, deletes the element at the specified index.
+     * @param index   The target index for deletion (used only if atIndex is
+     * true).
+     *
+     * @code
+     *  arrayOpr->deleteElement(true); // Delete from beginning
+     *  arrayOpr->deleteElement(false, false, true, 2); // Delete at index 2
+     * @endcode
+     */
     void ArrayO::deleteElement(bool atBegin, bool atEnd, bool atIndex,
                                int index)
     {

@@ -77,12 +77,13 @@ namespace menu
             {
                 isInvalidInput = true;
                 std::cout << selection_point << " " << "Doesn't exists in "
-                     << menu_label << "! Try again!" << std::endl;
+                          << menu_label << "! Try again!" << std::endl;
             }
 
             if (isInvalidInput)
             {
-                std::cout << "You have to choose [" << available_options << "]: ";
+                std::cout << "You have to choose [" << available_options
+                          << "]: ";
 
                 continue;
             }

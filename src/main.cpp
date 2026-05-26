@@ -38,30 +38,30 @@ int main()
 
                     switch (arrayOpr->selection_point)
                     {
-                  
-                        // Show Array Operations Menu 
-                    
+                            // Show Array Operations Menu
+
                         case 'a':
                         {
                             arrayOpr->createArray();
                             break;
                         }
-                    
-                        // Traverse stored array elements 
-          
+
+                            // Traverse stored array elements
+
                         case 'b':
                         {
                             base::hideTextOfScreen();
                             // Display array elements
-                            std::cout << "Displaying stored array elements:" << std::endl;
+                            std::cout << "Displaying stored array elements:"
+                                      << std::endl;
                             arrayOpr->traverseArray();
                             presskey::pressAnyKey(
                                 "Press any key to return to Array Operations "
                                 "menu");
                             break;
                         }
-                 
-                        // Insert element at begin 
+
+                        // Insert element at begin
                         case 'c':
                         {
                             base::hideTextOfScreen();
@@ -75,8 +75,8 @@ int main()
 
                             break;
                         }
-                  
-                        // Insert element at end 
+
+                        // Insert element at end
                         case 'd':
                         {
                             base::hideTextOfScreen();
@@ -90,7 +90,7 @@ int main()
 
                             break;
                         }
-                        // Insert element at specific index 
+                        // Insert element at specific index
                         case 'e':
                         {
                             base::hideTextOfScreen();
@@ -101,13 +101,15 @@ int main()
 
                             // Make string with element_count placeholder
                             auto input_ask_text =
-                                (std::ostringstream() << "Enter index between 0 to "
-                                                 << element_count - 1 << ": ")
+                                (std::ostringstream()
+                                 << "Enter index between 0 to "
+                                 << element_count - 1 << ": ")
                                     .str();
 
                             // Display array elements
-                            std::cout << "Current Array State: [" << element_count
-                                 << "] elements." << std::endl;
+                            std::cout << "Current Array State: ["
+                                      << element_count << "] elements."
+                                      << std::endl;
                             arrayOpr->traverseArray();
 
                             // Get index input from user
@@ -161,15 +163,18 @@ int main()
 
                             // Make string with element_count placeholder
                             auto input_ask_text =
-                                (std::ostringstream() << "Enter index between 0 to "
-                                                 << element_count - 1 << ": ")
+                                (std::ostringstream()
+                                 << "Enter index between 0 to "
+                                 << element_count - 1 << ": ")
                                     .str();
 
                             // Showing operation title
-                            std::cout << "!!!!!! Performing Deletion !!!!!!" << std::endl;
+                            std::cout << "!!!!!! Performing Deletion !!!!!!"
+                                      << std::endl;
                             // Display array elements
-                            std::cout << "Current Array State: [" << element_count
-                                 << "] elements." << std::endl;
+                            std::cout << "Current Array State: ["
+                                      << element_count << "] elements."
+                                      << std::endl;
                             arrayOpr->traverseArray();
 
                             // Get index input from user
