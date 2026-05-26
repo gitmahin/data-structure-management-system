@@ -13,6 +13,32 @@
 - [Linux x86_64](https://github.com/Kitware/CMake/releases/download/v4.3.2/cmake-4.3.2-linux-x86_64.sh)
 - [Linux aarch64](https://github.com/Kitware/CMake/releases/download/v4.3.2/cmake-4.3.2-linux-aarch64.sh)
 
+### POSIX-compliant Systems Setup
+Arch:
+```bash
+sudo pacman -Syu
+gcc --version
+```
+
+Debian:
+```bash
+sudo apt install gcc-16 g++-16
+```
+
+Mac:
+```shell
+brew install gcc@16
+```
+
+Enter into the project root and run
+```bash
+cmake -B build
+cd build
+make
+./App
+```
+
+
 ### Windows Setup
 - Download & Install CMake
 - Install MinGW for c++ compiler
@@ -23,7 +49,11 @@ pacman -S mingw-w64-x86_64-gcc
 pacman -S mingw-w64-ucrt-x86_64-gcc
 gcc --version
 ```
+
+Enter into the project root and run
 ```shell
 cmake -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -B build
 cmake --build build
+cd build
+./App
 ```
