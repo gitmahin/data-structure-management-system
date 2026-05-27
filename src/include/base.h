@@ -36,6 +36,8 @@ namespace base
      * 
      * @tparam T The type to get the name of.
      * @return A string containing the demangled name of type T.
+     * 
+     * Reference: https://stackoverflow.com/q/81870/23577239
      */
     template <class T>
     std::string type_name()
