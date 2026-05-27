@@ -72,13 +72,12 @@ namespace presskey
      * Displays a custom or default message with an animated ellipsis.
      *
      * @param alert_text The message to display to the user.
-     * @return Returns 1 upon key press.
      *
      * @code
      * presskey::pressAnyKey("Press any key to return to menu");
      * @endcode
      */
-    int pressAnyKey(std::string alert_text)
+    void pressAnyKey(std::string alert_text)
     {
         if (alert_text != "")
             std::cout << alert_text;
@@ -106,6 +105,5 @@ namespace presskey
         }
 
         std::cout << std::endl;
-        return 1;
     }
 }  // namespace presskey
