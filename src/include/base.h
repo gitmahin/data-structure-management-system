@@ -13,30 +13,32 @@
 #define BASE_H
 
 #include <iostream>
-#include <variant>
-#include <vector>
 #include <type_traits>
 #include <typeinfo>
+#include <variant>
+#include <vector>
 #ifndef _MSC_VER
     #include <cxxabi.h>
 #endif
 #include <cstdlib>
 #include <memory>
 #include <string>
+#include <set>
 
 namespace base
 {
+    const std::set<char> data_type_options = {'a', 'b', 'c', 'd', 'z'};
 
     /**
      * Returns a human-readable string representing the type T.
-     * 
-     * This function uses platform-specific demangling (via abi::__cxa_demangle 
-     * on non-MSVC compilers) to provide a clear name for the type, including 
+     *
+     * This function uses platform-specific demangling (via abi::__cxa_demangle
+     * on non-MSVC compilers) to provide a clear name for the type, including
      * qualifiers like const, volatile, and references.
-     * 
+     *
      * @tparam T The type to get the name of.
      * @return A string containing the demangled name of type T.
-     * 
+     *
      * Reference: https://stackoverflow.com/q/81870/23577239
      */
     template <class T>
@@ -71,6 +73,7 @@ namespace base
     // Methods
     void showAppTitle(std::string sub_title);
     void hideTextOfScreen();
+    void showAvailableDataTypesMenu();
     void clearScreen();
     void pauseProgram(int second);
     void getIntInput(int& i_variable, int max = 1, int min = 0);

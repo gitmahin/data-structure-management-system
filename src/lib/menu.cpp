@@ -27,7 +27,7 @@ namespace menu
      *   cout << selection;   // access the stored selection
      * @endcode
      */
-    void getMenuSelection(char& selection_point, std::set<char>& menu_options,
+    void getMenuSelection(char& selection_point, const std::set<char>& menu_options,
                           std::string menu_label, bool shouldExitOnInputI)
     {
         // Track validity for each input

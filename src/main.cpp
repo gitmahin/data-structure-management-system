@@ -201,7 +201,6 @@ int main()
                 delete arrayOpr;
                 break;
             }
-            // if selection_point is [i] just exit program
 
             // Linked List Operations
             case 'b':
@@ -215,8 +214,39 @@ int main()
                     switch (linkListOpr->selection_point)
                     {
                         case 'a':
+                        {
+                            while (linkListOpr->selected_operation != 'z')
+                            {
+                                linkListOpr->startOperationsMenu();
 
+                                switch (linkListOpr->selected_operation)
+                                {
+                                    case 'a':
+                                    {
+                                        linkListOpr->createSinglyListElement();
+                                        break;
+                                    }
+                                    case 'b':
+                                    {
+                                        base::hideTextOfScreen();
+                                        // Display array elements
+                                        std::cout << "Displaying stored Linked "
+                                                     "List elements:"
+                                                  << std::endl;
+                                        linkListOpr->traverseSingly();
+                                        presskey::pressAnyKey(
+                                            "Press any key to return to "
+                                            "Operations Menu ");
+
+                                        break;
+                                    }
+
+                                    default:
+                                        break;
+                                }
+                            }
                             break;
+                        }
 
                         default:
                         {  // clear screen for new page after exiting this page

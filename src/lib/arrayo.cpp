@@ -12,10 +12,7 @@
 namespace arrayo
 {
 
-    // Constant values
-    std::set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e',
-                                       'f', 'g', 'h', 'z'};
-    std::set<char> array_data_type_options = {'a', 'b', 'c', 'd', 'z'};
+  
 
     /**
      * Handles type-safe input for elements within a vector data.
@@ -155,27 +152,17 @@ namespace arrayo
         std::cout << "========================================\n";
         std::cout << "Choose an array operation: ";
 
-        menu::getMenuSelection(this->selection_point, sub_menu_options,
+        menu::getMenuSelection(this->selection_point, arrayo::sub_menu_options,
                                "Array Operations", false);
     };
 
     void ArrayO::createArray()
     {
         base::hideTextOfScreen();
-        std::cout << "========================================\n";
-        std::cout << "|        Choose Array Data Type        |\n";
-        std::cout << "========================================\n";
-        std::cout << "| a -> int                             |\n";
-        std::cout << "| b -> double                          |\n";
-        std::cout << "| c -> string                          |\n";
-        std::cout << "| d -> char                            |\n";
-        std::cout << "========================================\n";
-        std::cout << "| z -> Array Operation Menu            |\n";
-        std::cout << "========================================\n";
-        std::cout << "Select the array data type you want: ";
+        base::showAvailableDataTypesMenu();
 
         menu::getMenuSelection(this->selected_data_type,
-                               array_data_type_options, "Array Data Types",
+                               base::data_type_options, "Array Data Types",
                                false);
 
         base::hideTextOfScreen();
@@ -307,7 +294,7 @@ namespace arrayo
                  * decay_t Reference:
                  * https://en.cppreference.com/cpp/types/decay
                  */
-                using ArrayType = std::decay_t<decltype(vec)>::value_type;
+                using ArrayType = typename std::decay_t<decltype(vec)>::value_type;
 
                 std::visit(
                     [&](auto& element)

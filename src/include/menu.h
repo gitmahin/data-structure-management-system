@@ -9,7 +9,7 @@
 namespace menu
 {
     // Methods
-    void getMenuSelection(char& selection_point, std::set<char>& menu_options,
+    void getMenuSelection(char& selection_point, const std::set<char>& menu_options,
                           std::string menu_label, bool shouldExitOnInputI);
 }  // namespace menu
 

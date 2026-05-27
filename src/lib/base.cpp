@@ -136,6 +136,21 @@ namespace base
         }
     }
 
+    void showAvailableDataTypesMenu()
+    {
+        std::cout << "=====================================\n";
+        std::cout << "|           Choose Data Type        |\n";
+        std::cout << "=====================================\n";
+        std::cout << "| a -> int                          |\n";
+        std::cout << "| b -> double                       |\n";
+        std::cout << "| c -> string                       |\n";
+        std::cout << "| d -> char                         |\n";
+        std::cout << "=====================================\n";
+        std::cout << "| z -> Back                         |\n";
+        std::cout << "=====================================\n";
+        std::cout << "Select the data type you want: ";
+    }
+
     /**
      * Handles the application shutdown process.
      * Prints an exit message to the console before termination.
