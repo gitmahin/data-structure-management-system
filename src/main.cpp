@@ -3,10 +3,12 @@
 #include "arrayo.h"
 #include "base.h"
 #include "home.h"
+#include "linklist.h"
 #include "presskey.h"
 
 using namespace home;
 using namespace arrayo;
+using namespace lnkls;
 
 /**
  * In main function handle all menu switching logic
@@ -18,6 +20,7 @@ int main()
     bool saveAllOperations = false;
     Home* appHome = new Home();
     ArrayO* arrayOpr;
+    LinkList* linkListOpr;
 
     // Dont exit while user input is not [z]
     while (appHome->selection_point != 'z')
@@ -26,6 +29,7 @@ int main()
 
         switch (appHome->selection_point)
         {
+            // Array Operations
             case 'a':
 
             {
@@ -198,6 +202,33 @@ int main()
                 break;
             }
             // if selection_point is [i] just exit program
+
+            // Linked List Operations
+            case 'b':
+            {
+                linkListOpr = new LinkList();
+                // Dont exit while user input is not [z]
+                while (linkListOpr->selection_point != 'z')
+                {
+                    linkListOpr->startMenu();
+
+                    switch (linkListOpr->selection_point)
+                    {
+                        case 'a':
+
+                            break;
+
+                        default:
+                        {  // clear screen for new page after exiting this page
+                            base::clearScreen();
+
+                            break;
+                        }
+                    }
+                }
+                delete linkListOpr;
+                break;
+            }
             default:
             {
                 break;

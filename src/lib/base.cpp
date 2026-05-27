@@ -26,7 +26,7 @@ namespace base
         std::cout << base::APP_TITLE << std::endl;
         if (sub_title != "")
         {
-            std::cout << "[" << sub_title << "]\n";
+            std::cout << "[" << sub_title << "]" << std::endl;
         }
         std::cout << "========================================\n\n";
     }
@@ -140,5 +140,5 @@ namespace base
      * Handles the application shutdown process.
      * Prints an exit message to the console before termination.
      */
-    void exitApp() { std::cout << "Exiting...\n"; };
+    void exitApp() { std::cout << "Exiting..." << std::endl; };
 }  // namespace base

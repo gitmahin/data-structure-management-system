@@ -95,10 +95,10 @@ namespace arrayo
             [&result](auto& vec)
             {
                 typename std::decay_t<decltype(vec)>::value_type element;
-                // cout << typeid(element).name() << endl;
+        
                 while (true)  // ← keep asking until valid input
                 {
-                    std::cout << "Enter element: ";
+                    std::cout << "Enter element ["<<base::type_name<decltype(element)>()<<"]: ";
 
                     // compare two types: if value type is string then use
                     // getline to take input

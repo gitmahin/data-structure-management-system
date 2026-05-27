@@ -1,7 +1,7 @@
 
 #ifdef _WIN32
     #include <conio.h>
-    #include <windows.h>
+    #include <windows.h> // Keep windows.h at top
 #else
     #include <termios.h>
     #include <unistd.h>
