@@ -78,7 +78,7 @@ namespace lnkls
                     }
                     else {
                          std::cout << "Enter element ["
-                        << base::type_name<decltype(data)>() << "]";
+                        << base::type_name<decltype(data)>() << "]: ";
                     }
                     if constexpr (std::is_same_v<
                                       std::decay_t<decltype(element)>,

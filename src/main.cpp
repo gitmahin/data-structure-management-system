@@ -6,6 +6,8 @@
 #include "linklist.h"
 #include "presskey.h"
 
+#include <type_traits>
+
 using namespace home;
 using namespace arrayo;
 using namespace lnkls;
@@ -276,12 +278,15 @@ int main()
                                     }
                                     case 'c':
                                     {
+                                        base::hideTextOfScreen();
                                         std::cout<<"Current Linked List State"<<std::endl;
                                         linkListOpr->traverseSingly();
 
-                                        std::cout<<"Inserting Element At Begin"<<std::endl;
-                                        // TODO: add insertion at begin logic
-
+                                        std::cout<<std::endl<<"Inserting Element At Begin"<<std::endl;
+                                        base::VariantSupportedDataType input = linkListOpr->createSinglyInput(0);
+                                        linkListOpr->insertSinglyAtStart(input);
+                                        std::cout<<"Element inserted successfully."<<std::endl;
+                                        base::pauseProgram(1);
                                     }
 
                                     default:

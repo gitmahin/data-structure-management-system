@@ -35,8 +35,6 @@ namespace lnkls
         void deleteSinglyAtEnd();
         void deleteSinglyAtIndex(int index);
         void traverseSingly();
-
-       private:
         base::VariantSupportedDataType createSinglyInput(int i, bool showIndex = false);
     };
 }  // namespace lnkls

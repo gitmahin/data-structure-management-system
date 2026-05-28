@@ -324,7 +324,7 @@ namespace arrayo
             },
             this->my_array);
 
-        std::cout << "Element inserted success.";
+        std::cout << "Element inserted successfully.";
         base::pauseProgram(1);
     }
 
@@ -412,7 +412,7 @@ namespace arrayo
         // if there is empty array return
         if (isInvalidRequest) return;
 
-        std::cout << "Element deleted success." << std::endl;
+        std::cout << "Element deleted successfully." << std::endl;
         std::cout << std::endl << "Deletion Result" << std::endl;
         std::cout << "Previous Number of Elements: "
                   << before_delete_element_count << std::endl;
