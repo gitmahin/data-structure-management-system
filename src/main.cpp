@@ -274,6 +274,15 @@ int main()
 
                                         break;
                                     }
+                                    case 'c':
+                                    {
+                                        std::cout<<"Current Linked List State"<<std::endl;
+                                        linkListOpr->traverseSingly();
+
+                                        std::cout<<"Inserting Element At Begin"<<std::endl;
+                                        
+
+                                    }
 
                                     default:
                                         break;

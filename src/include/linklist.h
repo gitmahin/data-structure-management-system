@@ -37,7 +37,7 @@ namespace lnkls
         void traverseSingly();
 
        private:
-        base::VariantSupportedDataType createSinglyInput(int i);
+        base::VariantSupportedDataType createSinglyInput(int i, bool showIndex = false);
     };
 }  // namespace lnkls
 

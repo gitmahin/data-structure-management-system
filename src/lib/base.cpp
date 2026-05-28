@@ -22,13 +22,13 @@ namespace base
      */
     void showAppTitle(std::string sub_title)
     {
-        std::cout << "\n========================================\n";
+        std::cout << "///////////////////////////////////////////\n";
         std::cout << base::APP_TITLE << std::endl;
         if (sub_title != "")
         {
             std::cout << "[" << sub_title << "]" << std::endl;
         }
-        std::cout << "========================================\n\n";
+        std::cout << "///////////////////////////////////////////\n\n";
     }
 
     /**

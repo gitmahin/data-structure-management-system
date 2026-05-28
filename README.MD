@@ -1,9 +1,8 @@
 ## Software Compatibility
 
 - GCC Version: 16.x.x
-- Operating System: Linux
+- Supported Operating System: Cross-platform
 - Clang Version: 22.x.x
-
 
 ## Download CMake (If not installed)
 
@@ -38,7 +37,6 @@ make
 ./App
 ```
 
-
 ### Windows Setup
 - Download & Install CMake
 - Install MinGW for c++ compiler
@@ -57,3 +55,92 @@ cmake --build build
 cd build
 ./App
 ```
+
+## Application UI:
+### Home Page:
+```bash
+========================================
+DATA STRUCTURE MANAGEMENT SYSTEM
+========================================
+
+========================================
+|          Data Structure Menu         |
+========================================
+| a -> Array Operations                |
+| b -> Linked List Operations          |
+| c -> Stack Operations                |
+| d -> Queue Operations                |
+| e -> Searching Operations            |
+| f -> Sorting Operations              |
+| g -> Graph Operations                |
+| h -> Tree Operations                 |
+========================================
+| z -> Exit                            |
+========================================
+Choose an option: 
+```
+---
+### Array Operations
+```bash
+========================================
+DATA STRUCTURE MANAGEMENT SYSTEM
+[Array Operations]
+========================================
+
+========================================
+|            Operations Menu           |
+========================================
+| a -> Create Array                    |
+| b -> Traverse Array                  |
+| c -> Insert at Beginning             |
+| d -> Insert at End                   |
+| e -> Insert at Any Position          |
+| f -> Delete from Beginning           |
+| g -> Delete from End                 |
+| h -> Delete from Any Position        |
+========================================
+| z -> Main Menu                       |
+========================================
+Choose an array operation: 
+```
+#### Create Array
+```bash
+=====================================
+|           Choose Data Type        |
+=====================================
+| a -> int                          |
+| b -> double                       |
+| c -> string                       |
+| d -> char                         |
+=====================================
+| z -> Back                         |
+=====================================
+Select the data type you want: 
+```
+
+#### Insertion
+```bash
+Current Array State:
+23
+24
+
+Inserting element at the beginning.
+Enter element [int]: 
+```
+#### Deletion By Index
+```bash
+!!!!!! Performing Deletion !!!!!!
+!!!!!! Performing Deletion !!!!!!
+Current Array State: [2] elements.
+23
+24
+Enter index between 0 to 1: 1   
+Element deleted success.
+
+Deletion Result
+Previous Number of Elements: 2
+Current Number of Elements: 1
+Deleted Element: 24 [Index: 1]
+Press any key to return to the Array Operations menu....
+```
+---

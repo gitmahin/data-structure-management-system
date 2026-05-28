@@ -60,7 +60,7 @@ namespace lnkls
                                "Linked List operations", false);
     }
 
-    base::VariantSupportedDataType LinkList::createSinglyInput(int i)
+    base::VariantSupportedDataType LinkList::createSinglyInput(int i, bool showIndex)
     {
         base::VariantSupportedDataType result;
         std::visit(
@@ -70,9 +70,16 @@ namespace lnkls
 
                 while (true)
                 {
-                    std::cout << "Enter element ["
-                              << base::type_name<decltype(data)>() << "][" << i
-                              << "]: ";
+                    if(showIndex) {
+
+                        std::cout << "Enter element ["
+                        << base::type_name<decltype(data)>() << "][" << i
+                        << "]: ";
+                    }
+                    else {
+                         std::cout << "Enter element ["
+                        << base::type_name<decltype(data)>() << "]";
+                    }
                     if constexpr (std::is_same_v<
                                       std::decay_t<decltype(element)>,
                                       std::string>)
@@ -148,19 +155,20 @@ namespace lnkls
                 return;
         }
 
+        base::hideTextOfScreen();
         int initial_elements_count = 1;
         std::cout
             << "Enter the number of elements to create in the linked list: ";
         base::getIntInput(initial_elements_count, 100);
 
         // Create head data first
-        base::VariantSupportedDataType first_data = this->createSinglyInput(0);
+        base::VariantSupportedDataType first_data = this->createSinglyInput(0, true);
         this->singlyHead->data = first_data;
 
         // Start index from one while head is created
         for (int i = 1; i < initial_elements_count; i++)
         {
-            base::VariantSupportedDataType data = this->createSinglyInput(i);
+            base::VariantSupportedDataType data = this->createSinglyInput(i, true);
 
             this->insertSinglyAtEnd(data);
         }

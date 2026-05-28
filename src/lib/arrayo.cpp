@@ -30,7 +30,7 @@ namespace arrayo
      *  }
      * @endcode
      */
-    void validVectorCreateInput(VariantVectorDataType& data, int i)
+    void ArrayO::validVectorCreateInput( int i)
     {
         std::visit(
             [i](auto& element)
@@ -66,7 +66,7 @@ namespace arrayo
                     }
                 }
             },
-            data);
+            this->my_array);
     }
 
     /**
@@ -84,8 +84,7 @@ namespace arrayo
      *  usr_input = validVectorInsertInput(my_array);
      * @endcode
      */
-    base::VariantSupportedDataType validVectorInsertInput(
-        VariantVectorDataType& data)
+    base::VariantSupportedDataType ArrayO::validVectorInsertInput()
     {
         base::VariantSupportedDataType result;
         std::visit(
@@ -126,7 +125,7 @@ namespace arrayo
 
                 result = element;
             },
-            data);
+            this->my_array);
 
         return result;
     }
@@ -216,7 +215,7 @@ namespace arrayo
 
         for (int i = 0; i < initial_array_size; i++)
         {
-            validVectorCreateInput(this->my_array, i);
+            validVectorCreateInput( i);
         }
 
         std::visit(
@@ -277,7 +276,7 @@ namespace arrayo
         base::VariantSupportedDataType i_element;
 
         std::cout << std::endl << label << std::endl;
-        i_element = validVectorInsertInput(this->my_array);
+        i_element = validVectorInsertInput();
 
         // string exit_word = get<string>(i_element);
         // if (exit_word == "exit")
