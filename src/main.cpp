@@ -25,6 +25,10 @@ int main()
     // Dont exit while user input is not [z]
     while (appHome->selection_point != 'z')
     {
+        // On application start clear screen
+        base::clearScreen();
+        // reset selection option to null
+        appHome->selection_point = '\0';
         appHome->startMenu();
 
         switch (appHome->selection_point)
@@ -207,15 +211,45 @@ int main()
             {
                 linkListOpr = new LinkList();
                 // Dont exit while user input is not [z]
+
                 while (linkListOpr->selection_point != 'z')
                 {
+                    /**
+                     * Back to Main menu
+                     *
+                     * if user choose selected_operation = m
+                     * it will break the selected_operation loop
+                     * and after re-entering in selection_point loop
+                     * it will check at first that before re-entering
+                     * selection_point if selected_operation has selected m.
+                     *
+                     * NOTE: don't reset selected_operation before doing this
+                     */
+                    if (linkListOpr->selected_operation == 'm')
+                    {
+                        break;
+                    }
+
+                    // reset selection option
+                    linkListOpr->selection_point = '\0';
                     linkListOpr->startMenu();
+
+                    // resetting selected_operation menu selection
+                    // so that it doesn't create infinite loop to stuck in
+                    // startMenu();
+                    linkListOpr->selected_operation = '\0';
 
                     switch (linkListOpr->selection_point)
                     {
                         case 'a':
                         {
-                            while (linkListOpr->selected_operation != 'z')
+                            // reset selected_operation to the null terminator
+                            // before reopening
+                            // linkListOpr->startMenu(). Otherwise, the previous
+                            // 'z' selection remains stored and causes the menu
+                            // to enter an infinite loop.
+                            while (linkListOpr->selected_operation != 'z' &&
+                                   linkListOpr->selected_operation != 'm')
                             {
                                 linkListOpr->startOperationsMenu();
 

@@ -51,6 +51,7 @@ namespace lnkls
         std::cout << "| h -> Delete from Any Position        |\n";
         std::cout << "========================================\n";
         std::cout << "| z -> Back                            |\n";
+        std::cout << "| m -> Main Menu                       |\n";
         std::cout << "========================================\n";
         std::cout << "Choose an operation: ";
 
@@ -86,13 +87,14 @@ namespace lnkls
                         if (std::cin.fail())
                         {
                             std::cin.clear();
-                            while (std::cin.get() != '\n');  // flush bad inputs
+                            // while (std::cin.get() != '\n');  // flush bad
+                            // inputs
                             std::cout << "Invalid input! Try again."
                                       << std::endl;
                             continue;
                         }
 
-                        while (std::cin.get() != '\n');
+                        // while (std::cin.get() != '\n');
                         break;
                     }
                 };
@@ -111,6 +113,7 @@ namespace lnkls
 
         base::hideTextOfScreen();
         base::showAvailableDataTypesMenu();
+        this->selected_data_type = '\0';
         menu::getMenuSelection(this->selected_data_type,
                                base::data_type_options, "Data Types", false);
 
@@ -163,6 +166,43 @@ namespace lnkls
         }
     }
 
+    void LinkList::traverseSingly()
+    {
+        Singly* ptr = this->singlyHead;
+        while (ptr != nullptr)
+        {
+            std::visit([](auto& element) { std::cout << element << std::endl; },
+                       ptr->data);
+            ptr = ptr->next;
+        }
+    }
+
+    void LinkList::insertSinglyAtStart(base::VariantSupportedDataType data)
+    {
+        Singly* newNode = new Singly;
+        newNode->data = data;
+        newNode->next = this->singlyHead;
+        this->singlyHead = newNode;
+    }
+
+    void LinkList::insertSinglyAtIndex(base::VariantSupportedDataType data,
+                                       int index)
+    {
+        Singly* newNode = new Singly;
+        newNode->data = data;
+
+        Singly* ptr = this->singlyHead;
+
+        int i = 0;
+        while (i != index - 1)
+        {
+            ptr = ptr->next;
+            i++;
+        }
+        newNode->next = ptr->next;
+        ptr->next = newNode;
+    }
+
     void LinkList::insertSinglyAtEnd(base::VariantSupportedDataType data)
     {
         Singly* newNode = new Singly;
@@ -176,15 +216,18 @@ namespace lnkls
         ptr->next = newNode;
     }
 
-    void LinkList::traverseSingly()
+    void LinkList::deleteSinglyAtEnd()
     {
-        Singly* ptr = this->singlyHead;
-        while (ptr != nullptr)
+        Singly* p = this->singlyHead;
+        Singly* q = this->singlyHead->next;
+
+        while (q->next != nullptr)
         {
-            std::visit([](auto& element) { std::cout << element << std::endl; },
-                       ptr->data);
-            ptr = ptr->next;
+            p = p->next;
+            q = q->next;
         }
+        p->next = nullptr;
+        delete q;
     }
 
 }  // namespace lnkls

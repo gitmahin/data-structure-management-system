@@ -54,7 +54,6 @@ namespace menu
             std::cin >> selection_point;
             // Remove leftover new line char
             std::cin.ignore();
-
             // std::set reference: https://en.cppreference.com/cpp/container/set
             // if user choosen point is available in options; then its valid and
             // break with success

@@ -9,7 +9,7 @@ namespace lnkls
 
     const std::set<char> sub_menu_options = {'a', 'b', 'c', 'z'};
     const std::set<char> operation_options = {'a', 'b', 'c', 'd', 'e',
-                                              'f', 'g', 'h', 'z'};
+                                              'f', 'g', 'h', 'z', 'm'};
 
     class LinkList : public IPage
     {
@@ -28,16 +28,12 @@ namespace lnkls
         void startOperationsMenu();
         void createSinglyListElement();
 
-        void insertSinglyAtStart(struct Singly*& head);
+        void insertSinglyAtStart(base::VariantSupportedDataType data);
         void insertSinglyAtEnd(base::VariantSupportedDataType data);
-        void insertSinglyAtIndex(struct Singly*& head,
-                                 base::VariantSupportedDataType data,
-                                 int index);
-        void deleteSinglyAtStart(struct Singly*& head);
-        void deleteSinglyAtEnd(struct Singly*& head);
-        void deleteSinglyAtIndex(struct Singly*& head,
-                                 base::VariantSupportedDataType data,
-                                 int index);
+        void insertSinglyAtIndex(base::VariantSupportedDataType data, int index);
+        void deleteSinglyAtStart();
+        void deleteSinglyAtEnd();
+        void deleteSinglyAtIndex(int index);
         void traverseSingly();
 
        private:
