@@ -523,7 +523,7 @@ int main()
                         }
                     }
                 }
-                // delete linkListOpr;
+                delete linkListOpr;
 
                 // reset all selections after exiting Linked List
                 linkListOpr->selection_point = '\0';

@@ -60,6 +60,28 @@ namespace lnkls
                                "Linked List operations", false);
     }
 
+    // ************************************************************************
+    // Singly Linked List
+    // ************************************************************************
+
+    /**
+     * Handles type-safe input for a single element to be used in a Singly
+     * Linked List.
+     *
+     * This method determines the required data type based on the current state
+     * of the singlyHead's data variant and prompts the user for a matching
+     * value. It includes validation for non-string types and uses getline for
+     * strings.
+     *
+     * @param i          The index or position identifier to display in the
+     * prompt.
+     * @param showIndex  If true, displays the index [i] in the input prompt.
+     * @return A variant containing the validated user input.
+     *
+     * @code
+     *  base::VariantSupportedDataType input = createSinglyInput(0, true);
+     * @endcode
+     */
     base::VariantSupportedDataType LinkList::createSinglyInput(int i,
                                                                bool showIndex)
     {
@@ -115,6 +137,22 @@ namespace lnkls
         return result;
     }
 
+    /**
+     * Initializes a new Singly Linked List by prompting the user for data type
+     * and size.
+     *
+     * If a list already exists, it clears all existing nodes before starting.
+     * The method guides the user through:
+     * 1. Selecting a supported data type (int, double, string, char).
+     * 2. Specifying the initial number of elements.
+     * 3. Entering values for each node in the list.
+     *
+     * @code
+     *  linkListOpr->createSinglyListElement();
+     * @endcode
+     *
+     * @note Maximum initial size is capped at 100 elements via getIntInput.
+     */
     void LinkList::createSinglyListElement()
     {
         if (this->singlyHead)
@@ -197,6 +235,11 @@ namespace lnkls
         }
     }
 
+    /**
+     * Iterates through the Singly Linked List and prints each element's data.
+     * Uses std::visit to handle the variant data type stored in each node.
+     * Displays "Empty Elements" if the list head is null.
+     */
     void LinkList::traverseSingly()
     {
         if (!this->singlyHead) std::cout << "Empty Elements" << std::endl;
@@ -209,6 +252,17 @@ namespace lnkls
         }
     }
 
+    /**
+     * Calculates the total number of nodes currently in the Singly Linked List.
+     *
+     * Iterates through the list starting from the head until the end is
+     * reached.
+     * @return The integer count of elements in the list.
+     *
+     * @code
+     *  int size = linkListOpr->getSinglyListSize();
+     * @endcode
+     */
     int LinkList::getSinglyListSize()
     {
         int i = 0;
@@ -222,6 +276,16 @@ namespace lnkls
         return i;
     }
 
+    /**
+     * Inserts a new node at the beginning of the Singly Linked List.
+     *
+     * Creates a new node with the provided data and updates the head pointer.
+     * @param data A variant containing the data to be stored in the new node.
+     *
+     * @code
+     *  linkListOpr->insertSinglyAtStart(my_data);
+     * @endcode
+     */
     void LinkList::insertSinglyAtStart(base::VariantSupportedDataType data)
     {
         Singly* newNode = new Singly;
@@ -230,6 +294,18 @@ namespace lnkls
         this->singlyHead = newNode;
     }
 
+    /**
+     * Inserts a new node at a specific index in the Singly Linked List.
+     *
+     * If the index is 0, it calls insertSinglyAtStart. Otherwise, it traverses
+     * to the specified position and links the new node.
+     * @param data  A variant containing the data to be stored.
+     * @param index The zero-based position where the node should be inserted.
+     *
+     * @code
+     *  linkListOpr->insertSinglyAtIndex(my_data, 2);
+     * @endcode
+     */
     void LinkList::insertSinglyAtIndex(base::VariantSupportedDataType data,
                                        int index)
     {
@@ -258,6 +334,17 @@ namespace lnkls
         this->insertSinglyAtStart(data);
     }
 
+    /**
+     * Appends a new node to the end of the Singly Linked List.
+     *
+     * Traverses the list to find the last node and links the new node to it.
+     * @param data A variant containing the data to be stored in the new node.
+     *
+     * @code
+     *  base::VariantSupportedDataType my_data = 10;
+     *  linkListOpr->insertSinglyAtEnd(my_data);
+     * @endcode
+     */
     void LinkList::insertSinglyAtEnd(base::VariantSupportedDataType data)
     {
         Singly* newNode = new Singly;
@@ -271,6 +358,45 @@ namespace lnkls
         ptr->next = newNode;
     }
 
+    /**
+     * Removes the first node (head) of the Singly Linked List.
+     *
+     * Updates the head pointer to the second node and frees the memory of the
+     * old head. Displays the deletion result using
+     * base::elementDeletionResultTUI.
+     *
+     * @code
+     *  linkListOpr->deleteSinglyAtStart();
+     * @endcode
+     */
+    void LinkList::deleteSinglyAtStart()
+    {
+        // Count element size before modify nodes
+        int element_count = this->getSinglyListSize();
+
+        // Modify nodes for proper deletion
+        Singly* ptr = this->singlyHead;
+        Singly* second_node = ptr->next;
+        this->singlyHead = second_node;
+
+        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
+                                       ptr->data);
+
+        delete ptr;
+    }
+
+    /**
+     * Removes the last node from the Singly Linked List.
+     *
+     * If the list has only one element, it calls deleteSinglyAtStart.
+     * Otherwise, it traverses to the second-to-last node to update its next
+     * pointer.
+     * @param isVerboseMode If true, displays the deletion result via TUI.
+     *
+     * @code
+     *  linkListOpr->deleteSinglyAtEnd();
+     * @endcode
+     */
     void LinkList::deleteSinglyAtEnd(bool isVerboseMode)
     {
         // Count element size before modify nodes
@@ -299,22 +425,19 @@ namespace lnkls
         delete q;
     }
 
-    void LinkList::deleteSinglyAtStart()
-    {
-        // Count element size before modify nodes
-        int element_count = this->getSinglyListSize();
-
-        // Modify nodes for proper deletion
-        Singly* ptr = this->singlyHead;
-        Singly* second_node = ptr->next;
-        this->singlyHead = second_node;
-
-        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
-                                       ptr->data);
-
-        delete ptr;
-    }
-
+    /**
+     * Removes a node at a specific index from the Singly Linked List.
+     *
+     * If the index is 0, it calls deleteSinglyAtStart. Otherwise, it traverses
+     * to the node at the specified index, unlinks it, and frees its memory.
+     * Displays the deletion result using base::elementDeletionResultTUI.
+     *
+     * @param index Get index and identify if its 0 or not.
+     *
+     * @code
+     *  linkListOpr->deleteSinglyAtIndex(2);
+     * @endcode
+     */
     void LinkList::deleteSinglyAtIndex(int index)
     {
         // Count element size before modify nodes
@@ -347,5 +470,9 @@ namespace lnkls
         // By this way it won't throw [Segmentation fault(core dumped)] error
         this->deleteSinglyAtStart();
     }
+
+    // ************************************************************************
+    // Circular Linked List
+    // ************************************************************************
 
 }  // namespace lnkls

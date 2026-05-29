@@ -31,6 +31,7 @@ namespace lnkls
         struct Singly* singlyHead;
         struct Circular* circularHead;
 
+        // Base 
         void startMenu() override;
         void startOperationsMenu();
 
