@@ -1,7 +1,7 @@
 
 #ifdef _WIN32
     #include <conio.h>
-    #include <windows.h> // Keep windows.h at top
+    #include <windows.h>  // Keep windows.h at top
 #else
     #include <termios.h>
     #include <unistd.h>
@@ -34,16 +34,16 @@ char getCharInput()
         newt = oldt; // create new terminal with current terminal settings for
                      // start safe modification
        
-        ///////////////////////////////////////////////////////////////////////
-        // Logging bits are on or off                                        //
-        //                                                                   //
-        // Print full c_lflag                                                //
-        // cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;     //
-        //                                                                   //
-        // Check ICANON specifically                                         //
-        // cout << "ICANON value: " << bitset<32>(ICANON) << endl;           //
-        // cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;           //
-        ///////////////////////////////////////////////////////////////////////
+        // *******************************************************************
+        // * Logging bits are on or off                                      *
+        // *                                                                 *
+        // * Print full c_lflag                                              *
+        // * cout << "c_lflag bits: " << bitset<32>(newt.c_lflag) << endl;   *
+        // *                                                                 *
+        // * Check ICANON specifically                                       *
+        // * cout << "ICANON value: " << bitset<32>(ICANON) << endl;         *
+        // * cout << "ECHO value:   " << bitset<32>(ECHO)   << endl;         *
+        // *******************************************************************
              
         /**
          *  The c_lflag field of the argument structure is used to control various

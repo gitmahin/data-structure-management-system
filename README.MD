@@ -130,7 +130,6 @@ Enter element [int]:
 #### Deletion By Index
 ```bash
 !!!!!! Performing Deletion !!!!!!
-!!!!!! Performing Deletion !!!!!!
 Current Array State: [2] elements.
 23
 24

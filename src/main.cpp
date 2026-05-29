@@ -64,9 +64,7 @@ int main()
                             std::cout << "Displaying stored array elements:"
                                       << std::endl;
                             arrayOpr->traverseArray();
-                            presskey::pressAnyKey(
-                                "Press any key to return to Array Operations "
-                                "menu");
+                            presskey::pressAnyKey("Press any key to back");
                             break;
                         }
 
@@ -212,9 +210,23 @@ int main()
             // Linked List Operations
             case 'b':
             {
-                linkListOpr = new LinkList();
-                // Dont exit while user input is not [z]
+                // reset selection option
+                if (!linkListOpr)
+                {
+                    linkListOpr = new LinkList();
+                }
 
+
+                /**
+                 * If selection_point != z, Show "Types of Linked List" Menu
+                 * if selected z break while loop, Reset all selections under "Linked List" and exit to Application Menu
+                 * else Enter to the "Operations Menu" -> startOperationsMenu()
+                 * if press m, exit from "Operations Menu" Menu,
+                 * It will then check if m was pressed, if then exit from "Types of Linked List" Mwnu clear all selections
+                 * under "Linked List" and back to Application Menu
+                 */
+
+                // Don't exit while user input is not [z]
                 while (linkListOpr->selection_point != 'z')
                 {
                     /**
@@ -233,8 +245,8 @@ int main()
                         break;
                     }
 
-                    // reset selection option
-                    linkListOpr->selection_point = '\0';
+             
+                    // Set selection_point
                     linkListOpr->startMenu();
 
                     // resetting selected_operation menu selection
@@ -244,6 +256,7 @@ int main()
 
                     switch (linkListOpr->selection_point)
                     {
+                        // Singly Linked List Management
                         case 'a':
                         {
                             // reset selected_operation to the null terminator
@@ -254,34 +267,62 @@ int main()
                             while (linkListOpr->selected_operation != 'z' &&
                                    linkListOpr->selected_operation != 'm')
                             {
+                                // Set selected_operation
                                 linkListOpr->startOperationsMenu();
 
                                 switch (linkListOpr->selected_operation)
                                 {
+                                    // Start Singly Linked List creation
                                     case 'a':
                                     {
                                         linkListOpr->createSinglyListElement();
                                         break;
                                     }
+                                    // Traverse Singly Linked List
                                     case 'b':
                                     {
                                         base::hideTextOfScreen();
-                                        // Display array elements
-                                        std::cout << "Displaying stored Linked "
-                                                     "List elements:"
-                                                  << std::endl;
-                                        linkListOpr->traverseSingly();
+
+                                        int element_count =
+                                            linkListOpr->getSinglyListSize();
+
+                                        if (!element_count)
+                                        {
+                                            std::cout
+                                                << "No list elements to show!"
+                                                << std::endl;
+                                        }
+                                        else
+                                        {
+                                            // Display list elements
+                                            std::cout
+                                                << "Displaying stored Linked "
+                                                   "List elements:"
+                                                << std::endl;
+                                            linkListOpr->traverseSingly();
+                                        }
                                         presskey::pressAnyKey(
-                                            "Press any key to return to the "
-                                            "Linked List Operations menu");
+                                            "Press any key to back");
 
                                         break;
                                     }
 
-                                    // Insert at begin
+                                    // Insert at begin [Singly Linked List]
                                     case 'c':
                                     {
                                         base::hideTextOfScreen();
+
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout
+                                                << "Cannot perform insertion "
+                                                   "on empty Linked List"
+                                                << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
                                         std::cout << "Current Linked List State"
                                                   << std::endl;
                                         linkListOpr->traverseSingly();
@@ -300,10 +341,22 @@ int main()
                                         break;
                                     }
 
-                                    // Insert at end
+                                    // Insert at end [Singly Linked List]
                                     case 'd':
                                     {
                                         base::hideTextOfScreen();
+
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout
+                                                << "Cannot perform insertion "
+                                                   "on empty Linked List"
+                                                << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
                                         std::cout << "Current Linked List State"
                                                   << std::endl;
                                         linkListOpr->traverseSingly();
@@ -321,12 +374,36 @@ int main()
                                         break;
                                     }
 
-                                    // Insert at index
+                                    // Insert at index [Singly Linked List]
                                     case 'e':
                                     {
                                         base::hideTextOfScreen();
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout
+                                                << "Cannot perform insertion "
+                                                   "on empty Linked List"
+                                                << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
                                         int elements_count =
                                             linkListOpr->getSinglyListSize();
+                                        // if (elements_count < 2)
+                                        // {
+                                        //     std::cout
+                                        //         << "Cannot perform this "
+                                        //            "operation, while there is
+                                        //            " "only 1 element!\nUse "
+                                        //            "Insert at "
+                                        //            "Beginning\nOr, Insert at
+                                        //            " "End."
+                                        //         << std::endl;
+                                        //     presskey::pressAnyKey(
+                                        //         "Press any key to back");
+                                        //     break;
+                                        // }
                                         std::cout
                                             << "Current Linked List State: ["
                                             << elements_count << "] elements."
@@ -359,21 +436,75 @@ int main()
                                     case 'f':
                                     {
                                         base::hideTextOfScreen();
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
                                         linkListOpr->deleteSinglyAtStart();
                                         presskey::pressAnyKey(
-                                            "Press any key to return to the "
-                                            "Linked List Operations menu");
+                                            "Press any key to back");
 
                                         break;
                                     }
 
+                                    // Delete element at end
                                     case 'g':
                                     {
                                         base::hideTextOfScreen();
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
                                         linkListOpr->deleteSinglyAtEnd();
                                         presskey::pressAnyKey(
-                                            "Press any key to return to the "
-                                            "Linked List Operations menu");
+                                            "Press any key to back");
+                                        break;
+                                    }
+
+                                    // Delete element by index
+                                    case 'h':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        if (!linkListOpr->singlyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        std::cout << "!!!!!! Performing "
+                                                     "Deletion !!!!!!"
+                                                  << std::endl;
+                                        int elements_count =
+                                            linkListOpr->getSinglyListSize();
+                                        std::cout
+                                            << "Current Linked List State: ["
+                                            << elements_count << "] elements."
+                                            << std::endl;
+                                        linkListOpr->traverseSingly();
+
+                                        std::cout << "Enter index between 0 to "
+                                                  << elements_count - 1 << ": ";
+                                        int index = 0;
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
+                                        linkListOpr->deleteSinglyAtIndex(index);
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
                                         break;
                                     }
 
@@ -392,7 +523,11 @@ int main()
                         }
                     }
                 }
-                delete linkListOpr;
+                // delete linkListOpr;
+
+                // reset all selections after exiting Linked List
+                linkListOpr->selection_point = '\0';
+                linkListOpr->selected_operation = '\0';
                 break;
             }
             default:

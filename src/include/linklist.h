@@ -22,7 +22,7 @@ namespace lnkls
             struct Singly* next;
         };
 
-        struct Singly* singlyHead = new struct Singly;
+        struct Singly* singlyHead;
 
         void startMenu() override;
         void startOperationsMenu();
@@ -31,14 +31,17 @@ namespace lnkls
         void createSinglyListElement();
         void insertSinglyAtStart(base::VariantSupportedDataType data);
         void insertSinglyAtEnd(base::VariantSupportedDataType data);
-        void insertSinglyAtIndex(base::VariantSupportedDataType data, int index);
+        void insertSinglyAtIndex(base::VariantSupportedDataType data,
+                                 int index);
         void deleteSinglyAtStart();
-        void deleteSinglyAtEnd();
+        void deleteSinglyAtEnd(bool isVerboseMode = true);
         void deleteSinglyAtIndex(int index);
         void traverseSingly();
         int getSinglyListSize();
-        
-        base::VariantSupportedDataType createSinglyInput(int i, bool showIndex = false);
+
+        // Here index i has no effect on real data. It just show index in std::cout
+        base::VariantSupportedDataType createSinglyInput(
+            int i, bool showIndex = false);
     };
 }  // namespace lnkls
 

@@ -63,6 +63,7 @@ namespace lnkls
     base::VariantSupportedDataType LinkList::createSinglyInput(int i,
                                                                bool showIndex)
     {
+        if (!this->singlyHead) this->singlyHead = new Singly;
         base::VariantSupportedDataType result;
         std::visit(
             [&](auto& element)
@@ -116,6 +117,18 @@ namespace lnkls
 
     void LinkList::createSinglyListElement()
     {
+        if (this->singlyHead)
+
+        {
+            int element_count = this->getSinglyListSize();
+            for (int i = 0; i < element_count; i++)
+            {
+                this->deleteSinglyAtEnd(false);
+            }
+        }
+
+        this->singlyHead = new Singly;
+
         this->singlyHead->next = nullptr;
 
         int i = 0;
@@ -168,6 +181,12 @@ namespace lnkls
             this->createSinglyInput(0, true);
         this->singlyHead->data = first_data;
 
+        // Make linked list empty to false
+        // Otherwise it will exclude first input data cause of insertSinglyAtEnd
+        // As in insertSinglyAtEnd if isSinglyEmpty true then it will create
+        // first data for head
+        // this->isSinglyEmpty = false;
+
         // Start index from one while head is created
         for (int i = 1; i < initial_elements_count; i++)
         {
@@ -180,6 +199,7 @@ namespace lnkls
 
     void LinkList::traverseSingly()
     {
+        if (!this->singlyHead) std::cout << "Empty Elements" << std::endl;
         Singly* ptr = this->singlyHead;
         while (ptr != nullptr)
         {
@@ -219,13 +239,23 @@ namespace lnkls
         Singly* ptr = this->singlyHead;
 
         int i = 0;
-        while (i != index - 1)
+
+        // If index is not the head node
+        if (index != 0)
         {
-            ptr = ptr->next;
-            i++;
+            while (i != index - 1)
+            {
+                ptr = ptr->next;
+                i++;
+            }
+            newNode->next = ptr->next;
+            ptr->next = newNode;
+            return;
         }
-        newNode->next = ptr->next;
-        ptr->next = newNode;
+
+        // if index is head node than run insert at start with given data
+        // By this way it won't throw [Segmentation fault(core dumped)] error
+        this->insertSinglyAtStart(data);
     }
 
     void LinkList::insertSinglyAtEnd(base::VariantSupportedDataType data)
@@ -241,14 +271,14 @@ namespace lnkls
         ptr->next = newNode;
     }
 
-    void LinkList::deleteSinglyAtEnd()
+    void LinkList::deleteSinglyAtEnd(bool isVerboseMode)
     {
         // Count element size before modify nodes
         int element_count = this->getSinglyListSize();
 
-        if (!element_count)
+        if (element_count < 2)
         {
-            std::cout << "Cannot delete empty Linked List" << std::endl;
+            this->deleteSinglyAtStart();
             return;
         }
 
@@ -261,9 +291,11 @@ namespace lnkls
             q = q->next;
         }
         p->next = nullptr;
-
-        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
-                                       q->data);
+        if (isVerboseMode)
+        {
+            base::elementDeletionResultTUI(element_count, element_count - 1,
+                                           element_count - 1, q->data);
+        }
         delete q;
     }
 
@@ -271,12 +303,6 @@ namespace lnkls
     {
         // Count element size before modify nodes
         int element_count = this->getSinglyListSize();
-
-        if (!element_count)
-        {
-            std::cout << "Cannot delete empty Linked List" << std::endl;
-            return;
-        }
 
         // Modify nodes for proper deletion
         Singly* ptr = this->singlyHead;
@@ -287,6 +313,39 @@ namespace lnkls
                                        ptr->data);
 
         delete ptr;
+    }
+
+    void LinkList::deleteSinglyAtIndex(int index)
+    {
+        // Count element size before modify nodes
+        int element_count = this->getSinglyListSize();
+
+        Singly* p = this->singlyHead;
+        Singly* q = this->singlyHead->next;
+
+        // If index is not the head node
+        if (index != 0)
+        {
+            for (int i = 0; i < index - 1; i++)
+            {
+                p = p->next;
+                q = q->next;
+            }
+
+            p->next = q->next;
+
+            base::elementDeletionResultTUI(element_count, index,
+                                           element_count - 1, q->data);
+
+            delete q;
+            // Return this function. Otherwise it will run deletion for begin
+            // element.
+            return;
+        }
+
+        // if head node then run delete at start
+        // By this way it won't throw [Segmentation fault(core dumped)] error
+        this->deleteSinglyAtStart();
     }
 
 }  // namespace lnkls

@@ -429,7 +429,7 @@ namespace arrayo
             deleted_element);
 
         presskey::pressAnyKey(
-            "Press any key to return to the Array Operations menu.");
+            "Press any key to back");
     };
 
 }  // namespace arrayo
