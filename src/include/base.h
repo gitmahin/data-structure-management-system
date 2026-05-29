@@ -22,8 +22,8 @@
 #endif
 #include <cstdlib>
 #include <memory>
-#include <string>
 #include <set>
+#include <string>
 
 namespace base
 {
@@ -78,7 +78,10 @@ namespace base
     void pauseProgram(int second);
     void getIntInput(int& i_variable, int max = 1, int min = 0);
 
-    void elementDeletionResultTUI();
+    void elementDeletionResultTUI(int before_delete_element_count,
+                                  int deleted_element_index,
+                                  int curr_element_count,
+                                  base::VariantSupportedDataType data);
     void exitApp();
 
 }  // namespace base

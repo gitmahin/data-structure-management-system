@@ -272,8 +272,8 @@ int main()
                                                   << std::endl;
                                         linkListOpr->traverseSingly();
                                         presskey::pressAnyKey(
-                                            "Press any key to return to "
-                                            "Operations Menu ");
+                                            "Press any key to return to the "
+                                            "Linked List Operations menu");
 
                                         break;
                                     }
@@ -297,6 +297,7 @@ int main()
                                             << "Element inserted successfully."
                                             << std::endl;
                                         base::pauseProgram(1);
+                                        break;
                                     }
 
                                     // Insert at end
@@ -324,25 +325,29 @@ int main()
                                     case 'e':
                                     {
                                         base::hideTextOfScreen();
-                                        int elements_count = linkListOpr->getSinglyListSize();
-                                        std::cout << "Current Linked List State: ["<< elements_count <<"]"
-                                                  << std::endl;
+                                        int elements_count =
+                                            linkListOpr->getSinglyListSize();
+                                        std::cout
+                                            << "Current Linked List State: ["
+                                            << elements_count << "] elements."
+                                            << std::endl;
                                         linkListOpr->traverseSingly();
-
-                                        
 
                                         std::cout
                                             << std::endl
                                             << "Inserting Element At Index."
                                             << std::endl;
 
-                                        std::cout<<"Enter index between 0 to "<<elements_count - 1 <<": ";
+                                        std::cout << "Enter index between 0 to "
+                                                  << elements_count - 1 << ": ";
                                         int index = 0;
-                                        base::getIntInput(index, elements_count-1);
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createSinglyInput(0);
-                                        linkListOpr->insertSinglyAtIndex(input, index);
+                                        linkListOpr->insertSinglyAtIndex(input,
+                                                                         index);
                                         std::cout
                                             << "Element inserted successfully."
                                             << std::endl;
@@ -350,16 +355,25 @@ int main()
                                         break;
                                     }
 
+                                    // Delete element at begin
                                     case 'f':
                                     {
-                                        // TODO: add delete at first logci
                                         base::hideTextOfScreen();
                                         linkListOpr->deleteSinglyAtStart();
+                                        presskey::pressAnyKey(
+                                            "Press any key to return to the "
+                                            "Linked List Operations menu");
 
-                                        std::cout<<"Element deleted successfully."<<std::endl;
+                                        break;
+                                    }
 
-                                        
-
+                                    case 'g':
+                                    {
+                                        base::hideTextOfScreen();
+                                        linkListOpr->deleteSinglyAtEnd();
+                                        presskey::pressAnyKey(
+                                            "Press any key to return to the "
+                                            "Linked List Operations menu");
                                         break;
                                     }
 

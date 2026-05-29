@@ -243,6 +243,15 @@ namespace lnkls
 
     void LinkList::deleteSinglyAtEnd()
     {
+        // Count element size before modify nodes
+        int element_count = this->getSinglyListSize();
+
+        if (!element_count)
+        {
+            std::cout << "Cannot delete empty Linked List" << std::endl;
+            return;
+        }
+
         Singly* p = this->singlyHead;
         Singly* q = this->singlyHead->next;
 
@@ -252,16 +261,32 @@ namespace lnkls
             q = q->next;
         }
         p->next = nullptr;
+
+        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
+                                       q->data);
         delete q;
     }
 
-    void LinkList::deleteSinglyAtStart() {
-        Singly * ptr = this->singlyHead;
-        Singly * second_node = ptr->next;
+    void LinkList::deleteSinglyAtStart()
+    {
+        // Count element size before modify nodes
+        int element_count = this->getSinglyListSize();
+
+        if (!element_count)
+        {
+            std::cout << "Cannot delete empty Linked List" << std::endl;
+            return;
+        }
+
+        // Modify nodes for proper deletion
+        Singly* ptr = this->singlyHead;
+        Singly* second_node = ptr->next;
         this->singlyHead = second_node;
+
+        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
+                                       ptr->data);
+
         delete ptr;
     }
-
-  
 
 }  // namespace lnkls
