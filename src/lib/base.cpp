@@ -151,6 +151,29 @@ namespace base
         std::cout << "Select the data type you want: ";
     }
 
+    // TODO: complete this
+    void elementDeletionResultTUI(int before_delete_element_count,
+                                  int deleted_element_index,
+                                  int curr_element_count,
+                                  base::VariantSupportedDataType data)
+    {
+        std::cout << "Element deleted successfully." << std::endl;
+        std::cout << std::endl << "Deletion Result" << std::endl;
+        std::cout << "Previous Number of Elements: "
+                  << before_delete_element_count << std::endl;
+        std::cout << "Current Number of Elements: " << curr_element_count
+                  << std::endl;
+
+        std::visit(
+            [&](auto& e)
+            {
+                std::cout << "Deleted Element: " << e
+                          << " [Index: " << deleted_element_index << "]"
+                          << std::endl;
+            },
+            data);
+    }
+
     /**
      * Handles the application shutdown process.
      * Prints an exit message to the console before termination.

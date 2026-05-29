@@ -77,6 +77,8 @@ namespace base
     void clearScreen();
     void pauseProgram(int second);
     void getIntInput(int& i_variable, int max = 1, int min = 0);
+
+    void elementDeletionResultTUI();
     void exitApp();
 
 }  // namespace base

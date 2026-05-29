@@ -135,7 +135,7 @@ Current Array State: [2] elements.
 23
 24
 Enter index between 0 to 1: 1   
-Element deleted success.
+Element deleted successfully.
 
 Deletion Result
 Previous Number of Elements: 2

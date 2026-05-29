@@ -1,12 +1,11 @@
 #include <sstream>
+#include <type_traits>
 
 #include "arrayo.h"
 #include "base.h"
 #include "home.h"
 #include "linklist.h"
 #include "presskey.h"
-
-#include <type_traits>
 
 using namespace home;
 using namespace arrayo;
@@ -109,7 +108,9 @@ int main()
                             // Get number of elements are in array
                             int element_count = arrayOpr->getArraySize();
 
-                            // Make string with element_count placeholder
+                            // Make string with element_count placeholder. (For
+                            // demonstration purpose) As you can achive this via
+                            // usual cout<<
                             auto input_ask_text =
                                 (std::ostringstream()
                                  << "Enter index between 0 to "
@@ -276,17 +277,90 @@ int main()
 
                                         break;
                                     }
+
+                                    // Insert at begin
                                     case 'c':
                                     {
                                         base::hideTextOfScreen();
-                                        std::cout<<"Current Linked List State"<<std::endl;
+                                        std::cout << "Current Linked List State"
+                                                  << std::endl;
                                         linkListOpr->traverseSingly();
 
-                                        std::cout<<std::endl<<"Inserting Element At Begin"<<std::endl;
-                                        base::VariantSupportedDataType input = linkListOpr->createSinglyInput(0);
+                                        std::cout
+                                            << std::endl
+                                            << "Inserting Element At Begin."
+                                            << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createSinglyInput(0);
                                         linkListOpr->insertSinglyAtStart(input);
-                                        std::cout<<"Element inserted successfully."<<std::endl;
+                                        std::cout
+                                            << "Element inserted successfully."
+                                            << std::endl;
                                         base::pauseProgram(1);
+                                    }
+
+                                    // Insert at end
+                                    case 'd':
+                                    {
+                                        base::hideTextOfScreen();
+                                        std::cout << "Current Linked List State"
+                                                  << std::endl;
+                                        linkListOpr->traverseSingly();
+
+                                        std::cout << std::endl
+                                                  << "Inserting Element At End."
+                                                  << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createSinglyInput(0);
+                                        linkListOpr->insertSinglyAtEnd(input);
+                                        std::cout
+                                            << "Element inserted successfully."
+                                            << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
+
+                                    // Insert at index
+                                    case 'e':
+                                    {
+                                        base::hideTextOfScreen();
+                                        int elements_count = linkListOpr->getSinglyListSize();
+                                        std::cout << "Current Linked List State: ["<< elements_count <<"]"
+                                                  << std::endl;
+                                        linkListOpr->traverseSingly();
+
+                                        
+
+                                        std::cout
+                                            << std::endl
+                                            << "Inserting Element At Index."
+                                            << std::endl;
+
+                                        std::cout<<"Enter index between 0 to "<<elements_count - 1 <<": ";
+                                        int index = 0;
+                                        base::getIntInput(index, elements_count-1);
+
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createSinglyInput(0);
+                                        linkListOpr->insertSinglyAtIndex(input, index);
+                                        std::cout
+                                            << "Element inserted successfully."
+                                            << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
+
+                                    case 'f':
+                                    {
+                                        // TODO: add delete at first logci
+                                        base::hideTextOfScreen();
+                                        linkListOpr->deleteSinglyAtStart();
+
+                                        std::cout<<"Element deleted successfully."<<std::endl;
+
+                                        
+
+                                        break;
                                     }
 
                                     default:

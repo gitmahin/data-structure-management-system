@@ -26,8 +26,9 @@ namespace lnkls
 
         void startMenu() override;
         void startOperationsMenu();
-        void createSinglyListElement();
 
+        // Singly operations
+        void createSinglyListElement();
         void insertSinglyAtStart(base::VariantSupportedDataType data);
         void insertSinglyAtEnd(base::VariantSupportedDataType data);
         void insertSinglyAtIndex(base::VariantSupportedDataType data, int index);
@@ -35,6 +36,8 @@ namespace lnkls
         void deleteSinglyAtEnd();
         void deleteSinglyAtIndex(int index);
         void traverseSingly();
+        int getSinglyListSize();
+        
         base::VariantSupportedDataType createSinglyInput(int i, bool showIndex = false);
     };
 }  // namespace lnkls

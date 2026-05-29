@@ -60,7 +60,8 @@ namespace lnkls
                                "Linked List operations", false);
     }
 
-    base::VariantSupportedDataType LinkList::createSinglyInput(int i, bool showIndex)
+    base::VariantSupportedDataType LinkList::createSinglyInput(int i,
+                                                               bool showIndex)
     {
         base::VariantSupportedDataType result;
         std::visit(
@@ -70,15 +71,16 @@ namespace lnkls
 
                 while (true)
                 {
-                    if(showIndex) {
-
+                    if (showIndex)
+                    {
                         std::cout << "Enter element ["
-                        << base::type_name<decltype(data)>() << "][" << i
-                        << "]: ";
+                                  << base::type_name<decltype(data)>() << "]["
+                                  << i << "]: ";
                     }
-                    else {
-                         std::cout << "Enter element ["
-                        << base::type_name<decltype(data)>() << "]: ";
+                    else
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(data)>() << "]: ";
                     }
                     if constexpr (std::is_same_v<
                                       std::decay_t<decltype(element)>,
@@ -162,13 +164,15 @@ namespace lnkls
         base::getIntInput(initial_elements_count, 100);
 
         // Create head data first
-        base::VariantSupportedDataType first_data = this->createSinglyInput(0, true);
+        base::VariantSupportedDataType first_data =
+            this->createSinglyInput(0, true);
         this->singlyHead->data = first_data;
 
         // Start index from one while head is created
         for (int i = 1; i < initial_elements_count; i++)
         {
-            base::VariantSupportedDataType data = this->createSinglyInput(i, true);
+            base::VariantSupportedDataType data =
+                this->createSinglyInput(i, true);
 
             this->insertSinglyAtEnd(data);
         }
@@ -183,6 +187,19 @@ namespace lnkls
                        ptr->data);
             ptr = ptr->next;
         }
+    }
+
+    int LinkList::getSinglyListSize()
+    {
+        int i = 0;
+        Singly* ptr = this->singlyHead;
+        while (ptr != nullptr)
+        {
+            ptr = ptr->next;
+            i++;
+        }
+
+        return i;
     }
 
     void LinkList::insertSinglyAtStart(base::VariantSupportedDataType data)
@@ -237,5 +254,14 @@ namespace lnkls
         p->next = nullptr;
         delete q;
     }
+
+    void LinkList::deleteSinglyAtStart() {
+        Singly * ptr = this->singlyHead;
+        Singly * second_node = ptr->next;
+        this->singlyHead = second_node;
+        delete ptr;
+    }
+
+  
 
 }  // namespace lnkls
