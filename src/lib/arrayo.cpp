@@ -12,8 +12,6 @@
 namespace arrayo
 {
 
-  
-
     /**
      * Handles type-safe input for elements within a vector data.
      *
@@ -30,7 +28,7 @@ namespace arrayo
      *  }
      * @endcode
      */
-    void ArrayO::validVectorCreateInput( int i)
+    void ArrayO::validVectorCreateInput(int i)
     {
         std::visit(
             [i](auto& element)
@@ -91,10 +89,11 @@ namespace arrayo
             [&result](auto& vec)
             {
                 typename std::decay_t<decltype(vec)>::value_type element;
-        
+
                 while (true)  // ← keep asking until valid input
                 {
-                    std::cout << "Enter element ["<<base::type_name<decltype(element)>()<<"]: ";
+                    std::cout << "Enter element ["
+                              << base::type_name<decltype(element)>() << "]: ";
 
                     // compare two types: if value type is string then use
                     // getline to take input
@@ -215,7 +214,7 @@ namespace arrayo
 
         for (int i = 0; i < initial_array_size; i++)
         {
-            validVectorCreateInput( i);
+            validVectorCreateInput(i);
         }
 
         std::visit(
@@ -293,7 +292,8 @@ namespace arrayo
                  * decay_t Reference:
                  * https://en.cppreference.com/cpp/types/decay
                  */
-                using ArrayType = typename std::decay_t<decltype(vec)>::value_type;
+                using ArrayType =
+                    typename std::decay_t<decltype(vec)>::value_type;
 
                 std::visit(
                     [&](auto& element)
@@ -428,8 +428,7 @@ namespace arrayo
             },
             deleted_element);
 
-        presskey::pressAnyKey(
-            "Press any key to back");
+        presskey::pressAnyKey("Press any key to back");
     };
 
 }  // namespace arrayo

@@ -39,7 +39,8 @@ namespace lnkls
         void traverseSingly();
         int getSinglyListSize();
 
-        // Here index i has no effect on real data. It just show index in std::cout
+        // Here index i has no effect on real data. It just show index in
+        // std::cout
         base::VariantSupportedDataType createSinglyInput(
             int i, bool showIndex = false);
     };

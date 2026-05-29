@@ -151,7 +151,6 @@ namespace base
         std::cout << "Select the data type you want: ";
     }
 
-
     void elementDeletionResultTUI(int before_delete_element_count,
                                   int deleted_element_index,
                                   int curr_element_count,

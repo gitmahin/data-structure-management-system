@@ -3,7 +3,7 @@
 
 /**
  * Interface for application pages.
- * 
+ *
  * Provides a common structure for different sections of the application,
  * ensuring they handle menu navigation and store user selections consistently.
  */

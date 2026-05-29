@@ -216,14 +216,15 @@ int main()
                     linkListOpr = new LinkList();
                 }
 
-
                 /**
                  * If selection_point != z, Show "Types of Linked List" Menu
-                 * if selected z break while loop, Reset all selections under "Linked List" and exit to Application Menu
-                 * else Enter to the "Operations Menu" -> startOperationsMenu()
-                 * if press m, exit from "Operations Menu" Menu,
-                 * It will then check if m was pressed, if then exit from "Types of Linked List" Mwnu clear all selections
-                 * under "Linked List" and back to Application Menu
+                 * if selected z break while loop, Reset all selections under
+                 * "Linked List" and exit to Application Menu else Enter to the
+                 * "Operations Menu" -> startOperationsMenu() if press m, exit
+                 * from "Operations Menu" Menu, It will then check if m was
+                 * pressed, if then exit from "Types of Linked List" Mwnu clear
+                 * all selections under "Linked List" and back to Application
+                 * Menu
                  */
 
                 // Don't exit while user input is not [z]
@@ -245,7 +246,6 @@ int main()
                         break;
                     }
 
-             
                     // Set selection_point
                     linkListOpr->startMenu();
 

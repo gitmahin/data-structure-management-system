@@ -33,7 +33,7 @@ namespace arrayo
         int getArraySize();
 
        private:
-        void validVectorCreateInput( int i);
+        void validVectorCreateInput(int i);
         base::VariantSupportedDataType validVectorInsertInput();
     };
 
