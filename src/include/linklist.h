@@ -22,7 +22,14 @@ namespace lnkls
             struct Singly* next;
         };
 
+        struct Circular
+        {
+            base::VariantSupportedDataType data;
+            struct Circular* next;
+        };
+
         struct Singly* singlyHead;
+        struct Circular* circularHead;
 
         void startMenu() override;
         void startOperationsMenu();
@@ -38,6 +45,18 @@ namespace lnkls
         void deleteSinglyAtIndex(int index);
         void traverseSingly();
         int getSinglyListSize();
+
+        // Circular operations
+        void createCircularListElement();
+        void insertCircularAtStart(base::VariantSupportedDataType data);
+        void insertCircularAtEnd(base::VariantSupportedDataType data);
+        void insertCircularAtIndex(base::VariantSupportedDataType data,
+                                   int index);
+        void deleteCircularAtStart();
+        void deleteCircularAtEnd(bool isVerboseMode = true);
+        void deleteCircularAtIndex(int index);
+        void traverseCircular();
+        int getCircularListSize();
 
         // Here index i has no effect on real data. It just show index in
         // std::cout
