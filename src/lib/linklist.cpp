@@ -1,8 +1,10 @@
 #include "linklist.h"
 
+#include <functional>
 #include <sstream>
 #include <string>
 #include <type_traits>
+#include <variant>
 
 #include "menu.h"
 
@@ -60,35 +62,16 @@ namespace lnkls
                                "Linked List operations", false);
     }
 
-    // ************************************************************************
-    // Singly Linked List
-    // ************************************************************************
-
-    /**
-     * Handles type-safe input for a single element to be used in a Singly
-     * Linked List.
-     *
-     * This method determines the required data type based on the current state
-     * of the singlyHead's data variant and prompts the user for a matching
-     * value. It includes validation for non-string types and uses getline for
-     * strings.
-     *
-     * @param i          The index or position identifier to display in the
-     * prompt.
-     * @param showIndex  If true, displays the index [i] in the input prompt.
-     * @return A variant containing the validated user input.
-     *
-     * @code
-     *  base::VariantSupportedDataType input = createSinglyInput(0, true);
-     * @endcode
-     */
-    base::VariantSupportedDataType LinkList::createSinglyInput(int i,
-                                                               bool showIndex)
+    template <LinkedListNodeType T>
+    base::VariantSupportedDataType LinkList::createLinkedListInput(
+        T*& node, int i, bool showIndex)
     {
-        if (!this->singlyHead) this->singlyHead = new Singly;
+        if (!node) node = new T;
         base::VariantSupportedDataType result;
+
         std::visit(
-            [&](auto& element)
+            // here element is just for matching type
+            [&](auto element)
             {
                 typename std::decay_t<decltype(element)> data;
 
@@ -119,8 +102,8 @@ namespace lnkls
                         if (std::cin.fail())
                         {
                             std::cin.clear();
-                            // while (std::cin.get() != '\n');  // flush bad
-                            // inputs
+                            // while (std::cin.get() != '\n');  //
+                            // flush bad inputs
                             std::cout << "Invalid input! Try again."
                                       << std::endl;
                             continue;
@@ -132,10 +115,18 @@ namespace lnkls
                 };
                 result = data;
             },
-            this->singlyHead->data);
+            // data is a std::variant
+            node->data);
 
         return result;
     }
+
+
+    
+
+    // ************************************************************************
+    // Singly Linked List
+    // ************************************************************************
 
     /**
      * Initializes a new Singly Linked List by prompting the user for data type
@@ -214,22 +205,16 @@ namespace lnkls
             << "Enter the number of elements to create in the linked list: ";
         base::getIntInput(initial_elements_count, 100);
 
-        // Create head data first
+        // Create head data with specific Singly struct type first
         base::VariantSupportedDataType first_data =
-            this->createSinglyInput(0, true);
+            this->createLinkedListInput(this->singlyHead, 0, true);
         this->singlyHead->data = first_data;
-
-        // Make linked list empty to false
-        // Otherwise it will exclude first input data cause of insertSinglyAtEnd
-        // As in insertSinglyAtEnd if isSinglyEmpty true then it will create
-        // first data for head
-        // this->isSinglyEmpty = false;
 
         // Start index from one while head is created
         for (int i = 1; i < initial_elements_count; i++)
         {
             base::VariantSupportedDataType data =
-                this->createSinglyInput(i, true);
+                this->createLinkedListInput(this->singlyHead, i, true);
 
             this->insertSinglyAtEnd(data);
         }
@@ -474,5 +459,157 @@ namespace lnkls
     // ************************************************************************
     // Circular Linked List
     // ************************************************************************
+
+    void LinkList::createCircularListElement()
+    {
+        if (this->circularHead)
+
+        {
+            int element_count = this->getCircularListSize();
+            for (int i = 0; i < element_count; i++)
+            {
+                this->deleteSinglyAtEnd(false);
+            }
+        }
+
+        this->circularHead = new Circular;
+
+        this->circularHead->next = nullptr;
+
+        int i = 0;
+
+        base::hideTextOfScreen();
+        base::showAvailableDataTypesMenu();
+        this->selected_data_type = '\0';
+        menu::getMenuSelection(this->selected_data_type,
+                               base::data_type_options, "Data Types", false);
+
+        switch (this->selected_data_type)
+        {
+            case 'a':
+            {
+                this->circularHead->data = int();
+                break;
+            }
+            case 'b':
+            {
+                this->circularHead->data = double();
+                break;
+            }
+            case 'c':
+            {
+                this->circularHead->data = std::string();
+                break;
+            }
+            case 'd':
+            {
+                this->circularHead->data = char();
+                break;
+            }
+
+            case 'z':
+                // back to linked list operations page
+                base::clearScreen();
+                return;
+            default:
+                return;
+        }
+
+        base::hideTextOfScreen();
+        int initial_elements_count = 1;
+        std::cout << "Enter the number of elements to create in the linked "
+                     "list: ";
+        base::getIntInput(initial_elements_count, 100);
+
+        // Create head data first
+        base::VariantSupportedDataType first_data =
+            this->createLinkedListInput(this->circularHead, 0, true);
+        this->circularHead->data = first_data;
+
+        // Start index from one while head is created
+        for (int i = 1; i < initial_elements_count; i++)
+        {
+            base::VariantSupportedDataType data =
+                this->createLinkedListInput(this->circularHead, i, true);
+
+            this->insertCircularAtEnd(data);
+        }
+    }
+
+    int LinkList::getCircularListSize()
+    {
+        int i = 0;
+        Circular* ptr = this->circularHead;
+        do
+        {
+            ptr = ptr->next;
+            i++;
+        } while (ptr != this->circularHead);
+
+        return i;
+    }
+
+    void LinkList::insertCircularAtEnd(base::VariantSupportedDataType data)
+    {
+        Circular* newNode = new Circular;
+
+        newNode->data = data;
+
+        Circular* ptr = this->circularHead;
+        do
+        {
+            ptr = ptr->next;
+        } while (ptr->next != this->circularHead);
+
+        ptr->next = newNode;
+        newNode->next = this->circularHead;
+    }
+
+    // down testing
+    void LinkList::deleteCircularAtStart()
+    {
+        // Count element size before modify nodes
+        int element_count = this->getCircularListSize();
+
+        Circular* headToDelete = this->circularHead;
+        Circular* secondNode = headToDelete->next;
+        Circular* ptr = this->circularHead;
+
+        do
+        {
+            ptr = ptr->next;
+        } while (ptr->next != this->circularHead);
+
+        ptr->next = secondNode;
+        this->circularHead = secondNode;
+
+        base::elementDeletionResultTUI(element_count, 0, element_count - 1,
+                                       headToDelete->data);
+        delete headToDelete;
+    }
+
+    void LinkList::deleteCircularAtEnd(bool isVerboseMode)
+    {
+        // Count element size before modify nodes
+        int element_count = this->getCircularListSize();
+
+        Circular* p = this->circularHead;
+        Circular* q = this->circularHead->next;
+        do
+        {
+            p = p->next;
+            q = q->next;
+        } while (q->next != this->circularHead);
+
+        p->next = this->circularHead;
+
+        if (isVerboseMode)
+        {
+            base::elementDeletionResultTUI(element_count, element_count - 1,
+                                           element_count - 1, q->data);
+        }
+
+        delete q;
+    }
 
 }  // namespace lnkls
