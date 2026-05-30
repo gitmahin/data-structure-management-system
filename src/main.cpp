@@ -115,6 +115,12 @@ int main()
                             // Get number of elements are in array
                             int element_count = arrayOpr->getArraySize();
 
+                            if(element_count < 1) {
+                                std::cout<<"Cannot insert into an empty array."<<std::endl;
+                                presskey::pressAnyKey("Press any key to back");
+                                break;
+                            }
+
                             // Make string with element_count placeholder. (For
                             // demonstration purpose) As you can achive this via
                             // usual cout<<
