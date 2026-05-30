@@ -12,6 +12,8 @@
 - [Linux x86_64](https://github.com/Kitware/CMake/releases/download/v4.3.2/cmake-4.3.2-linux-x86_64.sh)
 - [Linux aarch64](https://github.com/Kitware/CMake/releases/download/v4.3.2/cmake-4.3.2-linux-aarch64.sh)
 
+---
+
 ### POSIX-compliant Systems Setup
 
 Arch:
@@ -42,6 +44,8 @@ make
 ./App
 ```
 
+---
+
 ### Windows Setup
 
 - Download & Install CMake
@@ -64,6 +68,8 @@ cd build
 ./App
 ```
 
+---
+
 ## Application Home UI:
 
 ```txt
@@ -83,6 +89,7 @@ DATA STRUCTURE MANAGEMENT SYSTEM
 | g -> Graph Operations                |
 | h -> Tree Operations                 |
 ========================================
+| s -> Save all data                   |
 | z -> Exit                            |
 ========================================
 Choose an option:
