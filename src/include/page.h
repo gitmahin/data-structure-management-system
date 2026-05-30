@@ -17,8 +17,10 @@ class IPage
 
     /**
      * Displays the menu for the page and handles initial user interaction.
+     * saveAllData is not responsible for real implementation of save data or
+     * not saving data. Its just for UI
      */
-    virtual void startMenu() = 0;
+    virtual void startMenu(bool saveAllData = false) = 0;
 };
 
 #endif

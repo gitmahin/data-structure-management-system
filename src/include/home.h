@@ -9,7 +9,7 @@ namespace home
     class Home : public IPage
     {
        public:
-        void startMenu() override;
+        void startMenu(bool saveAllData = false) override;
     };
 
 }  // namespace home

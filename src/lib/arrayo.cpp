@@ -129,7 +129,7 @@ namespace arrayo
         return result;
     }
 
-    void ArrayO::startMenu()
+    void ArrayO::startMenu(bool saveAllData)
     {
         // Clear home page for new page this
         base::clearScreen();

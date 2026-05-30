@@ -21,7 +21,7 @@ namespace arrayo
        public:
         VariantVectorDataType my_array;
         base::OptionSelectionDataType selected_data_type;
-        void startMenu() override;
+        void startMenu(bool saveAllData = false) override;
         void createArray();
         void traverseArray();
         void insertAt(std::string label, bool atBegin = true,

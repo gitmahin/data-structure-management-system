@@ -20,7 +20,7 @@ using namespace lnkls;
 int main()
 {
     base::clearScreen();
-    int saveAllOperations = 0;
+    bool saveAllOperations = false;
 
     saveAllOperations =
         base::askUser(saveAllOperations, "Do you want to save all tasks data");
@@ -36,7 +36,7 @@ int main()
         base::clearScreen();
         // reset selection option to null
         appHome->selection_point = '\0';
-        appHome->startMenu();
+        appHome->startMenu(saveAllOperations);
 
         switch (appHome->selection_point)
         {
@@ -842,6 +842,25 @@ int main()
                 }
                 break;
             }
+
+            case 's':
+            {
+                saveAllOperations = true;
+                break;
+            }
+
+            case 'u':
+            {
+                delete arrayOpr;
+                delete linkListOpr;
+
+                arrayOpr = nullptr;
+                linkListOpr = nullptr;
+
+                saveAllOperations = false;
+                break;
+            }
+
             default:
             {
                 break;

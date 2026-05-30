@@ -48,7 +48,7 @@ namespace lnkls
         Circular* circularHead = nullptr;
 
         // Base
-        void startMenu() override;
+        void startMenu(bool saveAllData = false) override;
         void startOperationsMenu();
 
         // Singly operations

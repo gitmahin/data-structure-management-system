@@ -11,7 +11,7 @@
 namespace lnkls
 {
 
-    void LinkList::startMenu()
+    void LinkList::startMenu(bool saveAllData)
     {
         // Clear home page for new page
 

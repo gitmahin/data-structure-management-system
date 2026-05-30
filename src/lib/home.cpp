@@ -7,10 +7,10 @@
 namespace home
 {
 
-    std::set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e',
-                                        'f', 'g', 'h', 'z'};
+    std::set<char> main_menu_options = {'a', 'b', 'c', 'd', 'e', 'f',
+                                        'g', 'h', 's', 'u', 'z'};
 
-    void Home::startMenu()
+    void Home::startMenu(bool saveAllData)
     {
         base::showAppTitle("");
         std::cout << "========================================\n";
@@ -25,6 +25,15 @@ namespace home
         std::cout << "| g -> Graph Operations                |\n";
         std::cout << "| h -> Tree Operations                 |\n";
         std::cout << "========================================\n";
+
+        if (saveAllData)
+        {
+            std::cout << "| u -> Delete all data and unsave      |\n";
+        }
+        else
+        {
+            std::cout << "| s -> Save all data                   |\n";
+        }
         std::cout << "| z -> Exit                            |\n";
         std::cout << "========================================\n";
         std::cout << "Choose an option: ";
