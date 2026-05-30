@@ -240,6 +240,12 @@ namespace arrayo
      */
     void ArrayO::traverseArray()
     {
+        int element_count = this->getArraySize();
+        if (element_count < 1)
+        {
+            std::cout << "Empty Array" << std::endl;
+            return;
+        }
         std::visit(
             [](auto& vec)
             {
@@ -370,63 +376,55 @@ namespace arrayo
         base::VariantSupportedDataType deleted_element;
         int before_delete_element_count = this->getArraySize();
         int deleted_element_index = 0;
-        bool isInvalidRequest = false;
 
-        std::visit(
-            // catch everything by reference
-            [&](auto& vec)
-            {
-                if (vec.empty())
+        try
+        {
+            std::visit(
+                // catch everything by reference
+                [&](auto& vec)
                 {
-                    std::cout << "Cannot delete from an empty array!"
-                              << std::endl;
-                    base::pauseProgram(1);
-                    isInvalidRequest = true;
-                }
-                else
-                {
-                    if (atBegin)
+                    if (vec.empty())
                     {
-                        deleted_element = vec[0];
-                        deleted_element_index = 0;
-                        vec.erase(vec.begin());
+                        throw std::runtime_error(
+                            "Cannot delete from an empty array!");
                     }
-
-                    if (atEnd)
+                    else
                     {
-                        int last_index = vec.size() - 1;
-                        deleted_element = vec.at(last_index);
-                        deleted_element_index = last_index;
-                        vec.pop_back();
+                        if (atBegin)
+                        {
+                            deleted_element = vec[0];
+                            deleted_element_index = 0;
+                            vec.erase(vec.begin());
+                        }
+
+                        if (atEnd)
+                        {
+                            int last_index = vec.size() - 1;
+                            deleted_element = vec.at(last_index);
+                            deleted_element_index = last_index;
+                            vec.pop_back();
+                        }
+
+                        if (atIndex)
+                        {
+                            deleted_element = vec[index];
+                            deleted_element_index = index;
+                            vec.erase(vec.begin() + index);
+                        }
                     }
+                },
+                this->my_array);
+        }
+        catch (const std::runtime_error& e)
+        {
+            std::cout << e.what() << std::endl;
+            presskey::pressAnyKey("Press any key to back");
+            return;
+        }
 
-                    if (atIndex)
-                    {
-                        deleted_element = vec[index];
-                        deleted_element_index = index;
-                        vec.erase(vec.begin() + index);
-                    }
-                }
-            },
-            this->my_array);
-        // if there is empty array return
-        if (isInvalidRequest) return;
-
-        std::cout << "Element deleted successfully." << std::endl;
-        std::cout << std::endl << "Deletion Result" << std::endl;
-        std::cout << "Previous Number of Elements: "
-                  << before_delete_element_count << std::endl;
-        std::cout << "Current Number of Elements: " << this->getArraySize()
-                  << std::endl;
-
-        std::visit(
-            [&](auto& e)
-            {
-                std::cout << "Deleted Element: " << e
-                          << " [Index: " << deleted_element_index << "]"
-                          << std::endl;
-            },
-            deleted_element);
+        base::elementDeletionResultTUI(before_delete_element_count,
+                                       deleted_element_index,
+                                       this->getArraySize(), deleted_element);
 
         presskey::pressAnyKey("Press any key to back");
     };

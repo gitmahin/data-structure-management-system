@@ -44,10 +44,8 @@ namespace lnkls
         base::OptionSelectionDataType selected_data_type;
         base::OptionSelectionDataType selected_operation;
 
-        Singly* singlyHead;
-        Circular* circularHead;
-
-        LinkList() : singlyHead(nullptr), circularHead(nullptr) {};
+        Singly* singlyHead = nullptr;
+        Circular* circularHead = nullptr;
 
         // Base
         void startMenu() override;

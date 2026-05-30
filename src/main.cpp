@@ -19,7 +19,12 @@ using namespace lnkls;
  */
 int main()
 {
-    bool saveAllOperations = false;
+    base::clearScreen();
+    int saveAllOperations = 0;
+
+    saveAllOperations =
+        base::askUser(saveAllOperations, "Do you want to save all tasks data");
+
     Home* appHome = new Home();
     ArrayO* arrayOpr = nullptr;
     LinkList* linkListOpr = nullptr;
@@ -39,7 +44,10 @@ int main()
             case 'a':
 
             {
-                arrayOpr = new ArrayO();
+                if (!arrayOpr)
+                {
+                    arrayOpr = new ArrayO();
+                }
 
                 // Dont exit while user input is not [z]
                 while (arrayOpr->selection_point != 'z')
@@ -167,7 +175,7 @@ int main()
                                 std::cout
                                     << "Cannot perform deletion on empty array!"
                                     << std::endl;
-                                base::pauseProgram(2);
+                                presskey::pressAnyKey("Press any key to back");
                                 break;
                             }
 
@@ -204,7 +212,13 @@ int main()
                         }
                     }
                 }
-                delete arrayOpr;
+                arrayOpr->selection_point = '\0';
+
+                if (!saveAllOperations)
+                {
+                    delete arrayOpr;
+                    arrayOpr = nullptr;
+                }
                 break;
             }
 
@@ -816,11 +830,16 @@ int main()
                     }
                 }
 
-                delete linkListOpr;
-                // Set to nullptr otherwise if(!linkListOpr) will false and
-                // instance of new LinkList() will not create if not create it
-                // will throw Segfault error
-                linkListOpr = nullptr;
+                linkListOpr->selection_point = '\0';
+                linkListOpr->selected_operation = '\0';
+                if (!saveAllOperations)
+                {
+                    delete linkListOpr;
+                    // Set to nullptr otherwise if(!linkListOpr) will false and
+                    // instance of new LinkList() will not create if not create
+                    // it will throw Segfault error
+                    linkListOpr = nullptr;
+                }
                 break;
             }
             default:

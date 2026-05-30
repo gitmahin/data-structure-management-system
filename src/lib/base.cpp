@@ -136,6 +136,42 @@ namespace base
         }
     }
 
+    int askUser(int default_value, std::string question)
+    {
+        int result = default_value;
+        char input;
+        char lower_case_input;
+
+        std::cout << question << " [y/n]: ";
+        while (true)
+        {
+            std::cin >> input;
+
+            lower_case_input = (char)tolower(input);
+
+            if (std::cin.fail() ||
+                (lower_case_input != 'y' && lower_case_input != 'n'))
+            {
+                std::cin.clear();
+                while (std::cin.get() != '\n');  // flush bad inputs
+                std::cout << "Invalid input! You have to choose [y/n]: ";
+                continue;
+            }
+
+            while (std::cin.get() != '\n');
+            break;
+        }
+
+        if (lower_case_input == 'y')
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     void showAvailableDataTypesMenu()
     {
         std::cout << "=====================================\n";

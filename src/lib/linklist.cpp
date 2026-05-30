@@ -303,7 +303,7 @@ namespace lnkls
 
     void LinkList::traverseCircular()
     {
-        if (!this->circularHead) std::cout << "Empty Elements" << std::endl;
+        if (!this->circularHead) std::cout << "Empty List" << std::endl;
         Circular* ptr = this->circularHead;
 
         do
