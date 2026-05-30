@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.23)
 # Name the project
 project(App)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Used by Code IntelliSense (via cpp.json)
 
 # Create new library named AppLib
@@ -10,6 +13,7 @@ add_library(AppLib)
 
 # Name the executable file
 add_executable(App)
+
 
 # Include all header files
 file(GLOB_RECURSE HEADERS
