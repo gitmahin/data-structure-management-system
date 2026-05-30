@@ -11,6 +11,15 @@
 namespace lnkls
 {
 
+    /**
+     * Displays the menu for selecting the type of Linked List to manage.
+     * 
+     * Provides options for Singly, Circular, and Doubly Linked Lists.
+     * Updates the selection_point based on user input.
+     * 
+     * @param saveAllData A boolean flag indicating if data persistence is active
+     *                    (inherited from IPage, used for UI consistency).
+     */
     void LinkList::startMenu(bool saveAllData)
     {
         // Clear home page for new page
@@ -30,6 +39,12 @@ namespace lnkls
                                "Linked List data type", false);
     }
 
+    /**
+     * Displays the operations menu for the currently selected Linked List type.
+     * 
+     * Includes standard operations like creation, traversal, insertion, and deletion.
+     * Updates the selected_operation member variable.
+     */
     void LinkList::startOperationsMenu()
     {
         // Clear home page for new page
@@ -301,6 +316,11 @@ namespace lnkls
     // Circular Linked List
     // ************************************************************************
 
+    /**
+     * Iterates through the Circular Linked List and prints each element's data.
+     * Uses std::visit to handle the variant data type stored in each node.
+     * Displays "Empty List" if the list head is null.
+     */
     void LinkList::traverseCircular()
     {
         if (!this->circularHead) std::cout << "Empty List" << std::endl;
@@ -314,6 +334,17 @@ namespace lnkls
         } while (ptr != this->circularHead);
     }
 
+    /**
+     * Calculates the total number of nodes currently in the Circular Linked List.
+     *
+     * Iterates through the list starting from the head and loops until it 
+     * returns to the head node.
+     * @return The integer count of elements in the list.
+     *
+     * @code
+     *  int size = linkListOpr->getCircularListSize();
+     * @endcode
+     */
     int LinkList::getCircularListSize()
     {
         int i = 0;
@@ -328,6 +359,17 @@ namespace lnkls
         return i;
     }
 
+    /**
+     * Inserts a new node at the beginning of the Circular Linked List.
+     *
+     * Creates a new node, finds the last node to maintain the circular link,
+     * and updates the head pointer.
+     * @param data A variant containing the data to be stored in the new node.
+     *
+     * @code
+     *  linkListOpr->insertCircularAtStart(my_data);
+     * @endcode
+     */
     void LinkList::insertCircularAtStart(base::VariantSupportedDataType data)
     {
         Circular* newNode = new Circular;
@@ -345,6 +387,19 @@ namespace lnkls
         this->circularHead = newNode;
     }
 
+    /**
+     * Inserts a new node at a specific index in the Circular Linked List.
+     *
+     * If the index is 0, it calls insertCircularAtStart to handle head and tail
+     * updates. Otherwise, it traverses to the specified position and links the
+     * new node.
+     * @param data  A variant containing the data to be stored.
+     * @param index The zero-based position where the node should be inserted.
+     *
+     * @code
+     *  linkListOpr->insertCircularAtIndex(my_data, 2);
+     * @endcode
+     */
     void LinkList::insertCircularAtIndex(base::VariantSupportedDataType data,
                                          int index)
     {
@@ -370,6 +425,17 @@ namespace lnkls
         this->insertCircularAtStart(data);
     }
 
+    /**
+     * Appends a new node to the end of the Circular Linked List.
+     *
+     * Traverses the list to find the current last node and updates its next
+     * pointer to the new node, while the new node points back to the head.
+     * @param data A variant containing the data to be stored in the new node.
+     *
+     * @code
+     *  linkListOpr->insertCircularAtEnd(my_data);
+     * @endcode
+     */
     void LinkList::insertCircularAtEnd(base::VariantSupportedDataType data)
     {
         Circular* newNode = new Circular;
@@ -390,6 +456,15 @@ namespace lnkls
         newNode->next = this->circularHead;
     }
 
+    /**
+     * Removes the first node (head) of the Circular Linked List.
+     *
+     * Updates the tail's next pointer to the second node and frees the memory
+     * of the old head. Displays the deletion result using
+     * base::elementDeletionResultTUI.
+     *
+     * @code linkListOpr->deleteCircularAtStart(); @endcode
+     */
     void LinkList::deleteCircularAtStart()
     {
         // Count element size before modify nodes
@@ -412,6 +487,16 @@ namespace lnkls
         delete headToDelete;
     }
 
+    /**
+     * Removes a node at a specific index from the Circular Linked List.
+     *
+     * If the index is 0, it calls deleteCircularAtStart. Otherwise, it traverses
+     * to the node at the specified index, unlinks it, and frees its memory.
+     * Displays the deletion result using base::elementDeletionResultTUI.
+     *
+     * @param index The zero-based position of the node to be deleted.
+     * @code linkListOpr->deleteCircularAtIndex(2); @endcode
+     */
     void LinkList::deleteCircularAtIndex(int index)
     {
         // Count element size before modify nodes
@@ -443,6 +528,17 @@ namespace lnkls
         this->deleteCircularAtStart();
     }
 
+    /**
+     * Removes the last node from the Circular Linked List.
+     *
+     * Traverses the list to find the second-to-last node, updates its next
+     * pointer to point back to the head, and frees the memory of the last node.
+     * @param isVerboseMode If true, displays the deletion result via TUI.
+     *
+     * @code
+     *  linkListOpr->deleteCircularAtEnd();
+     * @endcode
+     */
     void LinkList::deleteCircularAtEnd(bool isVerboseMode)
     {
         // Count element size before modify nodes
