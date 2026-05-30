@@ -21,8 +21,8 @@ int main()
 {
     bool saveAllOperations = false;
     Home* appHome = new Home();
-    ArrayO* arrayOpr ;
-    LinkList* linkListOpr ;
+    ArrayO* arrayOpr = nullptr;
+    LinkList* linkListOpr = nullptr;
 
     // Dont exit while user input is not [z]
     while (appHome->selection_point != 'z')
@@ -247,7 +247,8 @@ int main()
                     }
 
                     // Set selection_point
-
+                    base::clearScreen();
+                    base::showAppTitle("Linked List");
                     linkListOpr->startMenu();
 
                     // resetting selected_operation menu selection
@@ -273,6 +274,8 @@ int main()
                                    linkListOpr->selected_operation != 'm')
                             {
                                 // Set selected_operation
+                                base::clearScreen();
+                                base::showAppTitle("Linked List / Singly");
                                 linkListOpr->startOperationsMenu();
 
                                 switch (linkListOpr->selected_operation)
@@ -524,304 +527,285 @@ int main()
                             break;
                         }
 
-                            // case 'b':
-                            // {
-                            //     // Reset selections while Singly, Circular
-                            //     and
-                            //     // Doubly is using this same selections
-                            //     linkListOpr->selected_operation = '\0';
+                        // Circular Linked List Management
+                        case 'b':
+                        {
+                            // Reset selections while Singly, Circular and
+                            // Doubly is using this same selections
+                            linkListOpr->selected_operation = '\0';
 
-                            //     while (linkListOpr->selected_operation != 'z'
-                            //     &&
-                            //            linkListOpr->selected_operation !=
-                            //            'm')
-                            //     {
-                            //         // Set selected_operation
-                            //         linkListOpr->startOperationsMenu();
-                            //         switch (linkListOpr->selected_operation)
-                            //         {
-                            //             // Start Singly Linked List creation
-                            //             case 'a':
-                            //             {
-                            //                 linkListOpr->createSinglyListElement();
-                            //                 break;
-                            //             }
-                            //             // Traverse Singly Linked List
-                            //             case 'b':
-                            //             {
-                            //                 base::hideTextOfScreen();
+                            while (linkListOpr->selected_operation != 'z' &&
+                                   linkListOpr->selected_operation != 'm')
+                            {
+                                // Set selected_operation
+                                base::clearScreen();
+                                base::showAppTitle("Linked List / Circular");
+                                linkListOpr->startOperationsMenu();
+                                switch (linkListOpr->selected_operation)
+                                {
+                                    // Start Circular Linked List creation
+                                    case 'a':
+                                    {
+                                        linkListOpr->createLinkedListElement(
+                                            linkListOpr->circularHead,
+                                            std::bind(
+                                                &LinkList::getCircularListSize,
+                                                linkListOpr),
+                                            std::bind(
+                                                &LinkList::deleteCircularAtEnd,
+                                                linkListOpr,
+                                                std::placeholders::_1),
+                                            std::bind(
+                                                &LinkList::insertCircularAtEnd,
+                                                linkListOpr,
+                                                std::placeholders::_1)
 
-                            //                 int element_count =
-                            //                     linkListOpr->getCircularListSize();
+                                        );
+                                        break;
+                                    }
+                                    // Traverse Circular Linked List
+                                    case 'b':
+                                    {
+                                        base::hideTextOfScreen();
 
-                            //                 if (!element_count)
-                            //                 {
-                            //                     std::cout
-                            //                         << "No list elements to
-                            //                         show!"
-                            //                         << std::endl;
-                            //                 }
-                            //                 else
-                            //                 {
-                            //                     // Display list elements
-                            //                     std::cout
-                            //                         << "Displaying stored
-                            //                         Circular Linked "
-                            //                            "List elements:"
-                            //                         << std::endl;
-                            //                     linkListOpr->traverseCircular();
-                            //                 }
-                            //                 presskey::pressAnyKey(
-                            //                     "Press any key to back");
+                                        int element_count =
+                                            linkListOpr->getCircularListSize();
 
-                            //                 break;
-                            //             }
+                                        if (!element_count)
+                                        {
+                                            std::cout << "No list elements to "
+                                                         "show!"
+                                                      << std::endl;
+                                        }
+                                        else
+                                        {
+                                            // Display list elements
+                                            std::cout << "Displaying stored "
+                                                         "Circular Linked "
+                                                         "List elements:"
+                                                      << std::endl;
+                                            linkListOpr->traverseCircular();
+                                        }
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
 
-                            //             // Insert at begin [Circular Linked
-                            //             List] case 'c':
-                            //             {
-                            //                 base::hideTextOfScreen();
+                                        break;
+                                    }
 
-                            //                 if (!linkListOpr->circularHead)
-                            //                 {
-                            //                     std::cout
-                            //                         << "Cannot perform
-                            //                         insertion "
-                            //                            "on empty Linked List"
-                            //                         << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
+                                    // Insert at begin [Circular Linked
+                                    // List]
+                                    case 'c':
+                                    {
+                                        base::hideTextOfScreen();
 
-                            //                 std::cout << "Current Linked List
-                            //                 State"
-                            //                           << std::endl;
-                            //                 linkListOpr->traverseCircular();
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
 
-                            //                 // TODO: Modify from here
-                            //                 ===========================
-                            //                 std::cout
-                            //                     << std::endl
-                            //                     << "Inserting Element At
-                            //                     Begin."
-                            //                     << std::endl;
-                            //                 base::VariantSupportedDataType
-                            //                 input =
-                            //                     linkListOpr->createCircularInput(0);
-                            //                 linkListOpr->insertSinglyAtStart(input);
-                            //                 std::cout
-                            //                     << "Element inserted
-                            //                     successfully."
-                            //                     << std::endl;
-                            //                 base::pauseProgram(1);
-                            //                 break;
-                            //             }
+                                        std::cout << "Current Linked List "
+                                                     "State"
+                                                  << std::endl;
+                                        linkListOpr->traverseCircular();
 
-                            //             // Insert at end [Circular Linked
-                            //             List] case 'd':
-                            //             {
-                            //                 base::hideTextOfScreen();
+                                        std::cout << std::endl
+                                                  << "Inserting Element At "
+                                                     "Begin."
+                                                  << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->circularHead, 0);
+                                        linkListOpr->insertCircularAtStart(
+                                            input);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
 
-                            //                 if (!linkListOpr->singlyHead)
-                            //                 {
-                            //                     std::cout
-                            //                         << "Cannot perform
-                            //                         insertion "
-                            //                            "on empty Linked List"
-                            //                         << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
+                                    // Insert at end [Circular Linked List]
+                                    case 'd':
+                                    {
+                                        base::hideTextOfScreen();
 
-                            //                 std::cout << "Current Linked List
-                            //                 State"
-                            //                           << std::endl;
-                            //                 linkListOpr->traverseSingly();
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
 
-                            //                 std::cout << std::endl
-                            //                           << "Inserting Element
-                            //                           At End."
-                            //                           << std::endl;
-                            //                 base::VariantSupportedDataType
-                            //                 input =
-                            //                     linkListOpr->createSinglyInput(0);
-                            //                 linkListOpr->insertSinglyAtEnd(input);
-                            //                 std::cout
-                            //                     << "Element inserted
-                            //                     successfully."
-                            //                     << std::endl;
-                            //                 base::pauseProgram(1);
-                            //                 break;
-                            //             }
+                                        std::cout << "Current Linked List "
 
-                            //             // Insert at index [Circular Linked
-                            //             List] case 'e':
-                            //             {
-                            //                 base::hideTextOfScreen();
-                            //                 if (!linkListOpr->singlyHead)
-                            //                 {
-                            //                     std::cout
-                            //                         << "Cannot perform
-                            //                         insertion "
-                            //                            "on empty Linked List"
-                            //                         << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
-                            //                 int elements_count =
-                            //                     linkListOpr->getSinglyListSize();
-                            //                 // if (elements_count < 2)
-                            //                 // {
-                            //                 //     std::cout
-                            //                 //         << "Cannot perform
-                            //                 this "
-                            //                 //            "operation, while
-                            //                 there is
-                            //                 //            " "only 1
-                            //                 element!\nUse "
-                            //                 //            "Insert at "
-                            //                 //            "Beginning\nOr,
-                            //                 Insert at
-                            //                 //            " "End."
-                            //                 //         << std::endl;
-                            //                 //     presskey::pressAnyKey(
-                            //                 //         "Press any key to
-                            //                 back");
-                            //                 //     break;
-                            //                 // }
-                            //                 std::cout
-                            //                     << "Current Linked List
-                            //                     State: ["
-                            //                     << elements_count << "]
-                            //                     elements."
-                            //                     << std::endl;
-                            //                 linkListOpr->traverseSingly();
+                                                     "State"
+                                                  << std::endl;
+                                        linkListOpr->traverseCircular();
 
-                            //                 std::cout
-                            //                     << std::endl
-                            //                     << "Inserting Element At
-                            //                     Index."
-                            //                     << std::endl;
+                                        std::cout << std::endl
+                                                  << "Inserting Element "
 
-                            //                 std::cout << "Enter index between
-                            //                 0 to "
-                            //                           << elements_count - 1
-                            //                           << ": ";
-                            //                 int index = 0;
-                            //                 base::getIntInput(index,
-                            //                                   elements_count
-                            //                                   - 1);
+                                                     "At End."
+                                                  << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->circularHead, 0);
+                                        linkListOpr->insertCircularAtEnd(input);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
 
-                            //                 base::VariantSupportedDataType
-                            //                 input =
-                            //                     linkListOpr->createSinglyInput(0);
-                            //                 linkListOpr->insertSinglyAtIndex(input,
-                            //                                                  index);
-                            //                 std::cout
-                            //                     << "Element inserted
-                            //                     successfully."
-                            //                     << std::endl;
-                            //                 base::pauseProgram(1);
-                            //                 break;
-                            //             }
+                                    // Insert at index [Circular Linked
+                                    // List]
+                                    case 'e':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        int elements_count =
+                                            linkListOpr->getCircularListSize();
 
-                            //             // Delete element at begin [Circular
-                            //             Linked List] case 'f':
-                            //             {
-                            //                 base::hideTextOfScreen();
-                            //                 if (!linkListOpr->singlyHead)
-                            //                 {
-                            //                     std::cout << "Cannot delete
-                            //                     from "
-                            //                                  "empty Linked
-                            //                                  List!"
-                            //                               << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
-                            //                 linkListOpr->deleteSinglyAtStart();
-                            //                 presskey::pressAnyKey(
-                            //                     "Press any key to back");
+                                        std::cout << "Current Linked List "
 
-                            //                 break;
-                            //             }
+                                                     "State: ["
+                                                  << elements_count
+                                                  << "] "
+                                                     "elements."
+                                                  << std::endl;
+                                        linkListOpr->traverseCircular();
 
-                            //             // Delete element at end [Circular
-                            //             Linked List] case 'g':
-                            //             {
-                            //                 base::hideTextOfScreen();
-                            //                 if (!linkListOpr->singlyHead)
-                            //                 {
-                            //                     std::cout << "Cannot delete
-                            //                     from "
-                            //                                  "empty Linked
-                            //                                  List!"
-                            //                               << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
-                            //                 linkListOpr->deleteSinglyAtEnd();
-                            //                 presskey::pressAnyKey(
-                            //                     "Press any key to back");
-                            //                 break;
-                            //             }
+                                        std::cout << std::endl
+                                                  << "Inserting Element At "
+                                                     "Index."
+                                                  << std::endl;
 
-                            //             // Delete element by index [Circular
-                            //             Linked List] case 'h':
-                            //             {
-                            //                 base::hideTextOfScreen();
+                                        std::cout << "Enter index between "
+                                                     "0 to "
+                                                  << elements_count - 1 << ": ";
+                                        int index = 0;
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
 
-                            //                 if (!linkListOpr->singlyHead)
-                            //                 {
-                            //                     std::cout << "Cannot delete
-                            //                     from "
-                            //                                  "empty Linked
-                            //                                  List!"
-                            //                               << std::endl;
-                            //                     presskey::pressAnyKey(
-                            //                         "Press any key to back");
-                            //                     break;
-                            //                 }
-                            //                 std::cout << "!!!!!! Performing "
-                            //                              "Deletion !!!!!!"
-                            //                           << std::endl;
-                            //                 int elements_count =
-                            //                     linkListOpr->getSinglyListSize();
-                            //                 std::cout
-                            //                     << "Current Linked List
-                            //                     State: ["
-                            //                     << elements_count << "]
-                            //                     elements."
-                            //                     << std::endl;
-                            //                 linkListOpr->traverseSingly();
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->circularHead, 0);
+                                        linkListOpr->insertCircularAtIndex(
+                                            input, index);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
 
-                            //                 std::cout << "Enter index between
-                            //                 0 to "
-                            //                           << elements_count - 1
-                            //                           << ": ";
-                            //                 int index = 0;
-                            //                 base::getIntInput(index,
-                            //                                   elements_count
-                            //                                   - 1);
-                            //                 linkListOpr->deleteSinglyAtIndex(index);
-                            //                 presskey::pressAnyKey(
-                            //                     "Press any key to back");
+                                    // Delete element at begin [Circular
+                                    // Linked List]
+                                    case 'f':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List !"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        linkListOpr->deleteCircularAtStart();
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
 
-                            //                 break;
-                            //             }
+                                        break;
+                                    }
 
-                            //             default:
-                            //                 break;
-                            //         }
-                            //     }
+                                    // Delete element at end [Circular
+                                    // Linked List]
+                                    case 'g':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List !"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        linkListOpr->deleteCircularAtEnd();
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+                                        break;
+                                    }
 
-                            //     break;
-                            // }
+                                    // Delete element by index [Circular Linked
+                                    // List]
+                                    case 'h':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        if (!linkListOpr->circularHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        std::cout << "!!!!!! Performing "
+                                                     "Deletion !!!!!!"
+                                                  << std::endl;
+                                        int elements_count =
+                                            linkListOpr->getCircularListSize();
+                                        std::cout
+                                            << "Current Linked List State: ["
+                                            << elements_count << "] elements."
+                                            << std::endl;
+                                        linkListOpr->traverseCircular();
+
+                                        std::cout << "Enter index between 0 to "
+                                                  << elements_count - 1 << ": ";
+                                        int index = 0;
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
+                                        linkListOpr->deleteCircularAtIndex(
+                                            index);
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
+                                        break;
+                                    }
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            break;
+                        }
 
                         default:
                         {  // clear screen for new page after exiting this page
@@ -833,7 +817,10 @@ int main()
                 }
 
                 delete linkListOpr;
-     
+                // Set to nullptr otherwise if(!linkListOpr) will false and
+                // instance of new LinkList() will not create if not create it
+                // will throw Segfault error
+                linkListOpr = nullptr;
                 break;
             }
             default:

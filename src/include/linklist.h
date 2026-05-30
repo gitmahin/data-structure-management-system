@@ -3,6 +3,8 @@
 
 #include <functional>
 #include <string>
+#include <type_traits>
+
 #include "base.h"
 #include "menu.h"
 #include "page.h"
@@ -45,12 +47,14 @@ namespace lnkls
         Singly* singlyHead;
         Circular* circularHead;
 
+        LinkList() : singlyHead(nullptr), circularHead(nullptr) {};
+
         // Base
         void startMenu() override;
         void startOperationsMenu();
 
         // Singly operations
-        void createSinglyListElement();
+
         void insertSinglyAtStart(base::VariantSupportedDataType data);
         void insertSinglyAtEnd(base::VariantSupportedDataType data);
         void insertSinglyAtIndex(base::VariantSupportedDataType data,
@@ -62,7 +66,6 @@ namespace lnkls
         int getSinglyListSize();
 
         // Circular operations
-        void createCircularListElement();
         void insertCircularAtStart(base::VariantSupportedDataType data);
         void insertCircularAtEnd(base::VariantSupportedDataType data);
         void insertCircularAtIndex(base::VariantSupportedDataType data,
@@ -79,8 +82,6 @@ namespace lnkls
         base::VariantSupportedDataType createLinkedListInput(
             T*& node, int i, bool showIndex = false);
 
-        // TODO: testing
-
         template <LinkedListNodeType T>
         void createLinkedListElement(
             T*& node, tListSize listSize,
@@ -89,20 +90,78 @@ namespace lnkls
     };
 
     template <LinkedListNodeType T>
+    base::VariantSupportedDataType LinkList::createLinkedListInput(
+        T*& node, int i, bool showIndex)
+    {
+        if (!node) node = new T;
+        base::VariantSupportedDataType result;
+
+        std::visit(
+            // here element is just for matching type
+            [&](auto element)
+            {
+                typename std::decay_t<decltype(element)> data;
+
+                while (true)
+                {
+                    if (showIndex)
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(data)>() << "]["
+                                  << i << "]: ";
+                    }
+                    else
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(data)>() << "]: ";
+                    }
+                    if constexpr (std::is_same_v<
+                                      std::decay_t<decltype(element)>,
+                                      std::string>)
+                    {
+                        getline(std::cin, data);
+                        break;
+                    }
+                    else
+                    {
+                        std::cin >> data;
+
+                        if (std::cin.fail())
+                        {
+                            std::cin.clear();
+                            while (std::cin.get() != '\n');  // flush bad inputs
+                            std::cout << "Invalid input! Try again."
+                                      << std::endl;
+                            continue;
+                        }
+
+                        while (std::cin.get() != '\n');
+                        break;
+                    }
+                };
+                result = data;
+            },
+            // data is a std::variant
+            node->data);
+
+        return result;
+    }
+
+    template <LinkedListNodeType T>
     void LinkList::createLinkedListElement(
         T*& node, tListSize listSize,
         tDeleteListElementAtEnd deleteListElementAtEnd,
         tInsertListElementAtEnd insertListElementAtEnd)
     {
-        // if (node)
+        if (node)
 
-        // {
-        //     int element_count = listSize();
-        //     for (int i = 0; i < element_count; i++)
-        //     {
-        //         deleteListElementAtEnd(false);
-        //     }
-        // }
+        {
+            int element_count = listSize();
+            for (int i = 0; i < element_count; i++)
+            {
+                deleteListElementAtEnd(false);
+            }
+        }
 
         node = new T;
         node->next = nullptr;
