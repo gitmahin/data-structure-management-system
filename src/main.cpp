@@ -666,7 +666,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -674,14 +674,12 @@ int main()
                                         }
 
                                         std::cout << "Current Linked List "
-
                                                      "State"
                                                   << std::endl;
                                         linkListOpr->traverseCircular();
 
                                         std::cout << std::endl
                                                   << "Inserting Element "
-
                                                      "At End."
                                                   << std::endl;
                                         base::VariantSupportedDataType input =
@@ -704,7 +702,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -754,7 +752,7 @@ int main()
                                         if (!linkListOpr->circularHead)
                                         {
                                             std::cout << "Cannot delete from "
-                                                         "empty Linked List !"
+                                                         "empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -775,7 +773,7 @@ int main()
                                         if (!linkListOpr->circularHead)
                                         {
                                             std::cout << "Cannot delete from "
-                                                         "empty Linked List !"
+                                                         "empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
