@@ -551,6 +551,16 @@ int main()
                                         break;
                                 }
                             }
+
+                            if (!saveAllOperations)
+                            {
+                                linkListOpr->clearAll(
+                                    std::bind(&LinkList::getSinglyListSize,
+                                              linkListOpr),
+                                    std::bind(&LinkList::deleteSinglyAtEnd,
+                                              linkListOpr,
+                                              std::placeholders::_1));
+                            }
                             break;
                         }
 
@@ -831,6 +841,15 @@ int main()
                                 }
                             }
 
+                            if (!saveAllOperations)
+                            {
+                                linkListOpr->clearAll(
+                                    std::bind(&LinkList::getCircularListSize,
+                                              linkListOpr),
+                                    std::bind(&LinkList::deleteCircularAtEnd,
+                                              linkListOpr,
+                                              std::placeholders::_1));
+                            }
                             break;
                         }
 
@@ -1111,6 +1130,15 @@ int main()
                                 }
                             }
 
+                            if (!saveAllOperations)
+                            {
+                                linkListOpr->clearAll(
+                                    std::bind(&LinkList::getDoublyListSize,
+                                              linkListOpr),
+                                    std::bind(&LinkList::deleteDoublyAtEnd,
+                                              linkListOpr,
+                                              std::placeholders::_1));
+                            }
                             break;
                         }
                         default:

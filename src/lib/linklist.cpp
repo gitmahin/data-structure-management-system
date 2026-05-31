@@ -71,10 +71,21 @@ namespace lnkls
                                "Linked List operations", false);
     }
 
-    // ************************************************************************
-    // Singly Linked List
-    // ************************************************************************
+    void LinkList::clearAll(tListSize listSize,
+                            tDeleteListElementAtEnd deleteListElementAtEnd)
+    {
+        int element_count = listSize();
+        for (int i = 0; i < element_count; i++)
+        {
+            deleteListElementAtEnd(false);
+        }
+    }
 
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+    // Singly Linked List
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
     /**
      * Iterates through the Singly Linked List and prints each element's data.
      * Uses std::visit to handle the variant data type stored in each node.
@@ -242,27 +253,35 @@ namespace lnkls
         // Count element size before modify nodes
         int element_count = this->getSinglyListSize();
 
-        if (element_count < 2)
-        {
-            this->deleteSinglyAtStart();
-            return;
-        }
-
         Singly* p = this->singlyHead;
         Singly* q = this->singlyHead->next;
 
-        while (q->next != nullptr)
+        if (q != nullptr)
         {
-            p = p->next;
-            q = q->next;
+            while (q->next != nullptr)
+            {
+                p = p->next;
+                q = q->next;
+            }
+
+            p->next = nullptr;
+            if (isVerboseMode)
+            {
+                base::elementDeletionResultTUI(element_count, element_count - 1,
+                                               element_count - 1, q->data);
+            }
+
+            delete q;
+            return;
         }
-        p->next = nullptr;
-        if (isVerboseMode)
-        {
-            base::elementDeletionResultTUI(element_count, element_count - 1,
-                                           element_count - 1, q->data);
-        }
-        delete q;
+
+         if (isVerboseMode)
+            {
+                base::elementDeletionResultTUI(element_count, element_count - 1,
+                                               element_count - 1, p->data);
+            }
+        delete p;
+        this->singlyHead = nullptr;
     }
 
     /**
@@ -311,9 +330,11 @@ namespace lnkls
         this->deleteSinglyAtStart();
     }
 
-    // ************************************************************************
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
     // Circular Linked List
-    // ************************************************************************
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
 
     /**
      * Iterates through the Circular Linked List and prints each element's data.
@@ -485,6 +506,13 @@ namespace lnkls
         base::elementDeletionResultTUI(element_count, 0, element_count - 1,
                                        headToDelete->data);
         delete headToDelete;
+
+        // When element count is 1 make variable point to null
+        // to solve SEG FAULT error.
+        if (element_count == 1)
+        {
+            this->circularHead = nullptr;
+        }
     }
 
     /**
@@ -562,11 +590,20 @@ namespace lnkls
         }
 
         delete q;
+
+        // When element count is 1 make variable point to null
+        // to solve SEG FAULT error.
+        if (element_count == 1)
+        {
+            this->circularHead = nullptr;
+        }
     }
 
-    // *********************************************************************
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
     // Doubly Linked List
-    // *********************************************************************
+    // *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=
+    // =>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
     void LinkList::insertDoublyAtStart(base::VariantSupportedDataType data)
     {
         if (!this->doublyHead) return;
@@ -696,9 +733,6 @@ namespace lnkls
         delete ptr;
     }
 
-    // TODO: Find bug:
-    // When there is one element
-    // selecting 0 index for deletion shows segment fault error.
     void LinkList::deleteDoublyAtIndex(int index)
     {
         if (!this->doublyHead) return;

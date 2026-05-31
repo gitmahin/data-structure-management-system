@@ -12,7 +12,7 @@
 namespace lnkls
 {
 
-    // function types For createLinkedListElement
+    // function types For createLinkedListElement, clearAll
     typedef std::function<int(void)> tListSize;
     typedef std::function<void(bool)> tDeleteListElementAtEnd;
     typedef std::function<void(base::VariantSupportedDataType)>
@@ -105,6 +105,9 @@ namespace lnkls
             T*& node, tListSize listSize,
             tDeleteListElementAtEnd deleteListElementAtEnd,
             tInsertListElementAtEnd insertListElementAtEnd);
+
+        void clearAll(tListSize listSize,
+                      tDeleteListElementAtEnd deleteListElementAtEnd);
     };
 
     template <LinkedListNodeType T>
@@ -190,6 +193,21 @@ namespace lnkls
         menu::getMenuSelection(this->selected_data_type,
                                base::data_type_options, "Data Types", false);
         node = new T;
+
+        // Initial setup for new creations
+        if constexpr (std::is_same_v<T, Circular>)
+        {
+            node->next = node;
+        }
+        else if constexpr (std::is_same_v<T, Singly>)
+        {
+            node->next = nullptr;
+        }
+        else if constexpr (std::is_same_v<T, Doubly>)
+        {
+            node->next = nullptr;
+            node->prev = nullptr;
+        }
         switch (this->selected_data_type)
         {
             case 'a':
@@ -243,6 +261,7 @@ namespace lnkls
             insertListElementAtEnd(data);
         }
     };
+
 }  // namespace lnkls
 
 #endif

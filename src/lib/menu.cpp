@@ -53,8 +53,11 @@ namespace menu
         {
             // Take user input
             std::cin >> selection_point;
-            // Remove leftover new line char
-            std::cin.ignore();
+            // Make uppercase to lowercase while options are in lowercase
+            selection_point = (char) tolower(selection_point);
+            // Remove leftover new line chars
+            std::cin.clear();
+            while (std::cin.get() != '\n');  // flush bad inputs
             // std::set reference: https://en.cppreference.com/cpp/container/set
             // if user choosen point is available in options; then its valid and
             // break with success
