@@ -34,9 +34,17 @@ namespace lnkls
         struct Circular* next;
     };
 
+    struct Doubly
+    {
+        struct Doubly* prev;
+        base::VariantSupportedDataType data;
+        struct Doubly* next;
+    };
+
     template <typename T>
     concept LinkedListNodeType =
-        std::is_same_v<T, Singly> || std::is_same_v<T, Circular>;
+        std::is_same_v<T, Singly> || std::is_same_v<T, Circular> ||
+        std::is_same_v<T, Doubly>;
 
     class LinkList : public IPage
     {
@@ -46,6 +54,7 @@ namespace lnkls
 
         Singly* singlyHead = nullptr;
         Circular* circularHead = nullptr;
+        Doubly* doublyHead = nullptr;
 
         // Base
         void startMenu(bool saveAllData = false) override;
@@ -74,6 +83,17 @@ namespace lnkls
         void traverseCircular();
         int getCircularListSize();
 
+        // Doubly operations
+        void insertDoublyAtStart(base::VariantSupportedDataType data);
+        void insertDoublyAtEnd(base::VariantSupportedDataType data);
+        void insertDoublyAtIndex(base::VariantSupportedDataType data,
+                                 int index);
+        void deleteDoublyAtStart();
+        void deleteDoublyAtEnd(bool isVerboseMode = true);
+        void deleteDoublyAtIndex(int index);
+        void traverseDoubly();
+        int getDoublyListSize();
+
         // Here index i has no effect on real data. It just show index in
         // std::cout
         template <LinkedListNodeType T>
@@ -92,6 +112,7 @@ namespace lnkls
         T*& node, int i, bool showIndex)
     {
         if (!node) node = new T;
+
         base::VariantSupportedDataType result;
 
         std::visit(
@@ -161,9 +182,6 @@ namespace lnkls
             }
         }
 
-        node = new T;
-        node->next = nullptr;
-
         int i = 0;
 
         base::hideTextOfScreen();
@@ -171,7 +189,7 @@ namespace lnkls
         this->selected_data_type = '\0';
         menu::getMenuSelection(this->selected_data_type,
                                base::data_type_options, "Data Types", false);
-
+        node = new T;
         switch (this->selected_data_type)
         {
             case 'a':
@@ -196,6 +214,8 @@ namespace lnkls
             }
 
             case 'z':
+                delete node;
+                node = nullptr;
                 // back to linked list operations page
                 base::clearScreen();
                 return;

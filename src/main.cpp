@@ -115,8 +115,11 @@ int main()
                             // Get number of elements are in array
                             int element_count = arrayOpr->getArraySize();
 
-                            if(element_count < 1) {
-                                std::cout<<"Cannot insert into an empty array."<<std::endl;
+                            if (element_count < 1)
+                            {
+                                std::cout
+                                    << "Cannot insert into an empty array."
+                                    << std::endl;
                                 presskey::pressAnyKey("Press any key to back");
                                 break;
                             }
@@ -303,6 +306,8 @@ int main()
                                     // Start Singly Linked List creation
                                     case 'a':
                                     {
+                                        // std::placeholder Reference:
+                                        // https://en.cppreference.com/cpp/utility/functional/placeholders
                                         linkListOpr->createLinkedListElement(
                                             linkListOpr->singlyHead,
                                             std::bind(
@@ -566,6 +571,8 @@ int main()
                                     // Start Circular Linked List creation
                                     case 'a':
                                     {
+                                        // std::placeholder Reference:
+                                        // https://en.cppreference.com/cpp/utility/functional/placeholders
                                         linkListOpr->createLinkedListElement(
                                             linkListOpr->circularHead,
                                             std::bind(
@@ -827,6 +834,285 @@ int main()
                             break;
                         }
 
+                        // Doubly Linked List
+                        case 'c':
+                        {
+                            // Reset selections while Singly, Circular and
+                            // Doubly is using this same selections
+                            linkListOpr->selected_operation = '\0';
+
+                            while (linkListOpr->selected_operation != 'z' &&
+                                   linkListOpr->selected_operation != 'm')
+                            {
+                                // Set selected_operation
+                                base::clearScreen();
+                                base::showAppTitle("Linked List / Doubly");
+                                linkListOpr->startOperationsMenu();
+                                switch (linkListOpr->selected_operation)
+                                {
+                                    // Start Circular Linked List creation
+                                    case 'a':
+                                    {
+                                        // std::placeholder Reference:
+                                        // https://en.cppreference.com/cpp/utility/functional/placeholders
+                                        linkListOpr->createLinkedListElement(
+                                            linkListOpr->doublyHead,
+                                            std::bind(
+                                                &LinkList::getDoublyListSize,
+                                                linkListOpr),
+                                            std::bind(
+                                                &LinkList::deleteDoublyAtEnd,
+                                                linkListOpr,
+                                                std::placeholders::_1),
+                                            std::bind(
+                                                &LinkList::insertDoublyAtEnd,
+                                                linkListOpr,
+                                                std::placeholders::_1)
+
+                                        );
+                                        break;
+                                    }
+                                    // Traverse Circular Linked List
+                                    case 'b':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        int element_count =
+                                            linkListOpr->getDoublyListSize();
+
+                                        if (!element_count)
+                                        {
+                                            std::cout << "No list elements to "
+                                                         "show!"
+                                                      << std::endl;
+                                        }
+                                        else
+                                        {
+                                            // Display list elements
+                                            std::cout << "Displaying stored "
+                                                         "Doubly Linked "
+                                                         "List elements:"
+                                                      << std::endl;
+                                            linkListOpr->traverseDoubly();
+                                        }
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
+                                        break;
+                                    }
+
+                                    // Insert at begin [Circular Linked
+                                    // List]
+                                    case 'c':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
+                                        std::cout << "Current Linked List "
+                                                     "State"
+                                                  << std::endl;
+                                        linkListOpr->traverseDoubly();
+
+                                        std::cout << std::endl
+                                                  << "Inserting Element At "
+                                                     "Begin."
+                                                  << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->doublyHead, 0);
+                                        linkListOpr->insertDoublyAtStart(input);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
+
+                                    // Insert at end [Circular Linked List]
+                                    case 'd':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
+                                        std::cout << "Current Linked List "
+
+                                                     "State"
+                                                  << std::endl;
+                                        linkListOpr->traverseDoubly();
+
+                                        std::cout << std::endl
+                                                  << "Inserting Element "
+
+                                                     "At End."
+                                                  << std::endl;
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->doublyHead, 0);
+                                        linkListOpr->insertDoublyAtEnd(input);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
+
+                                    // Insert at index [Circular Linked
+                                    // List]
+                                    case 'e':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot perform "
+                                                         "insertion "
+                                                         "on empty Linked List"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        int elements_count =
+                                            linkListOpr->getDoublyListSize();
+
+                                        std::cout << "Current Linked List "
+
+                                                     "State: ["
+                                                  << elements_count
+                                                  << "] "
+                                                     "elements."
+                                                  << std::endl;
+                                        linkListOpr->traverseDoubly();
+
+                                        std::cout << std::endl
+                                                  << "Inserting Element At "
+                                                     "Index."
+                                                  << std::endl;
+
+                                        std::cout << "Enter index between "
+                                                     "0 to "
+                                                  << elements_count - 1 << ": ";
+                                        int index = 0;
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
+
+                                        base::VariantSupportedDataType input =
+                                            linkListOpr->createLinkedListInput(
+                                                linkListOpr->doublyHead, 0);
+                                        linkListOpr->insertDoublyAtIndex(input,
+                                                                         index);
+                                        std::cout << "Element inserted "
+                                                     "successfully."
+                                                  << std::endl;
+                                        base::pauseProgram(1);
+                                        break;
+                                    }
+
+                                    // Delete element at begin [Circular
+                                    // Linked List]
+                                    case 'f':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List !"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        linkListOpr->deleteDoublyAtStart();
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
+                                        break;
+                                    }
+
+                                    // Delete element at end [Circular
+                                    // Linked List]
+                                    case 'g':
+                                    {
+                                        base::hideTextOfScreen();
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List !"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        linkListOpr->deleteDoublyAtEnd();
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+                                        break;
+                                    }
+
+                                    // Delete element by index [Circular Linked
+                                    // List]
+                                    case 'h':
+                                    {
+                                        base::hideTextOfScreen();
+
+                                        if (!linkListOpr->doublyHead)
+                                        {
+                                            std::cout << "Cannot delete from "
+                                                         "empty Linked List!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+                                        std::cout << "!!!!!! Performing "
+                                                     "Deletion !!!!!!"
+                                                  << std::endl;
+                                        int elements_count =
+                                            linkListOpr->getDoublyListSize();
+                                        std::cout
+                                            << "Current Linked List State: ["
+                                            << elements_count << "] elements."
+                                            << std::endl;
+                                        linkListOpr->traverseDoubly();
+
+                                        std::cout << "Enter index between 0 to "
+                                                  << elements_count - 1 << ": ";
+                                        int index = 0;
+                                        base::getIntInput(index,
+                                                          elements_count - 1);
+                                        linkListOpr->deleteDoublyAtIndex(index);
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
+                                        break;
+                                    }
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            break;
+                        }
                         default:
                         {  // clear screen for new page after exiting this page
                             base::clearScreen();
