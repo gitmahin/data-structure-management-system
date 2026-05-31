@@ -637,17 +637,30 @@ namespace lnkls
     void LinkList::deleteDoublyAtStart()
     {
         int element_count = this->getDoublyListSize();
-        Doubly* oldHeadToDelete = this->doublyHead;
-        Doubly* newHead = this->doublyHead->next;
 
-        newHead->prev = nullptr;
+        Doubly* oldHeadToDelete = this->doublyHead;
+        Doubly* nextNode;
+
+        if (this->doublyHead->next != nullptr)
+        {
+            nextNode = this->doublyHead->next;
+        }
+        nextNode->prev = nullptr;
 
         base::elementDeletionResultTUI(element_count, 0, element_count - 1,
                                        oldHeadToDelete->data);
 
-
-        delete oldHeadToDelete;
-        this->doublyHead = newHead;
+        if (oldHeadToDelete->next == nullptr &&
+            oldHeadToDelete->prev == nullptr)
+        {
+            delete oldHeadToDelete;
+            this->doublyHead = nullptr;
+        }
+        else
+        {
+            delete oldHeadToDelete;
+            this->doublyHead = nextNode;
+        }
     }
 
     void LinkList::deleteDoublyAtEnd(bool isVerboseMode)
@@ -666,7 +679,8 @@ namespace lnkls
                                            element_count - 1, ptr->data);
         }
 
-        if(ptr == this->doublyHead) {
+        if (ptr == this->doublyHead)
+        {
             delete ptr;
             this->doublyHead = nullptr;
             return;
