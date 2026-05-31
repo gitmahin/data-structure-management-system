@@ -363,7 +363,7 @@ int main()
                                         {
                                             std::cout
                                                 << "Cannot perform insertion "
-                                                   "on empty Linked List"
+                                                   "on empty Linked List!"
                                                 << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -398,7 +398,7 @@ int main()
                                         {
                                             std::cout
                                                 << "Cannot perform insertion "
-                                                   "on empty Linked List"
+                                                   "on empty Linked List!"
                                                 << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -431,7 +431,7 @@ int main()
                                         {
                                             std::cout
                                                 << "Cannot perform insertion "
-                                                   "on empty Linked List"
+                                                   "on empty Linked List!"
                                                 << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -629,7 +629,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -870,7 +870,7 @@ int main()
                                         );
                                         break;
                                     }
-                                    // Traverse Circular Linked List
+                                    // Traverse Doubly Linked List
                                     case 'b':
                                     {
                                         base::hideTextOfScreen();
@@ -899,7 +899,7 @@ int main()
                                         break;
                                     }
 
-                                    // Insert at begin [Circular Linked
+                                    // Insert at begin [Doubly Linked
                                     // List]
                                     case 'c':
                                     {
@@ -909,7 +909,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -936,7 +936,7 @@ int main()
                                         break;
                                     }
 
-                                    // Insert at end [Circular Linked List]
+                                    // Insert at end [Doubly Linked List]
                                     case 'd':
                                     {
                                         base::hideTextOfScreen();
@@ -945,7 +945,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -974,7 +974,7 @@ int main()
                                         break;
                                     }
 
-                                    // Insert at index [Circular Linked
+                                    // Insert at index [Doubly Linked
                                     // List]
                                     case 'e':
                                     {
@@ -983,7 +983,7 @@ int main()
                                         {
                                             std::cout << "Cannot perform "
                                                          "insertion "
-                                                         "on empty Linked List"
+                                                         "on empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -1025,7 +1025,7 @@ int main()
                                         break;
                                     }
 
-                                    // Delete element at begin [Circular
+                                    // Delete element at begin [Doubly
                                     // Linked List]
                                     case 'f':
                                     {
@@ -1033,7 +1033,7 @@ int main()
                                         if (!linkListOpr->doublyHead)
                                         {
                                             std::cout << "Cannot delete from "
-                                                         "empty Linked List !"
+                                                         "empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -1046,7 +1046,7 @@ int main()
                                         break;
                                     }
 
-                                    // Delete element at end [Circular
+                                    // Delete element at end [Doubly
                                     // Linked List]
                                     case 'g':
                                     {
@@ -1054,7 +1054,7 @@ int main()
                                         if (!linkListOpr->doublyHead)
                                         {
                                             std::cout << "Cannot delete from "
-                                                         "empty Linked List !"
+                                                         "empty Linked List!"
                                                       << std::endl;
                                             presskey::pressAnyKey(
                                                 "Press any key to back");
@@ -1066,7 +1066,7 @@ int main()
                                         break;
                                     }
 
-                                    // Delete element by index [Circular Linked
+                                    // Delete element by index [Doubly Linked
                                     // List]
                                     case 'h':
                                     {
