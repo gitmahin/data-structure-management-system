@@ -275,11 +275,11 @@ namespace lnkls
             return;
         }
 
-         if (isVerboseMode)
-            {
-                base::elementDeletionResultTUI(element_count, element_count - 1,
-                                               element_count - 1, p->data);
-            }
+        if (isVerboseMode)
+        {
+            base::elementDeletionResultTUI(element_count, element_count - 1,
+                                           element_count - 1, p->data);
+        }
         delete p;
         this->singlyHead = nullptr;
     }

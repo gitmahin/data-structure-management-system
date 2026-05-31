@@ -54,7 +54,7 @@ namespace menu
             // Take user input
             std::cin >> selection_point;
             // Make uppercase to lowercase while options are in lowercase
-            selection_point = (char) tolower(selection_point);
+            selection_point = (char)tolower(selection_point);
             // Remove leftover new line chars
             std::cin.clear();
             while (std::cin.get() != '\n');  // flush bad inputs
