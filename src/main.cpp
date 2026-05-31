@@ -22,8 +22,9 @@ int main()
     base::clearScreen();
     bool saveAllOperations = false;
 
-    saveAllOperations =
-        base::askUser(saveAllOperations, "Do you want to save all tasks data");
+    // You can ask user on application start
+    // saveAllOperations =
+    //     base::askUser(saveAllOperations, "Do you want to save all tasks data");
 
     Home* appHome = new Home();
     ArrayO* arrayOpr = nullptr;
