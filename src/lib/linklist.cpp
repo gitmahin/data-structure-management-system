@@ -569,6 +569,7 @@ namespace lnkls
     // *********************************************************************
     void LinkList::insertDoublyAtStart(base::VariantSupportedDataType data)
     {
+        if (!this->doublyHead) return;
         Doubly* newNode = new Doubly;
         Doubly* oldHead = this->doublyHead;
 
@@ -586,6 +587,7 @@ namespace lnkls
 
     void LinkList::insertDoublyAtEnd(base::VariantSupportedDataType data)
     {
+        if (!this->doublyHead) return;
         Doubly* newNode = new Doubly;
         Doubly* ptr = this->doublyHead;
         // Set data;
@@ -606,6 +608,7 @@ namespace lnkls
     void LinkList::insertDoublyAtIndex(base::VariantSupportedDataType data,
                                        int index)
     {
+        if (!this->doublyHead) return;
         if (index != 0)
         {
             Doubly* newNode = new Doubly;
@@ -636,6 +639,7 @@ namespace lnkls
 
     void LinkList::deleteDoublyAtStart()
     {
+        if (!this->doublyHead) return;
         int element_count = this->getDoublyListSize();
 
         Doubly* oldHeadToDelete = this->doublyHead;
@@ -665,6 +669,7 @@ namespace lnkls
 
     void LinkList::deleteDoublyAtEnd(bool isVerboseMode)
     {
+        if (!this->doublyHead) return;
         int element_count = this->getDoublyListSize();
         Doubly* ptr = this->doublyHead;
 
@@ -691,8 +696,12 @@ namespace lnkls
         delete ptr;
     }
 
+    // TODO: Find bug:
+    // When there is one element
+    // selecting 0 index for deletion shows segment fault error.
     void LinkList::deleteDoublyAtIndex(int index)
     {
+        if (!this->doublyHead) return;
         if (index != 0)
         {
             int element_count = this->getDoublyListSize();
@@ -722,6 +731,7 @@ namespace lnkls
 
     void LinkList::traverseDoubly()
     {
+        if (!this->doublyHead) return;
         Doubly* ptr = this->doublyHead;
         while (ptr != nullptr)
         {
