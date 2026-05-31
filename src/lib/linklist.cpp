@@ -648,8 +648,8 @@ namespace lnkls
         if (this->doublyHead->next != nullptr)
         {
             nextNode = this->doublyHead->next;
+            nextNode->prev = nullptr;
         }
-        nextNode->prev = nullptr;
 
         base::elementDeletionResultTUI(element_count, 0, element_count - 1,
                                        oldHeadToDelete->data);
