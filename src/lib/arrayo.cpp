@@ -156,11 +156,11 @@ namespace arrayo
 
     /**
      * Initializes a new array by prompting the user for a data type and size.
-     * 
-     * This function clears any existing data, sets the underlying vector type 
-     * based on user selection (int, double, string, or char), and populates 
+     *
+     * This function clears any existing data, sets the underlying vector type
+     * based on user selection (int, double, string, or char), and populates
      * the array with initial elements provided by the user.
-     * 
+     *
      * @code
      *  arrayOpr->createArray();
      * @endcode

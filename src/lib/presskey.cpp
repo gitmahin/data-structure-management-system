@@ -16,10 +16,11 @@
 
 /**
  * Reads a single character from standard input without waiting for a newline.
- * 
- * On Windows, it uses _getch(). On POSIX systems, it temporarily disables 
- * canonical mode (line buffering) and echoing to capture the key press immediately.
- * 
+ *
+ * On Windows, it uses _getch(). On POSIX systems, it temporarily disables
+ * canonical mode (line buffering) and echoing to capture the key press
+ * immediately.
+ *
  * @return The character pressed by the user.
  */
 char getCharInput()

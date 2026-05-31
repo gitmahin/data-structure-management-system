@@ -138,13 +138,14 @@ namespace base
 
     /**
      * Prompts the user with a yes/no question and returns the result.
-     * 
-     * Validates input to ensure only 'y' or 'n' (case-insensitive) are accepted.
-     * 
+     *
+     * Validates input to ensure only 'y' or 'n' (case-insensitive) are
+     * accepted.
+     *
      * @param default_value The value to return if logic requires a fallback.
      * @param question The string to display as the prompt.
      * @return 1 if the user chooses 'y', 0 if the user chooses 'n'.
-     * 
+     *
      * @code
      *  bool save = base::askUser(false, "Do you want to save");
      * @endcode
@@ -187,10 +188,10 @@ namespace base
 
     /**
      * Displays a menu of supported data types for user selection.
-     * 
+     *
      * Shows options for int, double, string, and char, which correspond
      * to the types supported by VariantSupportedDataType.
-     * 
+     *
      * @code base::showAvailableDataTypesMenu(); @endcode
      */
     void showAvailableDataTypesMenu()
@@ -214,10 +215,14 @@ namespace base
      * Shows the count of elements before and after deletion, as well as the
      * value and index of the deleted element.
      *
-     * @param before_delete_element_count The size of the collection before deletion.
-     * @param deleted_element_index       The index where the element was removed.
-     * @param curr_element_count          The size of the collection after deletion.
-     * @param data                        A variant containing the value of the deleted element.
+     * @param before_delete_element_count The size of the collection before
+     * deletion.
+     * @param deleted_element_index       The index where the element was
+     * removed.
+     * @param curr_element_count          The size of the collection after
+     * deletion.
+     * @param data                        A variant containing the value of the
+     * deleted element.
      *
      * @code base::elementDeletionResultTUI(5, 2, 4, my_variant); @endcode
      */
