@@ -44,10 +44,10 @@ namespace stck
 
     /**
      * Initializes a new stack using a dynamic array.
-     * 
+     *
      * Prompts the user to specify the stack capacity and the data type.
-     * It handles memory allocation for the underlying array based on the 
-     * selected type (int, double, string, or char) and allows initial 
+     * It handles memory allocation for the underlying array based on the
+     * selected type (int, double, string, or char) and allows initial
      * elements to be pushed onto the stack.
      */
     void Stack::createStackArray()
@@ -136,7 +136,7 @@ namespace stck
 
     /**
      * Displays the current status of the stack array.
-     * 
+     *
      * Prints the number of elements currently stored in the stack and the
      * number of remaining available slots based on the stack's maximum
      * capacity.
@@ -156,8 +156,8 @@ namespace stck
 
     /**
      * Checks if the stack array has reached its maximum capacity.
-     * 
-     * @return True if the top index is equal to the size minus one, 
+     *
+     * @return True if the top index is equal to the size minus one,
      * indicating no more elements can be pushed; false otherwise.
      */
     bool Stack::isFullStackArray()
@@ -171,8 +171,8 @@ namespace stck
 
     /**
      * Checks if the stack array is empty.
-     * 
-     * @return True if the stack has not been initialized or if the top index 
+     *
+     * @return True if the stack has not been initialized or if the top index
      * is -1, indicating no elements are present; false otherwise.
      */
     bool Stack::isEmptyStackArray()
@@ -188,7 +188,7 @@ namespace stck
 
     /**
      * Pushes a new element onto the stack array.
-     * 
+     *
      * Increments the top index and assigns the provided data to the new top
      * position. Checks for stack overflow before insertion.
      * @param data           The variant containing the value to be pushed.
@@ -221,8 +221,9 @@ namespace stck
     }
 
     /**
-     * Handles the input and execution of a single push operation for the stack array.
-     * 
+     * Handles the input and execution of a single push operation for the stack
+     * array.
+     *
      * Uses std::visit to determine the underlying data type of the stack,
      * prompts the user for a matching value, and pushes it onto the stack
      * with a success log.
@@ -242,7 +243,7 @@ namespace stck
 
     /**
      * Removes and returns the top element from the stack array.
-     * 
+     *
      * Retrieves the value at the current top index, decrements the top pointer,
      * and returns the value as a variant.
      * @return A variant containing the element removed from the top of the
@@ -261,9 +262,9 @@ namespace stck
 
     /**
      * Retrieves the top element of the stack array without removing it.
-     * 
+     *
      * Checks if the stack is empty before attempting to access the top index.
-     * @return A variant containing the value at the top of the stack, or -1 
+     * @return A variant containing the value at the top of the stack, or -1
      * if the stack is empty.
      */
     base::VariantSupportedDataType Stack::topStackArray()
@@ -284,9 +285,9 @@ namespace stck
 
     /**
      * Retrieves the bottom element of the stack array.
-     * 
+     *
      * Checks if the stack is empty before attempting to access the first index.
-     * @return A variant containing the value at the bottom of the stack, or -1 
+     * @return A variant containing the value at the bottom of the stack, or -1
      * if the stack is empty.
      */
     base::VariantSupportedDataType Stack::bottomStackArray()
@@ -306,11 +307,13 @@ namespace stck
     }
 
     /**
-     * Retrieves an element from the stack array at a specific offset from the top.
-     * 
-     * Calculates the target index by subtracting the provided offset from the 
+     * Retrieves an element from the stack array at a specific offset from the
+     * top.
+     *
+     * Calculates the target index by subtracting the provided offset from the
      * current top index.
-     * @param i The offset from the top (0 for top, 1 for element below top, etc.).
+     * @param i The offset from the top (0 for top, 1 for element below top,
+     * etc.).
      * @return A variant containing the element at the calculated position.
      */
     base::VariantSupportedDataType Stack::peekStackArray(int i)
@@ -326,9 +329,9 @@ namespace stck
 
     /**
      * Displays all elements currently stored in the stack array.
-     * 
-     * Iterates from the top of the stack down to the bottom, printing each 
-     * element's value. If the stack is not initialized or is empty, it 
+     *
+     * Iterates from the top of the stack down to the bottom, printing each
+     * element's value. If the stack is not initialized or is empty, it
      * prints an appropriate message.
      */
     void Stack::displayStackArray()
@@ -353,9 +356,9 @@ namespace stck
 
     /**
      * Deletes the stack array and releases allocated memory.
-     * 
-     * Uses std::visit to delete the dynamically allocated array of the 
-     * specific data type, then deletes the StackStructArray container 
+     *
+     * Uses std::visit to delete the dynamically allocated array of the
+     * specific data type, then deletes the StackStructArray container
      * and sets the pointer to nullptr.
      */
     void Stack::deleteStackArray()
