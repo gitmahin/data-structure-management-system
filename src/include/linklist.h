@@ -18,9 +18,10 @@ namespace lnkls
     typedef std::function<void(base::VariantSupportedDataType)>
         tInsertListElementAtEnd;
 
-    const std::set<base::OptionSelectionDataType> sub_menu_options = {'a', 'b', 'c', 'z'};
-    const std::set<base::OptionSelectionDataType> operation_options = {'a', 'b', 'c', 'd', 'e',
-                                              'f', 'g', 'h', 'z', 'm'};
+    const std::set<base::OptionSelectionDataType> sub_menu_options = {'a', 'b',
+                                                                      'c', 'z'};
+    const std::set<base::OptionSelectionDataType> operation_options = {
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z', 'm'};
 
     struct Singly
     {
@@ -60,8 +61,9 @@ namespace lnkls
         void startMenu(bool saveAllData = false) override;
         void startOperationsMenu();
 
-        // Singly operations
-
+        // ┌──────────────────────────────────────────────────────────┐
+        // │                   Singly operations                      │
+        // └──────────────────────────────────────────────────────────┘
         void insertSinglyAtStart(base::VariantSupportedDataType data);
         void insertSinglyAtEnd(base::VariantSupportedDataType data);
         void insertSinglyAtIndex(base::VariantSupportedDataType data,
@@ -72,7 +74,10 @@ namespace lnkls
         void traverseSingly();
         int getSinglyListSize();
 
-        // Circular operations
+        // ┌──────────────────────────────────────────────────────────┐
+        // │                   Circular operations                    │
+        // └──────────────────────────────────────────────────────────┘
+
         void insertCircularAtStart(base::VariantSupportedDataType data);
         void insertCircularAtEnd(base::VariantSupportedDataType data);
         void insertCircularAtIndex(base::VariantSupportedDataType data,
@@ -83,7 +88,10 @@ namespace lnkls
         void traverseCircular();
         int getCircularListSize();
 
-        // Doubly operations
+        // ┌──────────────────────────────────────────────────────────┐
+        // │                    Doubly operations                     │
+        // └──────────────────────────────────────────────────────────┘
+
         void insertDoublyAtStart(base::VariantSupportedDataType data);
         void insertDoublyAtEnd(base::VariantSupportedDataType data);
         void insertDoublyAtIndex(base::VariantSupportedDataType data,
@@ -94,6 +102,9 @@ namespace lnkls
         void traverseDoubly();
         int getDoublyListSize();
 
+        // ┌──────────────────────────────────────────────────────────┐
+        // │                       Base Operations                    │
+        // └──────────────────────────────────────────────────────────┘
         // Here index i has no effect on real data. It just show index in
         // std::cout
         template <LinkedListNodeType T>
