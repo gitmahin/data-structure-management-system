@@ -52,7 +52,8 @@ namespace stck
 
         base::hideTextOfScreen();
         int stack_size = 1;
-        std::cout << "Enter the number of elements for Stack: ";
+        std::cout
+            << "Specify the maximum number of elements the stack can hold: ";
         base::getIntInput(stack_size, 100, stack_size);
 
         base::hideTextOfScreen();
@@ -99,9 +100,19 @@ namespace stck
             default:
                 return;
         }
-        this->stackArray->top = -1;
 
-        for (int i = 0; i < stack_size; i++)
+        this->stackArray->top = -1;
+        this->stackArray->size = stack_size;
+
+        base::hideTextOfScreen();
+
+        int number_of_elements_to_add = 0;
+        this->showStackArrayStatus();
+        std::cout << "Enter the number of elements to push onto the stack "
+                     "(within the available space): ";
+        base::getIntInput(number_of_elements_to_add, this->stackArray->size, 1);
+
+        for (int i = 0; i < number_of_elements_to_add; i++)
         {
             base::VariantSupportedDataType element;
             std::visit(
@@ -113,6 +124,19 @@ namespace stck
                 this->stackArray->data);
             this->pushArray(element);
         }
+    }
+
+    void Stack::showStackArrayStatus()
+    {
+        if (!this->stackArray) return;
+
+        int stack_taken_size = (this->stackArray->top + 1);
+        int stack_available_slots =
+            this->stackArray->size - (this->stackArray->top + 1);
+
+        std::cout << "Stack Status: " << stack_taken_size
+                  << " element(s) in use | " << stack_available_slots
+                  << " slot(s) available" << std::endl;
     }
 
     bool Stack::isFullStackArray()
@@ -135,7 +159,8 @@ namespace stck
         return false;
     }
 
-    void Stack::pushArray(base::VariantSupportedDataType data)
+    void Stack::pushArray(base::VariantSupportedDataType data,
+                          bool showSuccessLog)
     {
         if (this->isFullStackArray())
         {
@@ -153,6 +178,23 @@ namespace stck
                 // assign variant data to the top of the
                 // stack
                 arr[this->stackArray->top] = std::get<T>(data);
+            },
+            this->stackArray->data);
+        if (showSuccessLog)
+        {
+            std::cout << "Element pushed success." << std::endl;
+        }
+    }
+
+    void Stack::handleSinglePushStackArray()
+    {
+        std::visit(
+            [&](auto* arr)
+            {
+                typename std::decay_t<decltype(arr[0])> input;
+                base::VariantSupportedDataType data =
+                    base::getVariantDataInput(input);
+                this->pushArray(data, true);
             },
             this->stackArray->data);
     }
@@ -238,12 +280,7 @@ namespace stck
             return;
         }
 
-        std::visit(
-            [](auto* arr)
-            {
-                delete[] arr;
-            },
-            this->stackArray->data);
+        std::visit([](auto* arr) { delete[] arr; }, this->stackArray->data);
         delete this->stackArray;
         this->stackArray = nullptr;
     }

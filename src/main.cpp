@@ -1221,7 +1221,42 @@ int main()
                                     }
                                     case 'b':
                                     {
-                                        
+                                        base::hideTextOfScreen();
+
+                                        if (!cStack->stackArray)
+                                        {
+                                            std::cout
+                                                << "Stack not created yet! "
+                                                   "Cannot push element!"
+                                                << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
+                                        cStack->showStackArrayStatus();
+
+                                        cStack->displayStackArray();
+
+                                        if ((cStack->stackArray->size -
+                                             (cStack->stackArray->top + 1)) ==
+                                            0)
+                                        {
+                                            std::cout
+                                                << "\nStack is full. Pop "
+                                                   "elements before pushing."
+                                                << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
+                                        std::cout
+                                            << "\nPushing element to the Stack."
+                                            << std::endl;
+                                        cStack->handleSinglePushStackArray();
+                                        base::pauseProgram(1);
+                                        break;
                                     }
                                     case 'c':
                                     {
