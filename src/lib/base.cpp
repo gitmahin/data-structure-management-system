@@ -6,6 +6,8 @@
     #include <unistd.h>
 #endif
 
+#include <type_traits>
+
 #include "base.h"
 
 namespace base
@@ -246,6 +248,75 @@ namespace base
                           << std::endl;
             },
             data);
+    }
+
+    /**
+     * Logs the value of a VariantSupportedDataType to the standard output.
+     * Uses std::visit to handle the underlying type within the variant.
+     *
+     * @param data The variant containing the data to be logged.
+     */
+    void logVariantData(VariantSupportedDataType data)
+    {
+        std::visit([](auto element) { std::cout << element; }, data);
+    };
+
+    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data,
+                                                 int i, bool showIndex)
+    {
+        VariantSupportedDataType result;
+        std::visit(
+            [&](auto val)
+            {
+                typename std::decay_t<decltype(val)> element;
+
+                while (true)  // ← keep asking until valid input
+                {
+                    if (showIndex)
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(element)>()
+                                  << "][" << i << "]: ";
+                    }
+                    else
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(element)>()
+                                  << "]: ";
+                    }
+
+                    // compare two types: if value type is string then use
+                    // getline to take input
+
+                    if constexpr (std::is_same_v<std::decay_t<decltype(val)>,
+                                                 std::string>)
+                    {
+                        getline(std::cin, element);
+                        break;
+                    }
+                    else
+                    {
+                        std::cin >> element;
+
+                        if (std::cin.fail())
+                        {
+                            std::cin.clear();
+                            while (std::cin.get() != '\n');  // flush bad inputs
+                            std::cout << "Invalid input! Try again."
+                                      << std::endl;
+                            continue;
+                        }
+
+                        while (std::cin.get() != '\n');
+                        break;
+                    }
+                }
+
+                result = element;
+            },
+            data);
+
+        return result;
     }
 
     /**
