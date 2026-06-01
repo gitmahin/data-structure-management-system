@@ -131,8 +131,8 @@ int main()
                             // usual cout<<
                             auto input_ask_text =
                                 (std::ostringstream()
-                                 << "Enter index between 0 to "
-                                 << element_count - 1 << ": ")
+                                 << "Enter position between 1 to "
+                                 << element_count << ": ")
                                     .str();
 
                             // Display array elements
@@ -143,12 +143,12 @@ int main()
 
                             // Get index input from user
                             std::cout << input_ask_text;
-                            base::getIntInput(arr_index, element_count - 1);
+                            base::getIntInput(arr_index, element_count , 1);
 
                             // Perform insertion
                             arrayOpr->insertAt(
-                                "Inserting element at your specified index.",
-                                false, false, true, arr_index);
+                                "Inserting element at your specified position.",
+                                false, false, true, arr_index - 1);
 
                             break;
                         }
@@ -193,8 +193,8 @@ int main()
                             // Make string with element_count placeholder
                             auto input_ask_text =
                                 (std::ostringstream()
-                                 << "Enter index between 0 to "
-                                 << element_count - 1 << ": ")
+                                 << "Enter position between 1 to "
+                                 << element_count << ": ")
                                     .str();
 
                             // Showing operation title
@@ -208,9 +208,9 @@ int main()
 
                             // Get index input from user
                             std::cout << input_ask_text;
-                            base::getIntInput(arr_index, element_count - 1);
+                            base::getIntInput(arr_index, element_count, 1);
                             arrayOpr->deleteElement(false, false, true,
-                                                    arr_index);
+                                                    arr_index -1);
 
                             break;
                         }
@@ -450,20 +450,20 @@ int main()
 
                                         std::cout
                                             << std::endl
-                                            << "Inserting Element At Index."
+                                            << "Inserting element by position."
                                             << std::endl;
 
-                                        std::cout << "Enter index between 0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between 1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
+                                                          elements_count, 1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
                                                 linkListOpr->singlyHead, 0);
                                         linkListOpr->insertSinglyAtIndex(input,
-                                                                         index);
+                                                                         index - 1);
                                         std::cout
                                             << "Element inserted successfully."
                                             << std::endl;
@@ -535,12 +535,12 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseSingly();
 
-                                        std::cout << "Enter index between 0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between 1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
-                                        linkListOpr->deleteSinglyAtIndex(index);
+                                                          elements_count, 1);
+                                        linkListOpr->deleteSinglyAtIndex(index - 1);
                                         presskey::pressAnyKey(
                                             "Press any key to back");
 
@@ -733,22 +733,22 @@ int main()
                                         linkListOpr->traverseCircular();
 
                                         std::cout << std::endl
-                                                  << "Inserting Element At "
-                                                     "Index."
+                                                  << "Inserting element by position."
+                            
                                                   << std::endl;
 
-                                        std::cout << "Enter index between "
-                                                     "0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between "
+                                                     "1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
+                                                          elements_count, 1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
                                                 linkListOpr->circularHead, 0);
                                         linkListOpr->insertCircularAtIndex(
-                                            input, index);
+                                            input, index - 1);
                                         std::cout << "Element inserted "
                                                      "successfully."
                                                   << std::endl;
@@ -823,13 +823,13 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseCircular();
 
-                                        std::cout << "Enter index between 0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between 1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
+                                                          elements_count, 1);
                                         linkListOpr->deleteCircularAtIndex(
-                                            index);
+                                            index - 1);
                                         presskey::pressAnyKey(
                                             "Press any key to back");
 
@@ -1023,22 +1023,22 @@ int main()
                                         linkListOpr->traverseDoubly();
 
                                         std::cout << std::endl
-                                                  << "Inserting Element At "
-                                                     "Index."
+                                                  << "Inserting element by position."
+                        
                                                   << std::endl;
 
-                                        std::cout << "Enter index between "
-                                                     "0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between "
+                                                     "1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
+                                                          elements_count, 1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
                                                 linkListOpr->doublyHead, 0);
                                         linkListOpr->insertDoublyAtIndex(input,
-                                                                         index);
+                                                                         index - 1);
                                         std::cout << "Element inserted "
                                                      "successfully."
                                                   << std::endl;
@@ -1113,12 +1113,12 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseDoubly();
 
-                                        std::cout << "Enter index between 0 to "
-                                                  << elements_count - 1 << ": ";
+                                        std::cout << "Enter position between 1 to "
+                                                  << elements_count << ": ";
                                         int index = 0;
                                         base::getIntInput(index,
-                                                          elements_count - 1);
-                                        linkListOpr->deleteDoublyAtIndex(index);
+                                                          elements_count, 1);
+                                        linkListOpr->deleteDoublyAtIndex(index - 1);
                                         presskey::pressAnyKey(
                                             "Press any key to back");
 
