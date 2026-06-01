@@ -1277,23 +1277,39 @@ int main()
                                             std::cout << "Stack Empty! Cannot "
                                                          "pop element!"
                                                       << std::endl;
-                                            presskey::pressAnyKey(
-                                                "Press any key to back");
-                                            break;
+                                        }
+                                        else
+                                        {
+                                            base::VariantSupportedDataType
+                                                popped = cStack->popArray();
+                                            std::cout << "Popped [";
+                                            base::logVariantData(popped);
+                                            std::cout << "] from the Stack."
+                                                      << std::endl;
                                         }
 
-                                        base::VariantSupportedDataType popped =
-                                            cStack->popArray();
-                                        std::cout << "Popped [";
-                                        base::logVariantData(popped);
-                                        std::cout << "] from the Stack."
-                                                  << std::endl;
                                         presskey::pressAnyKey(
                                             "Press any key to back");
                                         break;
                                     }
                                     case 'd':
                                     {
+                                        base::hideTextOfScreen();
+                                        if (cStack->isEmptyStackArray())
+                                        {
+                                            std::cout << "Stack Empty! There "
+                                                         "is no top element!"
+                                                      << std::endl;
+                                        }
+                                        else
+                                        {
+                                            std::cout << "Stack top element: ";
+                                            base::logVariantData(
+                                                cStack->topStackArray());
+                                            std::cout << std::endl;
+                                        }
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
                                         break;
                                     }
                                     case 'e':
