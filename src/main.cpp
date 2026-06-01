@@ -1221,16 +1221,45 @@ int main()
                                     }
                                     case 'b':
                                     {
-                                        cStack->displayStackArray();
-                                        presskey::pressAnyKey("Press any key to back");
-                                        break;
+                                        
                                     }
                                     case 'c':
                                     {
+                                        base::hideTextOfScreen();
+
+                                        if (cStack->isEmptyStackArray())
+                                        {
+                                            std::cout << "Stack Empty! Cannot "
+                                                         "pop element!"
+                                                      << std::endl;
+                                            presskey::pressAnyKey(
+                                                "Press any key to back");
+                                            break;
+                                        }
+
+                                        base::VariantSupportedDataType popped =
+                                            cStack->popArray();
+                                        std::cout << "Popped [";
+                                        base::logVariantData(popped);
+                                        std::cout << "] from the Stack."
+                                                  << std::endl;
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
                                         break;
                                     }
                                     case 'd':
                                     {
+                                        break;
+                                    }
+                                    case 'e':
+                                    {
+                                        base::hideTextOfScreen();
+                                        std::cout << "Displaying Stack"
+                                                  << std::endl;
+                                        cStack->displayStackArray();
+                                        presskey::pressAnyKey(
+                                            "Press any key to back");
+
                                         break;
                                     }
 
@@ -1239,6 +1268,10 @@ int main()
                                 }
                             }
 
+                            if (!saveAllOperations)
+                            {
+                                cStack->deleteStackArray();
+                            }
                             break;
                         }
 
@@ -1253,6 +1286,7 @@ int main()
 
                 cStack->selection_point = '\0';
                 cStack->selected_operation = '\0';
+
                 if (!saveAllOperations)
                 {
                     delete cStack;
@@ -1274,10 +1308,13 @@ int main()
             {
                 delete arrayOpr;
                 delete linkListOpr;
+                delete cStack;
 
                 arrayOpr = nullptr;
                 linkListOpr = nullptr;
+                cStack = nullptr;
 
+                // Reset
                 saveAllOperations = false;
                 break;
             }

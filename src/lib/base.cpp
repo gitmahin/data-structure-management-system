@@ -7,6 +7,7 @@
 #endif
 
 #include <type_traits>
+
 #include "base.h"
 
 namespace base
@@ -260,18 +261,29 @@ namespace base
         std::visit([](auto element) { std::cout << element; }, data);
     };
 
-    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data)
+    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data,
+                                                 int i, bool showIndex)
     {
         VariantSupportedDataType result;
         std::visit(
-            [&result](auto val)
+            [&](auto val)
             {
                 typename std::decay_t<decltype(val)> element;
 
                 while (true)  // ← keep asking until valid input
                 {
-                    std::cout << "Enter element ["
-                              << base::type_name<decltype(element)>() << "]: ";
+                    if (showIndex)
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(element)>()
+                                  << "][" << i << "]: ";
+                    }
+                    else
+                    {
+                        std::cout << "Enter element ["
+                                  << base::type_name<decltype(element)>()
+                                  << "]: ";
+                    }
 
                     // compare two types: if value type is string then use
                     // getline to take input

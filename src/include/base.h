@@ -81,7 +81,7 @@ namespace base
     void getIntInput(int& i_variable, int max = 1, int min = 0);
     int askUser(int default_value, std::string question);
     void logVariantData(VariantSupportedDataType data);
-    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data);
+    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data, int i = 0, bool showIndex = false);
 
 
     void elementDeletionResultTUI(int before_delete_element_count,

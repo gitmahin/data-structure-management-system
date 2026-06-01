@@ -53,7 +53,7 @@ namespace stck
         base::hideTextOfScreen();
         int stack_size = 1;
         std::cout << "Enter the number of elements for Stack: ";
-        base::getIntInput(stack_size, 100);
+        base::getIntInput(stack_size, 100, stack_size);
 
         base::hideTextOfScreen();
         base::showAvailableDataTypesMenu();
@@ -61,7 +61,8 @@ namespace stck
         this->selected_data_type = '\0';
         menu::getMenuSelection(this->selected_data_type,
                                base::data_type_options, "Data Types", false);
-
+        base::hideTextOfScreen();
+        std::cout << "Creating Stack Using Array." << std::endl;
         this->stackArray = new StackStructArray;
 
         switch (this->selected_data_type)
@@ -107,14 +108,14 @@ namespace stck
                 [&](auto* arr)
                 {
                     typename std::decay_t<decltype(arr[0])> data;
-                    element = base::getVariantDataInput(data);
+                    element = base::getVariantDataInput(data, i, true);
                 },
                 this->stackArray->data);
             this->pushArray(element);
         }
     }
 
-    bool Stack::isFullArray()
+    bool Stack::isFullStackArray()
     {
         if (this->stackArray->top == this->stackArray->size - 1)
         {
@@ -123,9 +124,11 @@ namespace stck
         return false;
     }
 
-    bool Stack::isEmptyArray()
+    bool Stack::isEmptyStackArray()
     {
-        if (!this->stackArray->top)
+        if (!this->stackArray) return true;
+
+        if (this->stackArray->top == -1)
         {
             return true;
         }
@@ -134,7 +137,7 @@ namespace stck
 
     void Stack::pushArray(base::VariantSupportedDataType data)
     {
-        if (this->isFullArray())
+        if (this->isFullStackArray())
         {
             std::cout << "Stack Overflow!" << std::endl;
             return;
@@ -156,12 +159,6 @@ namespace stck
 
     base::VariantSupportedDataType Stack::popArray()
     {
-        if (this->isEmptyArray())
-        {
-            std::cout << "Stack Empty! Cannot pop element!" << std::endl;
-            return -1;
-        }
-
         base::VariantSupportedDataType element;
 
         std::visit([&](auto* arr) { element = arr[this->stackArray->top]; },
@@ -173,7 +170,7 @@ namespace stck
 
     base::VariantSupportedDataType Stack::topStackArray()
     {
-        if (this->isEmptyArray())
+        if (this->isEmptyStackArray())
         {
             std::cout << "There is no top in empty Stack" << std::endl;
             return -1;
@@ -189,7 +186,7 @@ namespace stck
 
     base::VariantSupportedDataType Stack::bottomStackArray()
     {
-        if (this->isEmptyArray())
+        if (this->isEmptyStackArray())
         {
             std::cout << "There is no bottom in empty Stack" << std::endl;
             return -1;
@@ -216,11 +213,39 @@ namespace stck
 
     void Stack::displayStackArray()
     {
+        if (!this->stackArray)
+        {
+            std::cout << "Stack not created yet!" << std::endl;
+            return;
+        }
+
+        if (this->isEmptyStackArray())
+        {
+            std::cout << "Stack empty!" << std::endl;
+        }
+
         for (int i = 0; i <= this->stackArray->top; i++)
         {
             std::visit([&](auto element) { std::cout << element << std::endl; },
                        this->peekArray(i));
         }
+    }
+
+    void Stack::deleteStackArray()
+    {
+        if (!this->stackArray)
+        {
+            return;
+        }
+
+        std::visit(
+            [](auto* arr)
+            {
+                delete[] arr;
+            },
+            this->stackArray->data);
+        delete this->stackArray;
+        this->stackArray = nullptr;
     }
 
 }  // namespace stck

@@ -40,8 +40,8 @@ namespace stck
         void startOperationsMenu();
 
         // Stack using Array
-        bool isFullArray();
-        bool isEmptyArray();
+        bool isFullStackArray();
+        bool isEmptyStackArray();
         void pushArray(base::VariantSupportedDataType data);
         base::VariantSupportedDataType popArray();
         base::VariantSupportedDataType topStackArray();
@@ -49,6 +49,7 @@ namespace stck
         void createStackArray();
         void displayStackArray();
         base::VariantSupportedDataType peekArray(int i);
+        void deleteStackArray();
 
         // Stack using Linked List
         bool isFullLnkls();
