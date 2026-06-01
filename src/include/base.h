@@ -45,13 +45,15 @@ namespace base
     std::string type_name()
     {
         typedef typename std::remove_reference<T>::type TR;
+        // clang-format off
         std::unique_ptr<char, void (*)(void*)> own(
-#ifndef _MSC_VER
-            abi::__cxa_demangle(typeid(TR).name(), nullptr, nullptr, nullptr),
-#else
-            nullptr,
-#endif
+            #ifndef _MSC_VER
+                        abi::__cxa_demangle(typeid(TR).name(), nullptr, nullptr, nullptr),
+            #else
+                        nullptr,
+            #endif
             std::free);
+        // clang-format on
         std::string r = own != nullptr ? own.get() : typeid(TR).name();
         if (std::is_const<TR>::value) r += " const";
         if (std::is_volatile<TR>::value) r += " volatile";
