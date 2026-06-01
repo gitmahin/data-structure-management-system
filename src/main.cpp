@@ -4,6 +4,7 @@
 
 #include "arrayo.h"
 #include "base.h"
+#include "cstack.h"
 #include "home.h"
 #include "linklist.h"
 #include "presskey.h"
@@ -11,6 +12,7 @@
 using namespace home;
 using namespace arrayo;
 using namespace lnkls;
+using namespace stck;
 
 /**
  * In main function handle all menu switching logic
@@ -30,6 +32,7 @@ int main()
     Home* appHome = new Home();
     ArrayO* arrayOpr = nullptr;
     LinkList* linkListOpr = nullptr;
+    Stack* cStack = nullptr;
 
     // Dont exit while user input is not [z]
     while (appHome->selection_point != 'z')
@@ -143,7 +146,7 @@ int main()
 
                             // Get index input from user
                             std::cout << input_ask_text;
-                            base::getIntInput(arr_index, element_count , 1);
+                            base::getIntInput(arr_index, element_count, 1);
 
                             // Perform insertion
                             arrayOpr->insertAt(
@@ -210,7 +213,7 @@ int main()
                             std::cout << input_ask_text;
                             base::getIntInput(arr_index, element_count, 1);
                             arrayOpr->deleteElement(false, false, true,
-                                                    arr_index -1);
+                                                    arr_index - 1);
 
                             break;
                         }
@@ -453,17 +456,18 @@ int main()
                                             << "Inserting element by position."
                                             << std::endl;
 
-                                        std::cout << "Enter position between 1 to "
-                                                  << elements_count << ": ";
+                                        std::cout
+                                            << "Enter position between 1 to "
+                                            << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
                                                 linkListOpr->singlyHead, 0);
-                                        linkListOpr->insertSinglyAtIndex(input,
-                                                                         index - 1);
+                                        linkListOpr->insertSinglyAtIndex(
+                                            input, index - 1);
                                         std::cout
                                             << "Element inserted successfully."
                                             << std::endl;
@@ -535,12 +539,14 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseSingly();
 
-                                        std::cout << "Enter position between 1 to "
-                                                  << elements_count << ": ";
+                                        std::cout
+                                            << "Enter position between 1 to "
+                                            << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
-                                        linkListOpr->deleteSinglyAtIndex(index - 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
+                                        linkListOpr->deleteSinglyAtIndex(index -
+                                                                         1);
                                         presskey::pressAnyKey(
                                             "Press any key to back");
 
@@ -732,17 +738,18 @@ int main()
                                                   << std::endl;
                                         linkListOpr->traverseCircular();
 
-                                        std::cout << std::endl
-                                                  << "Inserting element by position."
-                            
-                                                  << std::endl;
+                                        std::cout
+                                            << std::endl
+                                            << "Inserting element by position."
+
+                                            << std::endl;
 
                                         std::cout << "Enter position between "
                                                      "1 to "
                                                   << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
@@ -823,11 +830,12 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseCircular();
 
-                                        std::cout << "Enter position between 1 to "
-                                                  << elements_count << ": ";
+                                        std::cout
+                                            << "Enter position between 1 to "
+                                            << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
                                         linkListOpr->deleteCircularAtIndex(
                                             index - 1);
                                         presskey::pressAnyKey(
@@ -1022,23 +1030,24 @@ int main()
                                                   << std::endl;
                                         linkListOpr->traverseDoubly();
 
-                                        std::cout << std::endl
-                                                  << "Inserting element by position."
-                        
-                                                  << std::endl;
+                                        std::cout
+                                            << std::endl
+                                            << "Inserting element by position."
+
+                                            << std::endl;
 
                                         std::cout << "Enter position between "
                                                      "1 to "
                                                   << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
 
                                         base::VariantSupportedDataType input =
                                             linkListOpr->createLinkedListInput(
                                                 linkListOpr->doublyHead, 0);
-                                        linkListOpr->insertDoublyAtIndex(input,
-                                                                         index - 1);
+                                        linkListOpr->insertDoublyAtIndex(
+                                            input, index - 1);
                                         std::cout << "Element inserted "
                                                      "successfully."
                                                   << std::endl;
@@ -1113,12 +1122,14 @@ int main()
                                             << std::endl;
                                         linkListOpr->traverseDoubly();
 
-                                        std::cout << "Enter position between 1 to "
-                                                  << elements_count << ": ";
+                                        std::cout
+                                            << "Enter position between 1 to "
+                                            << elements_count << ": ";
                                         int index = 0;
-                                        base::getIntInput(index,
-                                                          elements_count, 1);
-                                        linkListOpr->deleteDoublyAtIndex(index - 1);
+                                        base::getIntInput(index, elements_count,
+                                                          1);
+                                        linkListOpr->deleteDoublyAtIndex(index -
+                                                                         1);
                                         presskey::pressAnyKey(
                                             "Press any key to back");
 
@@ -1159,6 +1170,92 @@ int main()
                     // instance of new LinkList() will not create if not create
                     // it will throw Segfault error
                     linkListOpr = nullptr;
+                }
+                break;
+            }
+
+            // Stack
+            case 'c':
+            {
+                if (!cStack)
+                {
+                    cStack = new Stack();
+                }
+
+                while (cStack->selection_point != 'z')
+                {
+                    if (cStack->selected_operation == 'm')
+                    {
+                        break;
+                    }
+
+                    base::clearScreen();
+                    base::showAppTitle("Stack");
+                    cStack->startMenu();
+
+                    cStack->selected_operation = '\0';
+
+                    switch (cStack->selection_point)
+                    {
+                        case 'a':
+                        {
+                            // Reset selected_operation while case a and b is
+                            // using this same variable for selecting any
+                            // operation
+                            cStack->selected_operation = '\0';
+
+                            while (cStack->selected_operation != 'z' &&
+                                   cStack->selected_operation != 'm')
+                            {
+                                base::clearScreen();
+                                base::showAppTitle("Stack / Using Array");
+                                cStack->startOperationsMenu();
+
+                                switch (cStack->selected_operation)
+                                {
+                                    case 'a':
+                                    {
+                                        break;
+                                    }
+                                    case 'b':
+                                    {
+                                        break;
+                                    }
+                                    case 'c':
+                                    {
+                                        break;
+                                    }
+                                    case 'd':
+                                    {
+                                        break;
+                                    }
+
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            break;
+                        }
+
+                        default:
+                        {  // clear screen for new page after exiting this page
+                            base::clearScreen();
+
+                            break;
+                        }
+                    }
+                }
+
+                cStack->selection_point = '\0';
+                cStack->selected_operation = '\0';
+                if (!saveAllOperations)
+                {
+                    delete cStack;
+                    // Set to nullptr otherwise if(!cStack) will false and
+                    // instance of new cStack() will not create if not create
+                    // it will throw Segfault error
+                    cStack = nullptr;
                 }
                 break;
             }

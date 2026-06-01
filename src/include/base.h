@@ -80,11 +80,14 @@ namespace base
     void pauseProgram(int second);
     void getIntInput(int& i_variable, int max = 1, int min = 0);
     int askUser(int default_value, std::string question);
+    void logVariantData(VariantSupportedDataType data);
+    VariantSupportedDataType getVariantDataInput(VariantSupportedDataType data);
+
 
     void elementDeletionResultTUI(int before_delete_element_count,
                                   int deleted_element_index,
                                   int curr_element_count,
-                                  base::VariantSupportedDataType data);
+                                  VariantSupportedDataType data);
     void exitApp();
 
 }  // namespace base

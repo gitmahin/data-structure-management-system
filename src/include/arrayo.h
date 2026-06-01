@@ -10,7 +10,7 @@
 namespace arrayo
 {
     // Constant values
-    const std::set<char> sub_menu_options = {'a', 'b', 'c', 'd', 'e',
+    const std::set<base::OptionSelectionDataType> sub_menu_options = {'a', 'b', 'c', 'd', 'e',
                                              'f', 'g', 'h', 'z'};
     using VariantVectorDataType =
         std::variant<std::vector<int>, std::vector<double>,

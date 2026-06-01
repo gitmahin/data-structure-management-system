@@ -18,8 +18,8 @@ namespace lnkls
     typedef std::function<void(base::VariantSupportedDataType)>
         tInsertListElementAtEnd;
 
-    const std::set<char> sub_menu_options = {'a', 'b', 'c', 'z'};
-    const std::set<char> operation_options = {'a', 'b', 'c', 'd', 'e',
+    const std::set<base::OptionSelectionDataType> sub_menu_options = {'a', 'b', 'c', 'z'};
+    const std::set<base::OptionSelectionDataType> operation_options = {'a', 'b', 'c', 'd', 'e',
                                               'f', 'g', 'h', 'z', 'm'};
 
     struct Singly
