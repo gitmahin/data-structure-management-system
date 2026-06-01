@@ -1207,6 +1207,7 @@ int main()
                             while (cStack->selected_operation != 'z' &&
                                    cStack->selected_operation != 'm')
                             {
+                                cStack->selected_operation = '\0';
                                 base::clearScreen();
                                 base::showAppTitle("Stack / Using Array");
                                 cStack->startOperationsMenu();
@@ -1215,10 +1216,13 @@ int main()
                                 {
                                     case 'a':
                                     {
+                                        cStack->createStackArray();
                                         break;
                                     }
                                     case 'b':
                                     {
+                                        cStack->displayStackArray();
+                                        presskey::pressAnyKey("Press any key to back");
                                         break;
                                     }
                                     case 'c':

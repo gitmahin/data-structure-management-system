@@ -7,16 +7,23 @@
 
 namespace stck
 {
+
+    using VariantStackSupportedDataType = std::variant<int*, char*, double*, std::string*>;
     // selection_point(from IPage) is handled by sub_menu_options
     const std::set<base::OptionSelectionDataType> sub_menu_options = {'a', 'b', 'z'};
     const std::set<base::OptionSelectionDataType> operations_menu_options = {
         'a', 'b', 'c', 'd', 'e', 'z', 'm'};
+    
+
 
     struct StackStructArray
     {
         int size;
         int top;
-        base::VariantSupportedDataType* data;
+        // make pointers variable as we have to create dynamic memory allocation for each data type
+        // cannot use VariantSupportedDataType here as new (keyword) will not work on this.
+        // we can request dynamic memory only with pointers.
+        VariantStackSupportedDataType data;
     };
 
     class Stack : public IPage
@@ -40,6 +47,8 @@ namespace stck
         base::VariantSupportedDataType topStackArray();
         base::VariantSupportedDataType bottomStackArray();
         void createStackArray();
+        void displayStackArray();
+        base::VariantSupportedDataType peekArray(int i);
 
         // Stack using Linked List
         bool isFullLnkls();
